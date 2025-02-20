@@ -3,8 +3,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { 
   Search, FileText, Image, Mail, Shield, 
-  FileSignature, Book, Translate, Camera,
-  FileCheck, Printer, Globe, UserCheck 
+  GraduationCap, Globe2, FileSignature, Camera,
+  ScrollText, Printer, UserCheck, Building2 
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ServiceCard from "@/components/ServiceCard";
@@ -16,63 +16,63 @@ const Index = () => {
   const services = [
     {
       icon: <FileText className="w-6 h-6" />,
-      title: "Document Typing",
-      description: "Professional typing services for all types of documents",
+      title: "Typing Services",
+      description: "All types of typing services including documents, letters, and forms",
+    },
+    {
+      icon: <ScrollText className="w-6 h-6" />,
+      title: "Legal Translation",
+      description: "Professional translation services for legal documents",
+    },
+    {
+      icon: <FileSignature className="w-6 h-6" />,
+      title: "PRO Services",
+      description: "Professional business and government services",
+    },
+    {
+      icon: <Globe2 className="w-6 h-6" />,
+      title: "Visa Services",
+      description: "Tourist, business and residence visa services",
+    },
+    {
+      icon: <Building2 className="w-6 h-6" />,
+      title: "Company Formation",
+      description: "Business setup and licensing services",
+    },
+    {
+      icon: <GraduationCap className="w-6 h-6" />,
+      title: "Attestation Services",
+      description: "Document attestation and certification",
     },
     {
       icon: <Image className="w-6 h-6" />,
       title: "Photo Services",
-      description: "Photo editing and formatting for official documents",
-    },
-    {
-      icon: <FileSignature className="w-6 h-6" />,
-      title: "CV Writing",
-      description: "Professional CV and resume writing services",
-    },
-    {
-      icon: <Translate className="w-6 h-6" />,
-      title: "Translation Services",
-      description: "Document translation between Arabic and English",
-    },
-    {
-      icon: <Shield className="w-6 h-6" />,
-      title: "Government Services",
-      description: "Assistance with government applications and procedures",
-    },
-    {
-      icon: <Mail className="w-6 h-6" />,
-      title: "Email Services",
-      description: "Professional email drafting and communication",
-    },
-    {
-      icon: <Book className="w-6 h-6" />,
-      title: "E-Book Conversion",
-      description: "Convert documents to various e-book formats",
-    },
-    {
-      icon: <Camera className="w-6 h-6" />,
-      title: "ID Photo Service",
-      description: "Professional ID photos for official documents",
-    },
-    {
-      icon: <FileCheck className="w-6 h-6" />,
-      title: "Document Attestation",
-      description: "Legal document attestation services",
+      description: "Professional photography for documents",
     },
     {
       icon: <Printer className="w-6 h-6" />,
       title: "Printing Services",
-      description: "High-quality document printing and binding",
+      description: "High-quality printing and document services",
     },
     {
-      icon: <Globe className="w-6 h-6" />,
-      title: "Visa Services",
-      description: "Assistance with visa applications and renewals",
+      icon: <FileText className="w-6 h-6" />,
+      title: "Document Clearing",
+      description: "Document processing and clearance services",
     },
     {
       icon: <UserCheck className="w-6 h-6" />,
-      title: "PRO Services",
-      description: "Professional PRO services for businesses",
+      title: "Emirates ID",
+      description: "Emirates ID application and renewal services",
+    },
+    {
+      icon: <Mail className="w-6 h-6" />,
+      title: "Mail Services",
+      description: "Professional mailing and courier services",
+    },
+    {
+      icon: <Shield className="w-6 h-6" />,
+      title: "Insurance Services",
+      description: "All types of insurance services",
     }
   ];
 
