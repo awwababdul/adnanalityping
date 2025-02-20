@@ -1,4 +1,5 @@
 
+import React from 'react';
 import { 
   FileText, Image, Mail, Shield, 
   GraduationCap, Globe2, FileSignature, Camera,
@@ -60,6 +61,5 @@ export const services: Service[] = [
         governmentLink: "https://www.dubai.ae/en/Pages/default.aspx"
       }
     ]
-  },
-  // ... Add similar detailed data for other services
+  }
 ];
