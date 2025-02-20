@@ -10,7 +10,7 @@ import { Service } from "@/types/services";
 export const services: Service[] = [
   {
     id: "typing",
-    icon: <FileText className="w-6 h-6" />,
+    icon: React.createElement(FileText, { className: "w-6 h-6" }),
     title: "Typing Services",
     description: "All types of typing services including documents, letters, and forms",
     subServices: [
@@ -45,7 +45,7 @@ export const services: Service[] = [
   },
   {
     id: "legal-translation",
-    icon: <ScrollText className="w-6 h-6" />,
+    icon: React.createElement(ScrollText, { className: "w-6 h-6" }),
     title: "Legal Translation",
     description: "Professional translation services for legal documents",
     subServices: [
