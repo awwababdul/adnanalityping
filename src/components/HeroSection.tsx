@@ -15,13 +15,26 @@ const HeroSection = () => {
           transition={{ duration: 0.7 }}
           className="text-center"
         >
+          <motion.div
+            initial={{ scale: 0.5, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="mb-8"
+          >
+            <img 
+              src="/lovable-uploads/c3a3a109-e73f-4597-ba4b-c0043c986598.png" 
+              alt="Adnan Ali Typing Logo" 
+              className="w-32 h-32 mx-auto"
+            />
+          </motion.div>
+
           <motion.h1 
             className="text-5xl md:text-6xl font-bold text-white mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            Professional Typing Services
+            Adnan Ali Typing
           </motion.h1>
           
           <motion.p 
@@ -30,7 +43,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            Expert document services for all your personal and business needs
+            Professional Documentation & Government Services Portal
           </motion.p>
 
           <motion.div 

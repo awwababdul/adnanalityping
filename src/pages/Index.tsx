@@ -1,7 +1,11 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Search, FileText, Image, Mail, Shield } from "lucide-react";
+import { 
+  Search, FileText, Image, Mail, Shield, 
+  FileSignature, Book, Translate, Camera,
+  FileCheck, Printer, Globe, UserCheck 
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ServiceCard from "@/components/ServiceCard";
 import HeroSection from "@/components/HeroSection";
@@ -12,24 +16,64 @@ const Index = () => {
   const services = [
     {
       icon: <FileText className="w-6 h-6" />,
-      title: "Document Services",
-      description: "Professional typing, formatting and translation services for all your documentation needs",
+      title: "Document Typing",
+      description: "Professional typing services for all types of documents",
     },
     {
       icon: <Image className="w-6 h-6" />,
       title: "Photo Services",
-      description: "Expert photo editing and formatting for official documents and visas",
+      description: "Photo editing and formatting for official documents",
     },
     {
-      icon: <Mail className="w-6 h-6" />,
-      title: "Email & Communication",
-      description: "Automated client communications and professional email drafting services",
+      icon: <FileSignature className="w-6 h-6" />,
+      title: "CV Writing",
+      description: "Professional CV and resume writing services",
+    },
+    {
+      icon: <Translate className="w-6 h-6" />,
+      title: "Translation Services",
+      description: "Document translation between Arabic and English",
     },
     {
       icon: <Shield className="w-6 h-6" />,
       title: "Government Services",
-      description: "Assistance with various government and administrative procedures",
+      description: "Assistance with government applications and procedures",
     },
+    {
+      icon: <Mail className="w-6 h-6" />,
+      title: "Email Services",
+      description: "Professional email drafting and communication",
+    },
+    {
+      icon: <Book className="w-6 h-6" />,
+      title: "E-Book Conversion",
+      description: "Convert documents to various e-book formats",
+    },
+    {
+      icon: <Camera className="w-6 h-6" />,
+      title: "ID Photo Service",
+      description: "Professional ID photos for official documents",
+    },
+    {
+      icon: <FileCheck className="w-6 h-6" />,
+      title: "Document Attestation",
+      description: "Legal document attestation services",
+    },
+    {
+      icon: <Printer className="w-6 h-6" />,
+      title: "Printing Services",
+      description: "High-quality document printing and binding",
+    },
+    {
+      icon: <Globe className="w-6 h-6" />,
+      title: "Visa Services",
+      description: "Assistance with visa applications and renewals",
+    },
+    {
+      icon: <UserCheck className="w-6 h-6" />,
+      title: "PRO Services",
+      description: "Professional PRO services for businesses",
+    }
   ];
 
   return (
@@ -45,7 +89,7 @@ const Index = () => {
         >
           <h2 className="text-4xl font-bold text-secondary mb-4">Our Services</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Professional document services tailored to meet all your needs. From typing and translation to photo editing and government applications.
+            Comprehensive document and government services tailored to meet all your needs. Professional, reliable, and efficient solutions for individuals and businesses.
           </p>
         </motion.div>
 
