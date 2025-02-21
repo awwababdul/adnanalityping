@@ -3,9 +3,9 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { services } from "@/data/services";
 import { Button } from "@/components/ui/button";
-import ServiceCard from "@/components/ServiceCard";
 import HeroSection from "@/components/HeroSection";
 import { Shield, Clock, UserCheck } from "lucide-react";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -73,17 +73,41 @@ const Index = () => {
         >
           <h2 className="text-4xl font-bold text-secondary mb-4">Our Services</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Comprehensive document and government services tailored to meet all your needs. Professional, reliable, and efficient solutions for individuals and businesses.
+            Comprehensive document and government services tailored to meet all your needs
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <ServiceCard
+            <motion.div
               key={service.id}
-              service={service}
-              delay={index * 0.1}
-            />
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <div className="bg-primary/10 w-12 h-12 rounded-full flex items-center justify-center">
+                  <div className="text-primary">{service.icon}</div>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-secondary">{service.title}</h3>
+                  <p className="text-gray-600 text-sm">{service.description}</p>
+                </div>
+              </div>
+              
+              <div className="space-y-4 mt-6">
+                {service.subServices.map((subService) => (
+                  <div
+                    key={subService.id}
+                    className="p-4 bg-muted rounded-lg hover:bg-muted/80 transition-colors"
+                  >
+                    <h4 className="font-medium text-secondary">{subService.title}</h4>
+                    <p className="text-sm text-gray-600 mt-1">{subService.description}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
           ))}
         </div>
 
@@ -102,6 +126,9 @@ const Index = () => {
           </Button>
         </motion.div>
       </section>
+
+      {/* WhatsApp Button */}
+      <WhatsAppButton />
     </div>
   );
 };
