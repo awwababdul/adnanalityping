@@ -1,11 +1,13 @@
 
 import { motion } from "framer-motion";
-import { Search } from "lucide-react";
+import { Search, MapPin, Phone } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
 const HeroSection = () => {
   return (
-    <div className="relative bg-secondary overflow-hidden">
+    <div className="relative bg-secondary min-h-[80vh] overflow-hidden">
+      {/* Dubai Skyline Background Pattern */}
+      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1496307653780-42ee777d4833?auto=format&fit=crop&q=80')] bg-cover bg-center" />
       <div className="absolute inset-0 bg-gradient-to-r from-secondary/95 to-secondary/80" />
       
       <div className="container mx-auto px-4 py-24 relative z-10">
@@ -43,11 +45,11 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            Professional Documentation & Government Services Portal
+            Your Trusted Partner for Professional Documentation & Government Services in Dubai
           </motion.p>
 
           <motion.div 
-            className="max-w-md mx-auto"
+            className="max-w-md mx-auto mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
@@ -59,6 +61,39 @@ const HeroSection = () => {
                 className="w-full h-14 pl-12 pr-4 rounded-full text-lg bg-white/10 text-white placeholder:text-gray-300 border-none focus-visible:ring-2 focus-visible:ring-primary"
               />
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-300" />
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 }}
+            className="flex flex-col md:flex-row items-center justify-center gap-6 text-gray-200"
+          >
+            <a 
+              href="https://maps.app.goo.gl/DbxyAfj3s6AQ5R8A7?g_st=com.google.maps.preview.copy" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 hover:text-primary transition-colors"
+            >
+              <MapPin className="w-5 h-5" />
+              <span>Find us on Google Maps</span>
+            </a>
+            <div className="flex items-center gap-6">
+              <a 
+                href="tel:+971552636961" 
+                className="flex items-center gap-2 hover:text-primary transition-colors"
+              >
+                <Phone className="w-5 h-5" />
+                <span>+971 55 263 6961</span>
+              </a>
+              <a 
+                href="tel:+971545535013" 
+                className="flex items-center gap-2 hover:text-primary transition-colors"
+              >
+                <Phone className="w-5 h-5" />
+                <span>+971 54 553 5013</span>
+              </a>
             </div>
           </motion.div>
         </motion.div>

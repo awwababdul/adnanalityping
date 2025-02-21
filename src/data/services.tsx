@@ -1,210 +1,177 @@
 
 import React from 'react';
 import { 
-  FileText, Image, Mail, Shield, 
-  GraduationCap, Globe2, FileSignature, Camera,
-  ScrollText, Printer, UserCheck, Building2 
+  Building2, ScrollText, UserCheck, 
+  FileSignature, FileText, Building,
+  Globe2, BookCheck, Stamp, Printer,
+  MailCheck, FileCheck, ShieldCheck, Car,
+  BadgeCheck, Scale, GraduationCap, MapPin
 } from "lucide-react";
 import { Service } from "@/types/services";
 
 export const services: Service[] = [
   {
-    id: "typing",
-    icon: React.createElement(FileText, { className: "w-6 h-6" }),
-    title: "Typing Services",
-    description: "All types of typing services including documents, letters, and forms",
+    id: "business-setup",
+    icon: React.createElement(Building2, { className: "w-6 h-6" }),
+    title: "Business Setup and Trade Licensing",
+    description: "Complete business formation and licensing solutions in Dubai",
     subServices: [
       {
-        id: "legal-documents",
-        title: "Legal Documents Typing",
-        description: "Professional typing services for legal documents and contracts",
+        id: "company-formation",
+        title: "Dubai Company Formation Assistance",
+        description: "Guide entrepreneurs through the process of establishing businesses in Dubai, including mainland and free zone setups",
         requirements: [
-          "Original documents",
-          "Valid ID",
-          "Power of attorney (if applicable)"
+          "Valid passport copies",
+          "Initial approval from DED",
+          "Required capital proof",
+          "Additional documents based on business activity"
         ],
-        documents: [
-          "Original document to be typed",
-          "Emirates ID",
-          "Supporting documents"
-        ],
-        governmentLink: "https://www.dubai.ae/en/Pages/default.aspx"
+        governmentLink: "https://ded.ae/"
       },
       {
-        id: "business-documents",
-        title: "Business Documents",
-        description: "Typing services for business letters, agreements, and contracts",
+        id: "trade-license",
+        title: "Dubai Trade License Registration and Renewal",
+        description: "Manage the issuance and renewal of trade licenses to ensure businesses operate legally",
         requirements: [
-          "Company documents",
-          "Trade license",
-          "Authorization letter"
+          "Existing trade license (for renewal)",
+          "Location documents",
+          "Owner's documents",
+          "NOC if required"
         ],
-        governmentLink: "https://www.dubai.ae/en/Pages/default.aspx"
+        governmentLink: "https://ded.ae/"
       },
       {
-        id: "personal-documents",
-        title: "Personal Documents",
-        description: "Typing services for personal letters, CVs, and applications",
+        id: "license-modification",
+        title: "Dubai Business License Modification Services",
+        description: "Facilitate amendments to existing business licenses, such as activity additions or partner changes",
         requirements: [
-          "Personal identification",
-          "Document drafts",
-          "Additional requirements based on document type"
+          "Current trade license",
+          "Amendment application",
+          "Supporting documents for changes"
         ],
-        governmentLink: "https://www.dubai.ae/en/Pages/default.aspx"
+        governmentLink: "https://ded.ae/"
       }
     ]
   },
   {
-    id: "legal-translation",
+    id: "document-clearing",
     icon: React.createElement(ScrollText, { className: "w-6 h-6" }),
-    title: "Legal Translation",
-    description: "Professional translation services for legal documents",
+    title: "Document Clearing and PRO Services",
+    description: "Professional document processing and government liaison services",
     subServices: [
       {
-        id: "official-documents",
-        title: "Official Document Translation",
-        description: "Translation of official documents with legal certification",
+        id: "document-clearing",
+        title: "Dubai Document Clearing Services",
+        description: "Handle the processing and clearance of various governmental documents",
         requirements: [
           "Original documents",
           "Valid ID",
-          "Additional supporting documents"
+          "Payment for service fees"
         ],
-        governmentLink: "https://www.dubai.ae/en/Pages/default.aspx"
+        governmentLink: "https://www.dubai.ae/"
       },
       {
-        id: "court-documents",
-        title: "Court Documents Translation",
-        description: "Certified translation of court verdicts and legal papers",
+        id: "pro-services",
+        title: "Dubai PRO Services",
+        description: "Offer liaison services with government departments for document processing",
         requirements: [
-          "Original court documents",
-          "Valid identification",
-          "Court case reference number"
+          "Required documents",
+          "Authorization letter",
+          "Valid identification"
         ],
-        governmentLink: "https://www.dubai.ae/en/Pages/default.aspx"
-      }
-    ]
-  },
-  {
-    id: "printing",
-    icon: React.createElement(Printer, { className: "w-6 h-6" }),
-    title: "Printing Services",
-    description: "High-quality printing services for all document types",
-    subServices: [
-      {
-        id: "digital-printing",
-        title: "Digital Printing",
-        description: "Modern digital printing for documents and materials",
-        requirements: [
-          "Digital files",
-          "Specifications for printing",
-          "Payment for service"
-        ],
-        governmentLink: "https://www.dubai.ae/en/Pages/default.aspx"
-      },
-      {
-        id: "document-scanning",
-        title: "Document Scanning",
-        description: "Professional scanning services with high resolution",
-        requirements: [
-          "Original documents",
-          "Scanning specifications",
-          "Storage device (if required)"
-        ],
-        governmentLink: "https://www.dubai.ae/en/Pages/default.aspx"
-      }
-    ]
-  },
-  {
-    id: "attestation",
-    icon: React.createElement(FileSignature, { className: "w-6 h-6" }),
-    title: "Document Attestation",
-    description: "Official attestation services for various documents",
-    subServices: [
-      {
-        id: "certificate-attestation",
-        title: "Certificate Attestation",
-        description: "Authentication of educational and professional certificates",
-        requirements: [
-          "Original certificates",
-          "Passport copy",
-          "Previous attestations (if any)"
-        ],
-        governmentLink: "https://www.dubai.ae/en/Pages/default.aspx"
-      },
-      {
-        id: "commercial-attestation",
-        title: "Commercial Documents Attestation",
-        description: "Attestation of business and commercial documents",
-        requirements: [
-          "Original documents",
-          "Trade license",
-          "Chamber of Commerce membership"
-        ],
-        governmentLink: "https://www.dubai.ae/en/Pages/default.aspx"
+        governmentLink: "https://www.dubai.ae/"
       }
     ]
   },
   {
     id: "visa-services",
     icon: React.createElement(UserCheck, { className: "w-6 h-6" }),
-    title: "Visa Services",
-    description: "Comprehensive visa application and processing services",
+    title: "Visa and Immigration Services",
+    description: "Comprehensive visa and immigration solutions",
     subServices: [
       {
-        id: "tourist-visa",
-        title: "Tourist Visa Application",
-        description: "Assistance with tourist visa applications",
+        id: "employment-visa",
+        title: "Dubai Employment Visa Processing",
+        description: "Assist employers and employees in obtaining and renewing work visas",
         requirements: [
-          "Valid passport",
-          "Passport-size photos",
-          "Bank statements",
-          "Travel insurance"
+          "Passport copy",
+          "Photos",
+          "Job offer letter",
+          "Educational certificates"
         ],
-        governmentLink: "https://www.dubai.ae/en/Pages/default.aspx"
+        governmentLink: "https://www.ica.gov.ae/"
       },
       {
-        id: "business-visa",
-        title: "Business Visa Processing",
-        description: "Support for business visa applications",
+        id: "family-visa",
+        title: "Dubai Family Visa Sponsorship",
+        description: "Facilitate family visa sponsorship for UAE residents",
         requirements: [
-          "Company letter",
-          "Trade license",
-          "Passport with validity",
-          "Visa application form"
+          "Sponsor's documents",
+          "Family documents",
+          "Housing contract",
+          "Salary certificate"
         ],
-        governmentLink: "https://www.dubai.ae/en/Pages/default.aspx"
+        governmentLink: "https://www.ica.gov.ae/"
       }
     ]
   },
   {
-    id: "company-formation",
-    icon: React.createElement(Building2, { className: "w-6 h-6" }),
-    title: "Company Formation",
-    description: "Complete business setup and licensing services",
+    id: "attestation",
+    icon: React.createElement(FileSignature, { className: "w-6 h-6" }),
+    title: "Attestation and Translation",
+    description: "Professional document attestation and translation services",
     subServices: [
       {
-        id: "mainland-company",
-        title: "Mainland Company Setup",
-        description: "Establishment of mainland companies in UAE",
+        id: "document-attestation",
+        title: "Dubai Document Attestation Services",
+        description: "Authenticate various documents for official use",
         requirements: [
-          "Passport copies of shareholders",
-          "Business plan",
-          "Initial capital proof",
-          "Proposed company name"
+          "Original documents",
+          "Copy of ID",
+          "Application form"
         ],
-        governmentLink: "https://www.dubai.ae/en/Pages/default.aspx"
+        governmentLink: "https://www.mofaic.gov.ae/"
       },
       {
-        id: "freezone-company",
-        title: "Freezone Company Formation",
-        description: "Setup of freezone companies with 100% ownership",
+        id: "legal-translation",
+        title: "Legal and Normal Translation",
+        description: "Certified translation services in multiple languages",
         requirements: [
-          "Passport copies",
-          "CV of shareholders",
-          "Business plan",
-          "Application forms"
+          "Original document",
+          "Purpose of translation",
+          "Target language specification"
         ],
-        governmentLink: "https://www.dubai.ae/en/Pages/default.aspx"
+        governmentLink: "https://www.dubai.ae/"
+      }
+    ]
+  },
+  {
+    id: "additional-services",
+    icon: React.createElement(Globe2, { className: "w-6 h-6" }),
+    title: "Additional Services",
+    description: "Various essential services for businesses and individuals",
+    subServices: [
+      {
+        id: "ejari",
+        title: "Dubai Ejari Registration",
+        description: "Assist in registration and renewal of tenancy contracts",
+        requirements: [
+          "Tenancy contract",
+          "Landlord documents",
+          "Tenant documents"
+        ],
+        governmentLink: "https://www.ejari.ae/"
+      },
+      {
+        id: "typing-services",
+        title: "Document Typing Services",
+        description: "Professional typing services for all types of documents",
+        requirements: [
+          "Content details",
+          "Format requirements",
+          "Additional specifications"
+        ],
+        governmentLink: "https://www.dubai.ae/"
       }
     ]
   }
