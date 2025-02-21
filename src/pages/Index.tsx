@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { services } from "@/data/services";
 import { Button } from "@/components/ui/button";
 import HeroSection from "@/components/HeroSection";
-import { Shield, Clock, UserCheck, MessageCircle } from "lucide-react";
+import { Shield, Clock, UserCheck, MessageCircle, Award, Users } from "lucide-react";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 const Index = () => {
@@ -27,9 +27,9 @@ const Index = () => {
             transition={{ duration: 0.5 }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl font-bold text-secondary mb-4">Why Choose Us</h2>
+            <h2 className="text-4xl font-bold text-secondary mb-4">Your Trusted Document Services Partner</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Your trusted partner for professional documentation and government services in Dubai. We provide expert assistance with fast turnaround times and competitive prices.
+              With over 15 years of experience, we've successfully processed more than 50,000 documents, serving 10,000+ satisfied clients in Dubai. Our commitment to excellence makes us your ideal partner for all documentation needs.
             </p>
           </motion.div>
 
@@ -37,18 +37,18 @@ const Index = () => {
             {[
               {
                 icon: <Shield className="w-8 h-8 text-primary" />,
-                title: "Licensed & Certified",
-                description: "Fully licensed and certified service provider by Dubai authorities"
+                title: "Government-Authorized",
+                description: "Licensed and certified by Dubai authorities, ensuring full legal compliance"
               },
               {
                 icon: <Clock className="w-8 h-8 text-primary" />,
-                title: "Quick Turnaround",
-                description: "Swift and efficient processing for all your documentation needs"
+                title: "24-Hour Processing",
+                description: "Swift document processing with most services completed within 24 hours"
               },
               {
-                icon: <UserCheck className="w-8 h-8 text-primary" />,
-                title: "Expert Team",
-                description: "Experienced professionals dedicated to your success"
+                icon: <Award className="w-8 h-8 text-primary" />,
+                title: "15+ Years Experience",
+                description: "Extensive expertise in UAE documentation and government services"
               }
             ].map((feature, index) => (
               <motion.div
@@ -75,9 +75,9 @@ const Index = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl font-bold text-secondary mb-4">Our Services</h2>
+          <h2 className="text-4xl font-bold text-secondary mb-4">Comprehensive Documentation Services</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Professional documentation and government services in Dubai. Fast, reliable, and hassle-free solutions for all your needs.
+            From visa processing to legal document translation, we offer end-to-end documentation services tailored to your needs. Our expert team ensures accuracy, speed, and compliance with UAE regulations.
           </p>
         </motion.div>
 
@@ -115,6 +115,30 @@ const Index = () => {
           ))}
         </div>
 
+        {/* Success Metrics Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="mt-20 text-center"
+        >
+          <h2 className="text-3xl font-bold text-secondary mb-12">Our Success Story</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="p-6 bg-white rounded-xl shadow">
+              <div className="text-4xl font-bold text-primary mb-2">50,000+</div>
+              <div className="text-gray-600">Documents Processed</div>
+            </div>
+            <div className="p-6 bg-white rounded-xl shadow">
+              <div className="text-4xl font-bold text-primary mb-2">10,000+</div>
+              <div className="text-gray-600">Satisfied Clients</div>
+            </div>
+            <div className="p-6 bg-white rounded-xl shadow">
+              <div className="text-4xl font-bold text-primary mb-2">15+</div>
+              <div className="text-gray-600">Years of Experience</div>
+            </div>
+          </div>
+        </motion.div>
+
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -126,7 +150,7 @@ const Index = () => {
             className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg rounded-full flex items-center gap-2"
             onClick={handleGetStarted}
           >
-            Get Started
+            Start Your Documentation Process Now
             <MessageCircle className="w-6 h-6" />
           </Button>
         </motion.div>
@@ -139,4 +163,3 @@ const Index = () => {
 };
 
 export default Index;
-

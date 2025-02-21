@@ -25,7 +25,7 @@ const HeroSection = () => {
           >
             <img 
               src="/lovable-uploads/c3a3a109-e73f-4597-ba4b-c0043c986598.png" 
-              alt="Adnan Ali Typing Logo" 
+              alt="Adnan Ali Typing - Professional Documentation Services in Dubai" 
               className="w-32 h-32 mx-auto"
             />
           </motion.div>
@@ -36,7 +36,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            Adnan Ali Typing
+            Expert Documentation Services in Dubai
           </motion.h1>
           
           <motion.p 
@@ -45,7 +45,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            Your Trusted Partner for Professional Documentation & Government Services in Dubai
+            Your trusted partner for professional documentation, visa services, and legal translations. Fast, reliable, and government-approved services with 15+ years of experience.
           </motion.p>
 
           <motion.div 
@@ -77,7 +77,7 @@ const HeroSection = () => {
               className="flex items-center gap-2 hover:text-primary transition-colors"
             >
               <MapPin className="w-5 h-5" />
-              <span>Find us on Google Maps</span>
+              <span>Visit Our Office in Dubai</span>
             </a>
             <div className="flex items-center gap-6">
               <a 
