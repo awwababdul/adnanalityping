@@ -4,11 +4,15 @@ import { motion } from "framer-motion";
 import { services } from "@/data/services";
 import { Button } from "@/components/ui/button";
 import HeroSection from "@/components/HeroSection";
-import { Shield, Clock, UserCheck } from "lucide-react";
+import { Shield, Clock, UserCheck, MessageCircle } from "lucide-react";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
+
+  const handleGetStarted = () => {
+    window.open("https://api.whatsapp.com/send?phone=971552636961", "_blank");
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -25,7 +29,7 @@ const Index = () => {
           >
             <h2 className="text-4xl font-bold text-secondary mb-4">Why Choose Us</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Experience excellence in document and government services with our expert team
+              Your trusted partner for professional documentation and government services in Dubai. We provide expert assistance with fast turnaround times and competitive prices.
             </p>
           </motion.div>
 
@@ -34,17 +38,17 @@ const Index = () => {
               {
                 icon: <Shield className="w-8 h-8 text-primary" />,
                 title: "Licensed & Certified",
-                description: "Fully licensed and certified service provider in Dubai"
+                description: "Fully licensed and certified service provider by Dubai authorities"
               },
               {
                 icon: <Clock className="w-8 h-8 text-primary" />,
                 title: "Quick Turnaround",
-                description: "Fast and efficient processing of your documents"
+                description: "Swift and efficient processing for all your documentation needs"
               },
               {
                 icon: <UserCheck className="w-8 h-8 text-primary" />,
                 title: "Expert Team",
-                description: "Experienced professionals at your service"
+                description: "Experienced professionals dedicated to your success"
               }
             ].map((feature, index) => (
               <motion.div
@@ -73,7 +77,7 @@ const Index = () => {
         >
           <h2 className="text-4xl font-bold text-secondary mb-4">Our Services</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Comprehensive document and government services tailored to meet all your needs
+            Professional documentation and government services in Dubai. Fast, reliable, and hassle-free solutions for all your needs.
           </p>
         </motion.div>
 
@@ -119,10 +123,11 @@ const Index = () => {
         >
           <Button
             variant="default"
-            className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg rounded-full"
-            onClick={() => window.location.href = '/contact'}
+            className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg rounded-full flex items-center gap-2"
+            onClick={handleGetStarted}
           >
             Get Started
+            <MessageCircle className="w-6 h-6" />
           </Button>
         </motion.div>
       </section>
@@ -134,3 +139,4 @@ const Index = () => {
 };
 
 export default Index;
+
