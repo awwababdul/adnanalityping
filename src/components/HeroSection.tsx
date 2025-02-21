@@ -36,7 +36,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            Expert Documentation Services in Dubai
+            Adnan Ali Typing
           </motion.h1>
           
           <motion.p 
