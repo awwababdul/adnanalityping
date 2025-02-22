@@ -1,13 +1,49 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { services } from "@/data/services";
 import { Button } from "@/components/ui/button";
 import HeroSection from "@/components/HeroSection";
-import { Shield, Clock, UserCheck, MessageCircle, Award, Users, ArrowRight } from "lucide-react";
+import { Building2, UserCheck, FileSignature, Printer, BookCheck, ArrowRight } from "lucide-react";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import { Link } from "react-router-dom";
 
 const Index = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+  const mainServices = [
+    {
+      id: "packages",
+      icon: <Building2 className="w-8 h-8" />,
+      title: "Packages",
+      description: "Complete service packages for business setup, family visas, and document processing",
+      link: "/services/packages"
+    },
+    {
+      id: "immigration",
+      icon: <UserCheck className="w-8 h-8" />,
+      title: "Immigration",
+      description: "Comprehensive immigration services including visa processing and status change",
+      link: "/services/immigration"
+    },
+    {
+      id: "emirates-id",
+      icon: <FileSignature className="w-8 h-8" />,
+      title: "Emirates ID",
+      description: "Emirates ID application, renewal, and replacement services",
+      link: "/services/emirates-id"
+    },
+    {
+      id: "tas-heel",
+      icon: <Printer className="w-8 h-8" />,
+      title: "Tas-heel",
+      description: "Complete range of Tas-heel services for labor and employment needs",
+      link: "/services/tas-heel"
+    },
+    {
+      id: "dha",
+      icon: <BookCheck className="w-8 h-8" />,
+      title: "DHA Services",
+      description: "Dubai Health Authority services including medical fitness and licensing",
+      link: "/services/dubai-health-authority"
+    }
+  ];
 
   const handleGetStarted = () => {
     window.open("https://api.whatsapp.com/send?phone=971552636961", "_blank");
@@ -33,7 +69,7 @@ const Index = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
+            {mainServices.map((service, index) => (
               <motion.div
                 key={service.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -43,18 +79,19 @@ const Index = () => {
               >
                 <div className="flex items-center gap-4 mb-4">
                   <div className="bg-primary/10 w-16 h-16 rounded-xl flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                    <div className="text-primary w-8 h-8">{service.icon}</div>
+                    <div className="text-primary">{service.icon}</div>
                   </div>
                   <h3 className="text-xl font-semibold text-secondary">{service.title}</h3>
                 </div>
                 <p className="text-gray-600 mb-4">{service.description}</p>
-                <Button 
-                  variant="ghost" 
-                  className="w-full justify-between text-primary hover:text-primary/90"
-                  onClick={handleGetStarted}
-                >
-                  Learn More <ArrowRight className="w-5 h-5" />
-                </Button>
+                <Link to={service.link}>
+                  <Button 
+                    variant="ghost" 
+                    className="w-full justify-between text-primary hover:text-primary/90"
+                  >
+                    Learn More <ArrowRight className="w-5 h-5" />
+                  </Button>
+                </Link>
               </motion.div>
             ))}
           </div>
