@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { 
   Building2, ScrollText, UserCheck, 
@@ -12,9 +11,9 @@ import { Service } from "@/types/services";
 export const services: Service[] = [
   {
     id: "business-setup",
-    icon: React.createElement(Building2, { className: "w-6 h-6" }),
-    title: "Business Setup and Trade Licensing",
-    description: "Complete business formation and licensing solutions in Dubai",
+    icon: React.createElement(Building2, { className: "w-8 h-8" }),
+    title: "Business Setup Services",
+    description: "Complete business formation and licensing solutions in Dubai mainland and free zones",
     subServices: [
       {
         id: "company-formation",
@@ -55,9 +54,9 @@ export const services: Service[] = [
   },
   {
     id: "document-clearing",
-    icon: React.createElement(ScrollText, { className: "w-6 h-6" }),
-    title: "Document Clearing and PRO Services",
-    description: "Professional document processing and government liaison services",
+    icon: React.createElement(ScrollText, { className: "w-8 h-8" }),
+    title: "PRO Services",
+    description: "Professional document processing and government relations services",
     subServices: [
       {
         id: "document-clearing",
@@ -85,9 +84,9 @@ export const services: Service[] = [
   },
   {
     id: "visa-services",
-    icon: React.createElement(UserCheck, { className: "w-6 h-6" }),
-    title: "Visa and Immigration Services",
-    description: "Comprehensive visa and immigration solutions",
+    icon: React.createElement(UserCheck, { className: "w-8 h-8" }),
+    title: "Visa Services",
+    description: "Complete visa solutions for residence, visit, and employment",
     subServices: [
       {
         id: "employment-visa",
@@ -117,9 +116,9 @@ export const services: Service[] = [
   },
   {
     id: "attestation",
-    icon: React.createElement(FileSignature, { className: "w-6 h-6" }),
-    title: "Attestation and Translation",
-    description: "Professional document attestation and translation services",
+    icon: React.createElement(Stamp, { className: "w-8 h-8" }),
+    title: "Certificate Attestation",
+    description: "Ministry and embassy attestation services for all types of documents",
     subServices: [
       {
         id: "document-attestation",
@@ -146,30 +145,60 @@ export const services: Service[] = [
     ]
   },
   {
-    id: "additional-services",
-    icon: React.createElement(Globe2, { className: "w-6 h-6" }),
-    title: "Additional Services",
-    description: "Various essential services for businesses and individuals",
+    id: "translation",
+    icon: React.createElement(BookCheck, { className: "w-8 h-8" }),
+    title: "Legal Translation",
+    description: "Certified translation services in multiple languages",
     subServices: [
       {
-        id: "ejari",
-        title: "Dubai Ejari Registration",
-        description: "Assist in registration and renewal of tenancy contracts",
+        id: "document-attestation",
+        title: "Dubai Document Attestation Services",
+        description: "Authenticate various documents for official use",
         requirements: [
-          "Tenancy contract",
-          "Landlord documents",
-          "Tenant documents"
+          "Original documents",
+          "Copy of ID",
+          "Application form"
         ],
-        governmentLink: "https://www.ejari.ae/"
+        governmentLink: "https://www.mofaic.gov.ae/"
       },
       {
-        id: "typing-services",
-        title: "Document Typing Services",
-        description: "Professional typing services for all types of documents",
+        id: "legal-translation",
+        title: "Legal and Normal Translation",
+        description: "Certified translation services in multiple languages",
         requirements: [
-          "Content details",
-          "Format requirements",
-          "Additional specifications"
+          "Original document",
+          "Purpose of translation",
+          "Target language specification"
+        ],
+        governmentLink: "https://www.dubai.ae/"
+      }
+    ]
+  },
+  {
+    id: "typing",
+    icon: React.createElement(Printer, { className: "w-8 h-8" }),
+    title: "Typing Services",
+    description: "Professional typing services for all types of documents and applications",
+    subServices: [
+      {
+        id: "document-attestation",
+        title: "Dubai Document Attestation Services",
+        description: "Authenticate various documents for official use",
+        requirements: [
+          "Original documents",
+          "Copy of ID",
+          "Application form"
+        ],
+        governmentLink: "https://www.mofaic.gov.ae/"
+      },
+      {
+        id: "legal-translation",
+        title: "Legal and Normal Translation",
+        description: "Certified translation services in multiple languages",
+        requirements: [
+          "Original document",
+          "Purpose of translation",
+          "Target language specification"
         ],
         governmentLink: "https://www.dubai.ae/"
       }
