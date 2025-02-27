@@ -320,9 +320,9 @@ const Index = () => {
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
           >
             {[
-              { number: "50,000+", label: "Documents Processed" },
-              { number: "10,000+", label: "Satisfied Clients" },
-              { number: "15+", label: "Years of Experience" }
+              { number: "5,000,000+", label: "Documents Processed" },
+              { number: "350,000+", label: "Satisfied Clients" },
+              { number: "25+", label: "Years of Experience" }
             ].map((stat, index) => (
               <motion.div
                 key={index}
