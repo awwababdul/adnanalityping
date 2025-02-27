@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -49,71 +50,112 @@ const Index = () => {
     window.open("https://api.whatsapp.com/send?phone=971552636961", "_blank");
   };
 
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <HeroSection />
       
-      {/* Services Section with "What are you looking for?" */}
-      <section className="bg-white py-16">
-        <div className="container mx-auto px-4">
+      {/* Services Section with glass cards */}
+      <section className="py-24 relative overflow-hidden">
+        {/* Background gradient blobs */}
+        <div className="absolute top-1/4 -left-64 w-[500px] h-[500px] bg-primary/10 rounded-full filter blur-3xl"></div>
+        <div className="absolute bottom-1/4 -right-64 w-[500px] h-[500px] bg-accent/10 rounded-full filter blur-3xl"></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-12"
+            viewport={{ once: true }}
+            className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-secondary mb-4">What are you looking for?</h2>
+            <h2 className="text-4xl font-bold mb-4">
+              <span className="text-gradient">What are you looking for?</span>
+            </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Choose from our comprehensive range of professional documentation and business services
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {mainServices.map((service, index) => (
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {mainServices.map((service) => (
               <motion.div
                 key={service.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="group bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+                variants={itemVariants}
+                className="service-card glass-card bg-white/5 backdrop-blur-lg p-8 group"
               >
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="bg-primary/10 w-16 h-16 rounded-xl flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                  <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                     <div className="text-primary">{service.icon}</div>
                   </div>
-                  <h3 className="text-xl font-semibold text-secondary">{service.title}</h3>
+                  <h3 className="text-xl font-semibold">{service.title}</h3>
                 </div>
-                <p className="text-gray-600 mb-4">{service.description}</p>
-                <Link to={service.link}>
+                <p className="text-gray-600 mb-6">{service.description}</p>
+                <Link to={service.link} className="inline-block">
                   <Button 
                     variant="ghost" 
-                    className="w-full justify-between text-primary hover:text-primary/90"
+                    className="group w-full justify-between text-primary hover:text-primary/90 p-0"
                   >
-                    Learn More <ArrowRight className="w-5 h-5" />
+                    Learn More 
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
+                <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-primary to-accent group-hover:w-full transition-all duration-300"></div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Latest Offers Section */}
-      <section className="bg-muted py-16">
-        <div className="container mx-auto px-4">
+      <section className="py-24 bg-secondary/5 relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute inset-0 bg-noise-pattern opacity-5"></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-12"
+            viewport={{ once: true }}
+            className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-secondary mb-4">Discover Latest Offers</h2>
+            <h2 className="text-4xl font-bold mb-4">
+              <span className="text-gradient">Discover Latest Offers</span>
+            </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Take advantage of our special promotional packages and discounted services
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          >
             {[
               {
                 title: "Business Setup Package",
@@ -136,45 +178,56 @@ const Index = () => {
             ].map((offer, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+                variants={itemVariants}
+                className="service-card bg-white p-8 rounded-xl shadow-lg relative group overflow-hidden"
               >
-                <div className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm inline-block mb-4">
-                  {offer.savings}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative z-10">
+                  <div className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm inline-block mb-4">
+                    {offer.savings}
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">{offer.title}</h3>
+                  <p className="text-gray-600 mb-4">{offer.description}</p>
+                  <p className="text-primary font-semibold mb-6">{offer.price}</p>
+                  <Button 
+                    className="w-full bg-primary hover:bg-primary/90"
+                    onClick={handleGetStarted}
+                  >
+                    Get Offer Now
+                  </Button>
                 </div>
-                <h3 className="text-xl font-semibold text-secondary mb-2">{offer.title}</h3>
-                <p className="text-gray-600 mb-4">{offer.description}</p>
-                <p className="text-primary font-semibold mb-4">{offer.price}</p>
-                <Button 
-                  className="w-full"
-                  onClick={handleGetStarted}
-                >
-                  Get Offer Now
-                </Button>
+                <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-primary to-accent group-hover:w-full transition-all duration-300"></div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Our Esteemed Partners Section */}
-      <section className="bg-white py-16">
-        <div className="container mx-auto px-4">
+      <section className="py-24 relative overflow-hidden">
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-12"
+            viewport={{ once: true }}
+            className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-secondary mb-4">Our Esteemed Partners</h2>
+            <h2 className="text-4xl font-bold mb-4">
+              <span className="text-gradient">Our Esteemed Partners</span>
+            </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               We work with leading organizations and government entities to provide seamless services
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-center">
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-center"
+          >
             {[
               { name: "Dubai Economic Department", logo: "https://www.ded.ae/images/default-source/default-album/ded-logo.png" },
               { name: "UAE Ministry of Foreign Affairs", logo: "https://www.mofaic.gov.ae/Style%20Library/theme/img/logo-new.png" },
@@ -183,10 +236,8 @@ const Index = () => {
             ].map((partner, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow"
+                variants={itemVariants}
+                className="glass-card bg-white p-6 rounded-xl shadow-lg glow-effect transition-all duration-300 hover:scale-105"
               >
                 <img
                   src={partner.logo}
@@ -195,49 +246,89 @@ const Index = () => {
                 />
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Success Metrics Section */}
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        className="mt-20 text-center"
-      >
-        <h2 className="text-3xl font-bold text-secondary mb-12">Our Success Story</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="p-6 bg-white rounded-xl shadow">
-            <div className="text-4xl font-bold text-primary mb-2">50,000+</div>
-            <div className="text-gray-600">Documents Processed</div>
-          </div>
-          <div className="p-6 bg-white rounded-xl shadow">
-            <div className="text-4xl font-bold text-primary mb-2">10,000+</div>
-            <div className="text-gray-600">Satisfied Clients</div>
-          </div>
-          <div className="p-6 bg-white rounded-xl shadow">
-            <div className="text-4xl font-bold text-primary mb-2">15+</div>
-            <div className="text-gray-600">Years of Experience</div>
-          </div>
-        </div>
-      </motion.div>
+      <section className="py-24 bg-secondary relative overflow-hidden text-white">
+        {/* Decorative elements */}
+        <div className="absolute inset-0 bg-noise-pattern opacity-5"></div>
+        <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-background to-transparent"></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold mb-4">Our Success Story</h2>
+          </motion.div>
 
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-        className="text-center mt-16"
-      >
-        <Button
-          variant="default"
-          className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg rounded-full flex items-center gap-2"
-          onClick={handleGetStarted}
-        >
-          Start Your Documentation Process Now
-          <MessageCircle className="w-6 h-6" />
-        </Button>
-      </motion.div>
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          >
+            {[
+              { number: "50,000+", label: "Documents Processed" },
+              { number: "10,000+", label: "Satisfied Clients" },
+              { number: "15+", label: "Years of Experience" }
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="glass-card p-8 rounded-xl text-center group hover:bg-primary/20 transition-all duration-300"
+              >
+                <div className="text-5xl font-bold mb-2 text-primary">{stat.number}</div>
+                <div className="text-gray-300">{stat.label}</div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-24 relative overflow-hidden">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: "radial-gradient(circle at 50% 50%, rgba(0, 112, 243, 0.1) 0%, transparent 70%)"
+          }}
+        />
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="max-w-3xl mx-auto text-center"
+          >
+            <h2 className="text-4xl font-bold mb-8">
+              <span className="text-gradient">Ready to get started?</span>
+            </h2>
+            <p className="text-gray-600 text-lg mb-8">
+              Let our team of experts handle all your documentation needs with precision and efficiency.
+            </p>
+            <Button
+              className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg rounded-full flex items-center gap-2 animate-glow"
+              onClick={handleGetStarted}
+            >
+              Start Your Documentation Process Now
+              <MessageCircle className="w-6 h-6" />
+            </Button>
+          </motion.div>
+        </div>
+      </section>
 
       <WhatsAppButton />
     </div>

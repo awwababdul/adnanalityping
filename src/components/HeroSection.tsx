@@ -2,15 +2,27 @@
 import { motion } from "framer-motion";
 import { Search, MapPin, Phone } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 const HeroSection = () => {
   return (
-    <div className="relative bg-secondary min-h-[80vh] overflow-hidden">
-      {/* Dubai Skyline Background Pattern */}
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1496307653780-42ee777d4833?auto=format&fit=crop&q=80')] bg-cover bg-center" />
-      <div className="absolute inset-0 bg-gradient-to-r from-secondary/95 to-secondary/80" />
+    <div className="relative min-h-[90vh] overflow-hidden bg-secondary">
+      {/* Background elements */}
+      <div className="absolute inset-0 bg-noise-pattern opacity-[0.03]"></div>
+      <div className="absolute top-20 -left-32 w-96 h-96 bg-primary/20 rounded-full filter blur-3xl"></div>
+      <div className="absolute bottom-20 -right-32 w-96 h-96 bg-accent/20 rounded-full filter blur-3xl"></div>
       
-      <div className="container mx-auto px-4 py-24 relative z-10">
+      <div className="container relative z-10 mx-auto px-4 py-16 md:py-32 flex flex-col items-center justify-center">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          className="absolute top-0 left-0 w-full h-full pointer-events-none"
+          style={{
+            backgroundImage: "radial-gradient(circle at 50% 50%, rgba(0, 112, 243, 0.1) 0%, transparent 50%)"
+          }}
+        />
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -21,31 +33,32 @@ const HeroSection = () => {
             initial={{ scale: 0.5, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="mb-8"
+            className="mb-8 relative"
           >
+            <div className="absolute -inset-4 rounded-full bg-primary/10 animate-pulse blur-xl"></div>
             <img 
               src="/lovable-uploads/c3a3a109-e73f-4597-ba4b-c0043c986598.png" 
               alt="Adnan Ali Typing - Professional Documentation Services in Dubai" 
-              className="w-32 h-32 mx-auto"
+              className="w-32 h-32 mx-auto relative"
             />
           </motion.div>
 
           <motion.h1 
-            className="text-5xl md:text-6xl font-bold text-white mb-6"
+            className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            Adnan Ali Typing
+            <span className="text-gradient">Adnan Ali Typing</span>
           </motion.h1>
           
           <motion.p 
-            className="text-xl text-gray-200 max-w-2xl mx-auto mb-12"
+            className="text-xl text-gray-300 max-w-2xl mx-auto mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            Your trusted partner for professional documentation, visa services, and legal translations. Fast, reliable, and government-approved services with 15+ years of experience.
+            Your trusted partner for professional documentation, visa services, and legal translations with 15+ years of experience.
           </motion.p>
 
           <motion.div 
@@ -58,9 +71,12 @@ const HeroSection = () => {
               <Input
                 type="text"
                 placeholder="Search for services..."
-                className="w-full h-14 pl-12 pr-4 rounded-full text-lg bg-white/10 text-white placeholder:text-gray-300 border-none focus-visible:ring-2 focus-visible:ring-primary"
+                className="w-full h-14 pl-12 pr-4 rounded-full text-lg bg-white/10 text-white placeholder:text-gray-400 border-none focus-visible:ring-2 focus-visible:ring-primary backdrop-blur-md"
               />
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-300" />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <Button className="absolute right-1 top-1/2 transform -translate-y-1/2 rounded-full h-12 px-6">
+                Search
+              </Button>
             </div>
           </motion.div>
 
@@ -68,7 +84,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
-            className="flex flex-col md:flex-row items-center justify-center gap-6 text-gray-200"
+            className="flex flex-col md:flex-row items-center justify-center gap-6 text-gray-300"
           >
             <a 
               href="https://maps.app.goo.gl/DbxyAfj3s6AQ5R8A7?g_st=com.google.maps.preview.copy" 
@@ -98,6 +114,40 @@ const HeroSection = () => {
           </motion.div>
         </motion.div>
       </div>
+      
+      {/* Animated floating particles */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none z-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.5 }}
+        transition={{ delay: 1, duration: 1 }}
+      >
+        {Array.from({ length: 20 }).map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 rounded-full bg-primary/30"
+            initial={{
+              x: Math.random() * window.innerWidth,
+              y: Math.random() * window.innerHeight,
+            }}
+            animate={{
+              y: [
+                Math.random() * window.innerHeight,
+                Math.random() * window.innerHeight,
+              ],
+              x: [
+                Math.random() * window.innerWidth,
+                Math.random() * window.innerWidth,
+              ],
+            }}
+            transition={{
+              duration: 10 + Math.random() * 20,
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+          />
+        ))}
+      </motion.div>
     </div>
   );
 };
