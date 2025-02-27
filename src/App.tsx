@@ -8,6 +8,8 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import EmiratesIDPage from "./pages/services/emirates-id";
 import ImmigrationPage from "./pages/services/immigration";
+import Header from "./components/Header";
+import LoadingScreen from "./components/LoadingScreen";
 
 const queryClient = new QueryClient();
 
@@ -16,7 +18,9 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <LoadingScreen />
       <BrowserRouter>
+        <Header />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/services/emirates-id" element={<EmiratesIDPage />} />

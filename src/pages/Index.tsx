@@ -1,7 +1,5 @@
-
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import HeroSection from "@/components/HeroSection";
 import { Building2, UserCheck, FileSignature, Printer, BookCheck, ArrowRight, MessageCircle } from "lucide-react";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Link } from "react-router-dom";
@@ -329,7 +327,6 @@ const Index = () => {
                 variants={itemVariants}
                 className="glass-card bg-white/80 p-6 rounded-xl shadow-lg glow-effect transition-all duration-300 hover:scale-105"
               >
-                {/* Fallback to placeholder image if custom logo is not available */}
                 <div className="h-20 flex items-center justify-center">
                   <img
                     src={partner.logo}
@@ -337,7 +334,6 @@ const Index = () => {
                     className="max-h-16 max-w-full object-contain transition-all duration-300"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
-                      // Fallback to placeholder image with partner name as text
                       target.onerror = null;
                       target.src = `https://placehold.co/200x100/e6f7ff/0070f3?text=${encodeURIComponent(partner.name)}`;
                     }}
