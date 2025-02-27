@@ -1,11 +1,12 @@
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import HeroSection from "@/components/HeroSection";
 import { Building2, UserCheck, FileSignature, Printer, BookCheck, ArrowRight, MessageCircle } from "lucide-react";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Link } from "react-router-dom";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import TypewriterText from "@/components/TypewriterText";
 
 const Index = () => {
   const mainServices = [
@@ -68,10 +69,60 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <HeroSection />
+      <div className="relative z-10 pt-20 pb-32 md:pt-36 md:pb-40 flex items-center justify-center bg-gradient-to-b from-background to-secondary/5 overflow-hidden">
+        {/* Background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/4 -right-64 w-[800px] h-[800px] bg-primary/5 rounded-full filter blur-3xl"></div>
+          <div className="absolute bottom-1/4 -left-64 w-[600px] h-[600px] bg-accent/5 rounded-full filter blur-3xl"></div>
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+              Your Premier Partner for{" "}
+              <TypewriterText 
+                texts={[
+                  "Business Setup.", 
+                  "Document Processing.", 
+                  "Visa Services.",
+                  "Government PRO Services.",
+                  "Emirates ID."
+                ]} 
+                className="text-gradient font-bold"
+                typingSpeed={80}
+              />
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-600 mb-12 leading-relaxed">
+              Streamlined documentation services tailored for businesses and individuals in the UAE.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Button 
+                size="lg" 
+                className="text-lg px-8 py-6 rounded-full animate-glow"
+                onClick={handleGetStarted}
+              >
+                Get Started Now
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="text-lg px-8 py-6 rounded-full"
+                onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Explore Services
+              </Button>
+            </div>
+          </motion.div>
+        </div>
+      </div>
       
       {/* Services Section with glass cards */}
-      <section className="py-24 relative overflow-hidden">
+      <section id="services" className="py-24 relative overflow-hidden">
         {/* Background gradient blobs */}
         <div className="absolute top-1/4 -left-64 w-[500px] h-[500px] bg-primary/10 rounded-full filter blur-3xl"></div>
         <div className="absolute bottom-1/4 -right-64 w-[500px] h-[500px] bg-accent/10 rounded-full filter blur-3xl"></div>
@@ -127,6 +178,9 @@ const Index = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Testimonials Section */}
+      <TestimonialsSection />
 
       {/* Latest Offers Section */}
       <section className="py-24 bg-secondary/5 relative overflow-hidden">
@@ -381,4 +435,3 @@ const Index = () => {
 };
 
 export default Index;
-
