@@ -229,21 +229,66 @@ const Index = () => {
             className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-center"
           >
             {[
-              { name: "Dubai Economic Department", logo: "https://www.ded.ae/images/default-source/default-album/ded-logo.png" },
-              { name: "UAE Ministry of Foreign Affairs", logo: "https://www.mofaic.gov.ae/Style%20Library/theme/img/logo-new.png" },
-              { name: "Dubai Courts", logo: "https://www.dc.gov.ae/PublishingImages/ManipalDubai.png" },
-              { name: "Federal Authority for Identity and Citizenship", logo: "https://www.ica.gov.ae/assets/images/ica-logo-en.svg" }
+              {
+                name: "Dubai Economic Department",
+                logo: "/lovable-uploads/ded-logo.png",
+                alt: "Dubai Economic Department Logo"
+              },
+              {
+                name: "UAE Ministry of Foreign Affairs",
+                logo: "/lovable-uploads/mofaic-logo.png",
+                alt: "UAE Ministry of Foreign Affairs Logo"
+              },
+              {
+                name: "Dubai Courts",
+                logo: "/lovable-uploads/dubai-courts-logo.png",
+                alt: "Dubai Courts Logo"
+              },
+              {
+                name: "Federal Authority for Identity and Citizenship",
+                logo: "/lovable-uploads/ica-logo.png",
+                alt: "Federal Authority for Identity and Citizenship Logo"
+              },
+              {
+                name: "Tas-heel",
+                logo: "/lovable-uploads/tasheel-logo.png",
+                alt: "Tas-heel Logo"
+              },
+              {
+                name: "Dubai Health Authority",
+                logo: "/lovable-uploads/dha-logo.png",
+                alt: "Dubai Health Authority Logo"
+              },
+              {
+                name: "General Directorate of Residency and Foreigners Affairs",
+                logo: "/lovable-uploads/gdrfa-logo.png",
+                alt: "GDRFA Logo"
+              },
+              {
+                name: "National Media Council",
+                logo: "/lovable-uploads/nmc-logo.png",
+                alt: "National Media Council Logo"
+              }
             ].map((partner, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="glass-card bg-white p-6 rounded-xl shadow-lg glow-effect transition-all duration-300 hover:scale-105"
+                className="glass-card bg-white/80 p-6 rounded-xl shadow-lg glow-effect transition-all duration-300 hover:scale-105"
               >
-                <img
-                  src={partner.logo}
-                  alt={partner.name}
-                  className="w-full h-20 object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
-                />
+                {/* Fallback to placeholder image if custom logo is not available */}
+                <div className="h-20 flex items-center justify-center">
+                  <img
+                    src={partner.logo}
+                    alt={partner.alt}
+                    className="max-h-16 max-w-full object-contain transition-all duration-300"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      // Fallback to placeholder image with partner name as text
+                      target.onerror = null;
+                      target.src = `https://placehold.co/200x100/e6f7ff/0070f3?text=${encodeURIComponent(partner.name)}`;
+                    }}
+                  />
+                </div>
               </motion.div>
             ))}
           </motion.div>
@@ -336,3 +381,4 @@ const Index = () => {
 };
 
 export default Index;
+
