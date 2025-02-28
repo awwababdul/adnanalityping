@@ -44,8 +44,8 @@
 
 /* Emblem animations */
 @keyframes gold-pulse {
-  0%, 100% { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5)); }
-  50% { filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8)); }
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(139, 92, 246, 0.3)); }
+  50% { filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.6)); }
 }
 
 .animate-gold-pulse {
