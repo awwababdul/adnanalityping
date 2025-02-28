@@ -93,6 +93,29 @@ const LoadingScreen = ({ minDisplayTime = 2000 }: LoadingScreenProps) => {
     }
   };
 
+  const particleVariants = {
+    initial: { opacity: 0, y: 0 },
+    animate: (i: number) => ({
+      opacity: [0, 0.8, 0],
+      y: [0, -80],
+      x: i % 2 === 0 ? [0, 20, 0, -20, 0] : [0, -20, 0, 20, 0],
+      transition: {
+        repeat: Infinity,
+        duration: 2 + (i * 0.2),
+        delay: i * 0.1,
+        ease: "easeOut",
+      }
+    })
+  };
+
+  // Generate random particles
+  const particles = Array.from({ length: 15 }, (_, i) => ({
+    id: i,
+    size: Math.random() * 4 + 1,
+    left: `${Math.random() * 80 + 10}%`,
+    delay: Math.random() * 2
+  }));
+
   return (
     <AnimatePresence mode="wait">
       {isLoading && (
@@ -124,9 +147,40 @@ const LoadingScreen = ({ minDisplayTime = 2000 }: LoadingScreenProps) => {
             style={{ height: "100px" }}
           />
 
+          {/* Floating particles */}
+          {particles.map((particle) => (
+            <motion.div
+              key={particle.id}
+              custom={particle.id}
+              variants={particleVariants}
+              initial="initial"
+              animate="animate"
+              className="absolute bg-primary rounded-full"
+              style={{
+                width: `${particle.size}px`,
+                height: `${particle.size}px`,
+                left: particle.left,
+                bottom: "30%",
+                boxShadow: "0 0 10px rgba(0,112,243,0.8), 0 0 20px rgba(0,112,243,0.5)",
+                filter: "blur(1px)"
+              }}
+            />
+          ))}
+
           {/* Glow effect */}
           <div className="relative">
-            <div className="absolute -inset-12 rounded-full bg-primary/30 animate-pulse blur-3xl"></div>
+            <motion.div 
+              className="absolute -inset-12 rounded-full bg-primary/30 blur-3xl"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.5, 0.3]
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
             <motion.div
               variants={logoVariants}
               initial="initial"
@@ -216,6 +270,30 @@ const LoadingScreen = ({ minDisplayTime = 2000 }: LoadingScreenProps) => {
             </div>
           </motion.div>
 
+          {/* Digital circuit lines animation */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" stroke="rgba(0,112,243,0.15)" strokeWidth="1">
+              {[...Array(5)].map((_, i) => (
+                <motion.path
+                  key={i}
+                  d={`M${Math.random() * 100},0 Q${Math.random() * 100 + 50},${Math.random() * 100 + 50} ${Math.random() * 100 + 100},${Math.random() * 100 + 200}`}
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={{ 
+                    pathLength: 1, 
+                    opacity: [0, 0.8, 0],
+                    strokeDasharray: ["0, 1", "1, 0"] 
+                  }}
+                  transition={{
+                    duration: 3 + i,
+                    delay: i * 0.5,
+                    repeat: Infinity,
+                    ease: "linear"
+                  }}
+                />
+              ))}
+            </g>
+          </svg>
+
           {/* Animated corners */}
           {[
             "top-0 left-0", 
@@ -236,7 +314,8 @@ const LoadingScreen = ({ minDisplayTime = 2000 }: LoadingScreenProps) => {
               }}
               animate={{
                 opacity: [0.4, 0.8, 0.4],
-                scale: [0.8, 1, 0.8]
+                scale: [0.8, 1, 0.8],
+                rotate: position.includes("left") ? [-5, 0, -5] : [5, 0, 5]
               }}
               transition={{
                 duration: 3,

@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -101,9 +101,34 @@ const TestimonialsSection = () => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Background gradient blobs */}
-      <div className="absolute top-1/3 -left-64 w-[500px] h-[500px] bg-primary/5 rounded-full filter blur-3xl"></div>
-      <div className="absolute bottom-1/3 -right-64 w-[500px] h-[500px] bg-accent/5 rounded-full filter blur-3xl"></div>
+      {/* Animated Background gradient blobs */}
+      <motion.div 
+        animate={{
+          x: [0, 30, 0],
+          y: [0, 20, 0],
+          scale: [1, 1.05, 1],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          repeatType: "reverse"
+        }}
+        className="absolute top-1/3 -left-64 w-[500px] h-[500px] bg-primary/5 rounded-full filter blur-3xl"
+      />
+      
+      <motion.div 
+        animate={{
+          x: [0, -30, 0],
+          y: [0, -20, 0],
+          scale: [1, 1.05, 1],
+        }}
+        transition={{
+          duration: 17,
+          repeat: Infinity,
+          repeatType: "reverse"
+        }}
+        className="absolute bottom-1/3 -right-64 w-[500px] h-[500px] bg-accent/5 rounded-full filter blur-3xl"
+      />
       
       <div className="container mx-auto px-4">
         <motion.div 
@@ -113,9 +138,19 @@ const TestimonialsSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold mb-4">
+          <motion.h2 
+            className="text-4xl font-bold mb-4"
+            whileInView={{
+              backgroundPosition: ["0% 0%", "100% 0%"],
+              opacity: [0.5, 1]
+            }}
+            transition={{
+              duration: 2,
+              ease: "easeInOut"
+            }}
+          >
             <span className="text-gradient">What Our Clients Say</span>
-          </h2>
+          </motion.h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Don't just take our word for it - hear from some of our satisfied clients
           </p>
@@ -123,89 +158,148 @@ const TestimonialsSection = () => {
 
         <div className="relative px-12 max-w-5xl mx-auto">
           <div className="relative h-96 overflow-hidden">
-            {getVisibleTestimonials().map((testimonial) => {
-              const isActive = testimonial.position === 0;
-              const isLeft = testimonial.position === -1;
-              const isRight = testimonial.position === 1;
-              
-              return (
-                <motion.div
-                  key={testimonial.id}
-                  initial={false}
-                  animate={{
-                    x: isActive ? 0 : isLeft ? '-100%' : '100%',
-                    scale: isActive ? 1 : 0.8,
-                    opacity: isActive ? 1 : 0.3,
-                    zIndex: isActive ? 10 : 0,
-                  }}
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  className={cn(
-                    "absolute top-0 left-0 w-full h-full px-4",
-                    isActive ? "pointer-events-auto" : "pointer-events-none"
-                  )}
-                >
-                  <div 
+            <AnimatePresence mode="wait">
+              {getVisibleTestimonials().map((testimonial) => {
+                const isActive = testimonial.position === 0;
+                const isLeft = testimonial.position === -1;
+                const isRight = testimonial.position === 1;
+                
+                return (
+                  <motion.div
+                    key={testimonial.id}
+                    initial={false}
+                    animate={{
+                      x: isActive ? 0 : isLeft ? '-100%' : '100%',
+                      scale: isActive ? 1 : 0.8,
+                      opacity: isActive ? 1 : 0.3,
+                      zIndex: isActive ? 10 : 0,
+                      rotateY: isActive ? 0 : isLeft ? 15 : -15
+                    }}
+                    transition={{ 
+                      type: "spring", 
+                      stiffness: 300, 
+                      damping: 30,
+                      duration: 0.4
+                    }}
                     className={cn(
-                      "h-full flex flex-col items-center justify-center p-8 rounded-2xl text-center glass-card",
-                      isActive ? "shadow-xl" : ""
+                      "absolute top-0 left-0 w-full h-full px-4",
+                      isActive ? "pointer-events-auto" : "pointer-events-none"
                     )}
                   >
-                    <Quote className="text-primary w-12 h-12 mb-6 opacity-20" />
-                    <p className="text-xl mb-8 italic">"{testimonial.content}"</p>
-                    <div className="flex items-center">
-                      <div className="w-14 h-14 rounded-full overflow-hidden mr-4 border-2 border-primary">
-                        <img 
-                          src={testimonial.image} 
-                          alt={testimonial.author}
-                          className="w-full h-full object-cover"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            // Fallback to placeholder image
-                            target.onerror = null;
-                            target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(testimonial.author)}&background=0070F3&color=fff`;
-                          }}
-                        />
-                      </div>
-                      <div className="text-left">
-                        <h4 className="font-semibold">{testimonial.author}</h4>
-                        <p className="text-sm text-gray-600">{testimonial.position}, {testimonial.company}</p>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
+                    <motion.div 
+                      className={cn(
+                        "h-full flex flex-col items-center justify-center p-8 rounded-2xl text-center glass-card",
+                        isActive ? "shadow-xl" : ""
+                      )}
+                      whileHover={isActive ? { scale: 1.03 } : {}}
+                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                    >
+                      <motion.div
+                        initial={{ rotate: 0 }}
+                        animate={{ rotate: isActive ? [0, 5, 0, -5, 0] : 0 }}
+                        transition={{ 
+                          duration: 5, 
+                          repeat: Infinity, 
+                          repeatType: "reverse",
+                          ease: "easeInOut"
+                        }}
+                      >
+                        <Quote className="text-primary w-12 h-12 mb-6 opacity-20" />
+                      </motion.div>
+                      
+                      <p className="text-xl mb-8 italic">"{testimonial.content}"</p>
+                      <motion.div 
+                        className="flex items-center"
+                        initial={{ x: -10, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ delay: 0.3 }}
+                      >
+                        <motion.div 
+                          className="w-14 h-14 rounded-full overflow-hidden mr-4 border-2 border-primary"
+                          whileHover={{ scale: 1.1, rotate: 10 }}
+                        >
+                          <img 
+                            src={testimonial.image} 
+                            alt={testimonial.author}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              // Fallback to placeholder image
+                              target.onerror = null;
+                              target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(testimonial.author)}&background=0070F3&color=fff`;
+                            }}
+                          />
+                        </motion.div>
+                        <div className="text-left">
+                          <motion.h4
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.4 }}
+                            className="font-semibold"
+                          >
+                            {testimonial.author}
+                          </motion.h4>
+                          <motion.p
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.5 }}
+                            className="text-sm text-gray-600"
+                          >
+                            {testimonial.position}, {testimonial.company}
+                          </motion.p>
+                        </div>
+                      </motion.div>
+                    </motion.div>
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
           </div>
 
-          <Button 
-            onClick={prevTestimonial}
-            variant="outline"
-            size="icon"
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-background/80 backdrop-blur-sm hover:bg-background rounded-full w-10 h-10"
-            aria-label="Previous testimonial"
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
           >
-            <ChevronLeft className="w-5 h-5" />
-          </Button>
+            <Button 
+              onClick={prevTestimonial}
+              variant="outline"
+              size="icon"
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-background/80 backdrop-blur-sm hover:bg-background rounded-full w-10 h-10"
+              aria-label="Previous testimonial"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </Button>
+          </motion.div>
           
-          <Button 
-            onClick={nextTestimonial}
-            variant="outline"
-            size="icon"
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-background/80 backdrop-blur-sm hover:bg-background rounded-full w-10 h-10"
-            aria-label="Next testimonial"
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
           >
-            <ChevronRight className="w-5 h-5" />
-          </Button>
+            <Button 
+              onClick={nextTestimonial}
+              variant="outline"
+              size="icon"
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-background/80 backdrop-blur-sm hover:bg-background rounded-full w-10 h-10"
+              aria-label="Next testimonial"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </Button>
+          </motion.div>
 
-          {/* Dots indicator */}
+          {/* Dots indicator with animations */}
           <div className="flex justify-center mt-6 gap-2">
             {testimonials.map((_, index) => (
-              <button
+              <motion.button
                 key={index}
                 onClick={() => setActiveIndex(index)}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
                   index === activeIndex ? "bg-primary scale-125" : "bg-gray-300 hover:bg-gray-400"
                 }`}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.8 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
                 aria-label={`Go to testimonial ${index + 1}`}
               />
             ))}
