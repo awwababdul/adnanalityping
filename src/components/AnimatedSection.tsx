@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 type AnimationVariant = "fadeIn" | "fadeInUp" | "fadeInLeft" | "fadeInRight" | "zoomIn" | "slideUp";
 
 interface AnimatedSectionProps {
-  children: ReactNode;
+  children?: ReactNode; // Made children optional
   variant?: AnimationVariant;
   delay?: number;
   className?: string;
