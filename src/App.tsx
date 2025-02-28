@@ -8,6 +8,9 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import EmiratesIDPage from "./pages/services/emirates-id";
 import ImmigrationPage from "./pages/services/immigration";
+import BusinessSetupPage from "./pages/services/business-setup";
+import DocumentProcessingPage from "./pages/services/document-processing";
+import DubaiHealthAuthorityPage from "./pages/services/dubai-health-authority";
 import Header from "./components/Header";
 import LoadingScreen from "./components/LoadingScreen";
 
@@ -25,6 +28,9 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/services/emirates-id" element={<EmiratesIDPage />} />
           <Route path="/services/immigration" element={<ImmigrationPage />} />
+          <Route path="/services/business-setup" element={<BusinessSetupPage />} />
+          <Route path="/services/document-processing" element={<DocumentProcessingPage />} />
+          <Route path="/services/dubai-health-authority" element={<DubaiHealthAuthorityPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

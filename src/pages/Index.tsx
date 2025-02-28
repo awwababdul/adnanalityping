@@ -1,19 +1,20 @@
-import { motion } from "framer-motion";
+
 import { Button } from "@/components/ui/button";
 import { Building2, UserCheck, FileSignature, Printer, BookCheck, ArrowRight, MessageCircle } from "lucide-react";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Link } from "react-router-dom";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import TypewriterText from "@/components/TypewriterText";
+import AnimatedSection from "@/components/AnimatedSection";
 
 const Index = () => {
   const mainServices = [
     {
-      id: "packages",
+      id: "business-setup",
       icon: <Building2 className="w-8 h-8" />,
-      title: "Packages",
+      title: "Business Setup",
       description: "Complete service packages for business setup, family visas, and document processing",
-      link: "/services/packages"
+      link: "/services/business-setup"
     },
     {
       id: "immigration",
@@ -30,11 +31,11 @@ const Index = () => {
       link: "/services/emirates-id"
     },
     {
-      id: "tas-heel",
+      id: "document-processing",
       icon: <Printer className="w-8 h-8" />,
-      title: "Tas-heel",
-      description: "Complete range of Tas-heel services for labor and employment needs",
-      link: "/services/tas-heel"
+      title: "Document Processing",
+      description: "Complete range of document processing services for all your needs",
+      link: "/services/document-processing"
     },
     {
       id: "dha",
@@ -49,22 +50,6 @@ const Index = () => {
     window.open("https://api.whatsapp.com/send?phone=971552636961", "_blank");
   };
 
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-  };
-
   return (
     <div className="min-h-screen bg-background">
       <div className="relative z-10 pt-20 pb-32 md:pt-36 md:pb-40 flex items-center justify-center bg-gradient-to-b from-background to-secondary/5 overflow-hidden">
@@ -75,47 +60,44 @@ const Index = () => {
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Your Premier Partner for{" "}
-              <TypewriterText 
-                texts={[
-                  "Business Setup.", 
-                  "Document Processing.", 
-                  "Visa Services.",
-                  "Government PRO Services.",
-                  "Emirates ID."
-                ]} 
-                className="text-gradient font-bold"
-                typingSpeed={80}
-              />
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-600 mb-12 leading-relaxed">
-              Streamlined documentation services tailored for businesses and individuals in the UAE.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button 
-                size="lg" 
-                className="text-lg px-8 py-6 rounded-full animate-glow"
-                onClick={handleGetStarted}
-              >
-                Get Started Now
-              </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="text-lg px-8 py-6 rounded-full"
-                onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                Explore Services
-              </Button>
+          <AnimatedSection variant="fadeInUp">
+            <div className="max-w-4xl mx-auto text-center">
+              <h1 className="text-4xl md:text-6xl font-bold mb-6">
+                Your Premier Partner for{" "}
+                <TypewriterText 
+                  texts={[
+                    "Business Setup.", 
+                    "Document Processing.", 
+                    "Visa Services.",
+                    "Government PRO Services.",
+                    "Emirates ID."
+                  ]} 
+                  className="text-gradient font-bold"
+                  typingSpeed={80}
+                />
+              </h1>
+              <p className="text-xl md:text-2xl text-gray-600 mb-12 leading-relaxed">
+                Streamlined documentation services tailored for businesses and individuals in the UAE.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Button 
+                  size="lg" 
+                  className="text-lg px-8 py-6 rounded-full animate-glow"
+                  onClick={handleGetStarted}
+                >
+                  Get Started Now
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="text-lg px-8 py-6 rounded-full"
+                  onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  Explore Services
+                </Button>
+              </div>
             </div>
-          </motion.div>
+          </AnimatedSection>
         </div>
       </div>
       
@@ -126,54 +108,42 @@ const Index = () => {
         <div className="absolute bottom-1/4 -right-64 w-[500px] h-[500px] bg-accent/10 rounded-full filter blur-3xl"></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold mb-4">
-              <span className="text-gradient">What are you looking for?</span>
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Choose from our comprehensive range of professional documentation and business services
-            </p>
-          </motion.div>
+          <AnimatedSection variant="fadeInUp">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold mb-4">
+                <span className="text-gradient">What are you looking for?</span>
+              </h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Choose from our comprehensive range of professional documentation and business services
+              </p>
+            </div>
+          </AnimatedSection>
 
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            {mainServices.map((service) => (
-              <motion.div
-                key={service.id}
-                variants={itemVariants}
-                className="service-card glass-card bg-white/5 backdrop-blur-lg p-8 group"
-              >
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                    <div className="text-primary">{service.icon}</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {mainServices.map((service, index) => (
+              <AnimatedSection key={service.id} variant="fadeInUp" delay={index * 0.1}>
+                <div className="service-card glass-card bg-white/5 backdrop-blur-lg p-8 group">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                      <div className="text-primary">{service.icon}</div>
+                    </div>
+                    <h3 className="text-xl font-semibold">{service.title}</h3>
                   </div>
-                  <h3 className="text-xl font-semibold">{service.title}</h3>
+                  <p className="text-gray-600 mb-6">{service.description}</p>
+                  <Link to={service.link} className="inline-block">
+                    <Button 
+                      variant="ghost" 
+                      className="group w-full justify-between text-primary hover:text-primary/90 p-0"
+                    >
+                      Learn More 
+                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
+                  <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-primary to-accent group-hover:w-full transition-all duration-300"></div>
                 </div>
-                <p className="text-gray-600 mb-6">{service.description}</p>
-                <Link to={service.link} className="inline-block">
-                  <Button 
-                    variant="ghost" 
-                    className="group w-full justify-between text-primary hover:text-primary/90 p-0"
-                  >
-                    Learn More 
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
-                <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-primary to-accent group-hover:w-full transition-all duration-300"></div>
-              </motion.div>
+              </AnimatedSection>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -186,28 +156,18 @@ const Index = () => {
         <div className="absolute inset-0 bg-noise-pattern opacity-5"></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold mb-4">
-              <span className="text-gradient">Discover Latest Offers</span>
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Take advantage of our special promotional packages and discounted services
-            </p>
-          </motion.div>
+          <AnimatedSection variant="fadeInUp">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold mb-4">
+                <span className="text-gradient">Discover Latest Offers</span>
+              </h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Take advantage of our special promotional packages and discounted services
+              </p>
+            </div>
+          </AnimatedSection>
 
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
                 title: "Business Setup Package",
@@ -228,58 +188,46 @@ const Index = () => {
                 savings: "Save 25%"
               }
             ].map((offer, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="service-card bg-white p-8 rounded-xl shadow-lg relative group overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="relative z-10">
-                  <div className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm inline-block mb-4">
-                    {offer.savings}
+              <AnimatedSection key={index} variant="zoomIn" delay={index * 0.1}>
+                <div className="service-card bg-white p-8 rounded-xl shadow-lg relative group overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="relative z-10">
+                    <div className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm inline-block mb-4">
+                      {offer.savings}
+                    </div>
+                    <h3 className="text-xl font-semibold mb-2">{offer.title}</h3>
+                    <p className="text-gray-600 mb-4">{offer.description}</p>
+                    <p className="text-primary font-semibold mb-6">{offer.price}</p>
+                    <Button 
+                      className="w-full bg-primary hover:bg-primary/90"
+                      onClick={handleGetStarted}
+                    >
+                      Get Offer Now
+                    </Button>
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">{offer.title}</h3>
-                  <p className="text-gray-600 mb-4">{offer.description}</p>
-                  <p className="text-primary font-semibold mb-6">{offer.price}</p>
-                  <Button 
-                    className="w-full bg-primary hover:bg-primary/90"
-                    onClick={handleGetStarted}
-                  >
-                    Get Offer Now
-                  </Button>
+                  <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-primary to-accent group-hover:w-full transition-all duration-300"></div>
                 </div>
-                <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-primary to-accent group-hover:w-full transition-all duration-300"></div>
-              </motion.div>
+              </AnimatedSection>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Our Esteemed Partners Section */}
       <section className="py-24 relative overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold mb-4">
-              <span className="text-gradient">Our Esteemed Partners</span>
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              We work with leading organizations and government entities to provide seamless services
-            </p>
-          </motion.div>
+          <AnimatedSection variant="fadeInUp">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold mb-4">
+                <span className="text-gradient">Our Esteemed Partners</span>
+              </h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                We work with leading organizations and government entities to provide seamless services
+              </p>
+            </div>
+          </AnimatedSection>
 
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-center"
-          >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-center">
             {[
               {
                 name: "Dubai Economic Department",
@@ -322,26 +270,24 @@ const Index = () => {
                 alt: "National Media Council Logo"
               }
             ].map((partner, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="glass-card bg-white/80 p-6 rounded-xl shadow-lg glow-effect transition-all duration-300 hover:scale-105"
-              >
-                <div className="h-20 flex items-center justify-center">
-                  <img
-                    src={partner.logo}
-                    alt={partner.alt}
-                    className="max-h-16 max-w-full object-contain transition-all duration-300"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.onerror = null;
-                      target.src = `https://placehold.co/200x100/e6f7ff/0070f3?text=${encodeURIComponent(partner.name)}`;
-                    }}
-                  />
+              <AnimatedSection key={index} variant="fadeIn" delay={index * 0.05}>
+                <div className="glass-card bg-white/80 p-6 rounded-xl shadow-lg glow-effect transition-all duration-300 hover:scale-105">
+                  <div className="h-20 flex items-center justify-center">
+                    <img
+                      src={partner.logo}
+                      alt={partner.alt}
+                      className="max-h-16 max-w-full object-contain transition-all duration-300"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.onerror = null;
+                        target.src = `https://placehold.co/200x100/e6f7ff/0070f3?text=${encodeURIComponent(partner.name)}`;
+                      }}
+                    />
+                  </div>
                 </div>
-              </motion.div>
+              </AnimatedSection>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -352,48 +298,33 @@ const Index = () => {
         <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-background to-transparent"></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold mb-4">Our Success Story</h2>
-          </motion.div>
+          <AnimatedSection variant="fadeInUp">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold mb-4">Our Success Story</h2>
+            </div>
+          </AnimatedSection>
 
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { number: "5,000,000+", label: "Documents Processed" },
               { number: "350,000+", label: "Satisfied Clients" },
               { number: "25+", label: "Years of Experience" }
             ].map((stat, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="glass-card p-8 rounded-xl text-center group hover:bg-primary/20 transition-all duration-300"
-              >
-                <div className="text-5xl font-bold mb-2 text-primary">{stat.number}</div>
-                <div className="text-gray-300">{stat.label}</div>
-              </motion.div>
+              <AnimatedSection key={index} variant="zoomIn" delay={index * 0.1}>
+                <div className="glass-card p-8 rounded-xl text-center group hover:bg-primary/20 transition-all duration-300">
+                  <div className="text-5xl font-bold mb-2 text-primary">{stat.number}</div>
+                  <div className="text-gray-300">{stat.label}</div>
+                </div>
+              </AnimatedSection>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="py-24 relative overflow-hidden">
-        <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
+        <AnimatedSection 
+          variant="fadeIn"
           className="absolute inset-0 pointer-events-none"
           style={{
             backgroundImage: "radial-gradient(circle at 50% 50%, rgba(0, 112, 243, 0.1) 0%, transparent 70%)"
@@ -401,27 +332,23 @@ const Index = () => {
         />
         
         <div className="container mx-auto px-4 relative z-10">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="max-w-3xl mx-auto text-center"
-          >
-            <h2 className="text-4xl font-bold mb-8">
-              <span className="text-gradient">Ready to get started?</span>
-            </h2>
-            <p className="text-gray-600 text-lg mb-8">
-              Let our team of experts handle all your documentation needs with precision and efficiency.
-            </p>
-            <Button
-              className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg rounded-full flex items-center gap-2 animate-glow"
-              onClick={handleGetStarted}
-            >
-              Start Your Documentation Process Now
-              <MessageCircle className="w-6 h-6" />
-            </Button>
-          </motion.div>
+          <AnimatedSection variant="fadeInUp">
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="text-4xl font-bold mb-8">
+                <span className="text-gradient">Ready to get started?</span>
+              </h2>
+              <p className="text-gray-600 text-lg mb-8">
+                Let our team of experts handle all your documentation needs with precision and efficiency.
+              </p>
+              <Button
+                className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg rounded-full flex items-center gap-2 animate-glow"
+                onClick={handleGetStarted}
+              >
+                Start Your Documentation Process Now
+                <MessageCircle className="w-6 h-6" />
+              </Button>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
