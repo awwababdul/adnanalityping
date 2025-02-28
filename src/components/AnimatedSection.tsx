@@ -1,5 +1,5 @@
 
-import { ReactNode } from "react";
+import { ReactNode, CSSProperties } from "react";
 import { motion } from "framer-motion";
 
 type AnimationVariant = "fadeIn" | "fadeInUp" | "fadeInLeft" | "fadeInRight" | "zoomIn" | "slideUp";
@@ -10,6 +10,7 @@ interface AnimatedSectionProps {
   delay?: number;
   className?: string;
   once?: boolean;
+  style?: CSSProperties;
 }
 
 const variants = {
@@ -44,7 +45,8 @@ const AnimatedSection = ({
   variant = "fadeInUp", 
   delay = 0,
   className = "",
-  once = true
+  once = true,
+  style
 }: AnimatedSectionProps) => {
   return (
     <motion.div
@@ -54,6 +56,7 @@ const AnimatedSection = ({
       variants={variants[variant]}
       transition={{ delay }}
       className={className}
+      style={style}
     >
       {children}
     </motion.div>
