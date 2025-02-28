@@ -13,6 +13,7 @@ import DocumentProcessingPage from "./pages/services/document-processing";
 import DubaiHealthAuthorityPage from "./pages/services/dubai-health-authority";
 import Header from "./components/Header";
 import LoadingScreen from "./components/LoadingScreen";
+import AnniversaryEmblem from "./components/AnniversaryEmblem";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => (
       <LoadingScreen />
       <BrowserRouter>
         <Header />
+        <AnniversaryEmblem position="fixed" />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/services/emirates-id" element={<EmiratesIDPage />} />

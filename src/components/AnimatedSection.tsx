@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 type AnimationVariant = 
   "fadeIn" | "fadeInUp" | "fadeInLeft" | "fadeInRight" | 
   "zoomIn" | "slideUp" | "bounce" | "flip" | "rotate" | 
-  "staggered" | "pulse" | "float";
+  "staggered" | "pulse" | "float" | "shine";
 
 interface AnimatedSectionProps {
   children?: ReactNode; // Made children optional
@@ -111,6 +111,26 @@ const variants = {
         },
         opacity: { duration: 0.5 }
       } 
+    }
+  },
+  shine: {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      filter: [
+        "drop-shadow(0 0 0px rgba(255, 215, 0, 0))",
+        "drop-shadow(0 0 10px rgba(255, 215, 0, 0.8))",
+        "drop-shadow(0 0 0px rgba(255, 215, 0, 0))"
+      ],
+      transition: {
+        filter: {
+          repeat: Infinity,
+          duration: 3
+        },
+        opacity: { duration: 0.5 },
+        scale: { duration: 0.5 }
+      }
     }
   }
 };
