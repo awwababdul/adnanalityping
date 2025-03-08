@@ -1,4 +1,3 @@
-
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -46,6 +45,26 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/* Animation effects */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Dubai animation glow effects */
+@keyframes drone-pulse {
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(14, 165, 233, 0.7)); }
+  50% { filter: drop-shadow(0 0 15px rgba(14, 165, 233, 0.9)); }
+}
+
+.animate-drone-pulse {
+  animation: drone-pulse 3s infinite;
 }
 
 /* Emblem animations */

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import TypewriterText from "@/components/TypewriterText";
 import AnimatedSection from "@/components/AnimatedSection";
+import DubaiSkylineAnimation from "@/components/DubaiSkylineAnimation";
 
 const Index = () => {
   const mainServices = [
@@ -53,8 +54,9 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <div className="relative z-10 pt-20 pb-32 md:pt-36 md:pb-40 flex items-center justify-center bg-gradient-to-b from-background to-secondary/5 overflow-hidden">
-        {/* Background elements */}
+        {/* Background elements with Dubai animation */}
         <div className="absolute inset-0 overflow-hidden">
+          <DubaiSkylineAnimation className="w-full h-full" />
           <div className="absolute top-1/4 -right-64 w-[800px] h-[800px] bg-primary/5 rounded-full filter blur-3xl"></div>
           <div className="absolute bottom-1/4 -left-64 w-[600px] h-[600px] bg-accent/5 rounded-full filter blur-3xl"></div>
         </div>
@@ -62,7 +64,7 @@ const Index = () => {
         <div className="container mx-auto px-4 relative z-10">
           <AnimatedSection variant="fadeInUp">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl md:text-6xl font-bold mb-6">
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
                 Your Premier Partner for{" "}
                 <TypewriterText 
                   texts={[
@@ -76,7 +78,7 @@ const Index = () => {
                   typingSpeed={80}
                 />
               </h1>
-              <p className="text-xl md:text-2xl text-gray-600 mb-12 leading-relaxed">
+              <p className="text-xl md:text-2xl text-gray-300 mb-12 leading-relaxed">
                 Streamlined documentation services tailored for businesses and individuals in the UAE.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -90,7 +92,7 @@ const Index = () => {
                 <Button 
                   variant="outline" 
                   size="lg" 
-                  className="text-lg px-8 py-6 rounded-full"
+                  className="text-lg px-8 py-6 rounded-full bg-white/10 text-white"
                   onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
                 >
                   Explore Services
