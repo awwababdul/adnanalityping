@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Building2, UserCheck, FileSignature, Printer, BookCheck, ArrowRight, MessageCircle } from "lucide-react";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -52,7 +53,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="relative z-10 pt-20 pb-32 md:pt-36 md:pb-40 flex items-center justify-center bg-gradient-to-b from-background to-secondary/5 overflow-hidden">
+      <div className="relative z-10 pt-24 pb-32 md:pt-40 md:pb-48 flex items-center justify-center bg-gradient-to-b from-background to-secondary/5 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <DubaiSkylineAnimation className="w-full h-full" />
           <div className="absolute top-1/4 -right-64 w-[800px] h-[800px] bg-primary/5 rounded-full filter blur-3xl"></div>
@@ -62,7 +63,7 @@ const Index = () => {
         <div className="container mx-auto px-4 relative z-10">
           <AnimatedSection variant="fadeInUp">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 text-white">
                 Your Premier Partner for{" "}
                 <TypewriterText 
                   texts={[
@@ -76,21 +77,22 @@ const Index = () => {
                   typingSpeed={80}
                 />
               </h1>
-              <p className="text-xl md:text-2xl text-gray-300 mb-12 leading-relaxed">
+              <p className="text-xl md:text-2xl lg:text-3xl text-gray-300 mb-14 leading-relaxed">
                 Streamlined documentation services tailored for businesses and individuals in the UAE.
               </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                 <Button 
-                  size="lg" 
-                  className="text-lg px-8 py-6 rounded-full animate-glow bg-gradient-to-r from-primary to-[#D4AF37] hover:shadow-lg transition-all duration-300"
+                  size="xl" 
+                  variant="premium"
+                  className="text-lg rounded-full animate-glow"
                   onClick={handleGetStarted}
                 >
                   Get Started Now
                 </Button>
                 <Button 
                   variant="outline" 
-                  size="lg" 
-                  className="text-lg px-8 py-6 rounded-full bg-white/10 text-white border-[#D4AF37]/30 hover:border-[#D4AF37]/50 transition-all duration-300"
+                  size="xl" 
+                  className="text-lg rounded-full bg-white/10 text-white border-[#D4AF37]/30 hover:border-[#D4AF37]/50 transition-all duration-300"
                   onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
                 >
                   Explore Services
@@ -325,14 +327,16 @@ const Index = () => {
         <div className="container mx-auto px-4 relative z-10">
           <AnimatedSection variant="fadeInUp">
             <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-4xl font-bold mb-8">
+              <h2 className="text-4xl md:text-5xl font-bold mb-8">
                 <span className="text-gradient">Ready to get started?</span>
               </h2>
-              <p className="text-gray-600 text-lg mb-8">
+              <p className="text-xl text-gray-600 mb-10">
                 Let our team of experts handle all your documentation needs with precision and efficiency.
               </p>
               <Button
-                className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg rounded-full flex items-center gap-2 animate-glow"
+                size="xl"
+                variant="premium"
+                className="text-lg rounded-full flex items-center gap-3 animate-glow"
                 onClick={handleGetStarted}
               >
                 Start Your Documentation Process Now

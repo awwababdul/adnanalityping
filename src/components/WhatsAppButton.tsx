@@ -25,7 +25,7 @@ const WhatsAppButton = () => {
 
   return (
     <motion.div
-      className="fixed right-5 bottom-5 z-50 flex flex-col-reverse items-end gap-3"
+      className="fixed right-6 bottom-6 z-50 flex flex-col-reverse items-end gap-4"
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ type: "spring", stiffness: 260, damping: 20, delay: 1 }}
@@ -42,11 +42,11 @@ const WhatsAppButton = () => {
             >
               <Button
                 onClick={handleWhatsAppClick}
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-green-500 hover:bg-green-600 shadow-lg"
+                className="flex items-center justify-center w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 shadow-lg"
                 size="icon"
                 aria-label="Contact us on WhatsApp"
               >
-                <MessageCircle className="text-white w-6 h-6" />
+                <MessageCircle className="text-white w-7 h-7" />
               </Button>
             </motion.div>
             <motion.div
@@ -58,11 +58,11 @@ const WhatsAppButton = () => {
             >
               <Button
                 onClick={handleCallClick}
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 hover:bg-blue-600 shadow-lg"
+                className="flex items-center justify-center w-14 h-14 rounded-full bg-blue-500 hover:bg-blue-600 shadow-lg"
                 size="icon"
                 aria-label="Call us"
               >
-                <Phone className="text-white w-6 h-6" />
+                <Phone className="text-white w-7 h-7" />
               </Button>
             </motion.div>
             <motion.div
@@ -74,11 +74,11 @@ const WhatsAppButton = () => {
             >
               <Button
                 onClick={handleEmailClick}
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500 hover:bg-purple-600 shadow-lg"
+                className="flex items-center justify-center w-14 h-14 rounded-full bg-purple-500 hover:bg-purple-600 shadow-lg"
                 size="icon"
                 aria-label="Email us"
               >
-                <Mail className="text-white w-6 h-6" />
+                <Mail className="text-white w-7 h-7" />
               </Button>
             </motion.div>
           </>
@@ -88,15 +88,15 @@ const WhatsAppButton = () => {
       <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
         <Button
           onClick={toggleMenu}
-          className={`flex items-center justify-center w-16 h-16 rounded-full ${
+          className={`flex items-center justify-center w-18 h-18 rounded-full ${
             isOpen ? "bg-red-500 hover:bg-red-600" : "bg-primary hover:bg-primary/90"
           } shadow-lg transition-colors duration-300`}
           aria-label={isOpen ? "Close contact menu" : "Open contact menu"}
         >
           {isOpen ? (
-            <X className="text-white w-8 h-8" />
+            <X className="text-white w-9 h-9" />
           ) : (
-            <MessageSquare className="text-white w-8 h-8" />
+            <MessageSquare className="text-white w-9 h-9" />
           )}
           {!isOpen && (
             <span className="absolute w-full h-full rounded-full bg-primary animate-ping opacity-75"></span>
