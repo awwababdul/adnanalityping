@@ -1,3 +1,4 @@
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -57,20 +58,30 @@
   animation: float 6s ease-in-out infinite;
 }
 
-/* Dubai animation glow effects */
-@keyframes drone-pulse {
-  0%, 100% { filter: drop-shadow(0 0 5px rgba(14, 165, 233, 0.7)); }
-  50% { filter: drop-shadow(0 0 15px rgba(14, 165, 233, 0.9)); }
+/* Premium gold glow effects */
+@keyframes gold-glow {
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3)); }
+  50% { filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.6)); }
 }
 
-.animate-drone-pulse {
-  animation: drone-pulse 3s infinite;
+.animate-gold-glow {
+  animation: gold-glow 5s infinite;
+}
+
+/* Minimal hover effect */
+@keyframes subtle-pulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+.animate-subtle-pulse {
+  animation: subtle-pulse 3s infinite ease-in-out;
 }
 
 /* Emblem animations */
 @keyframes gold-pulse {
-  0%, 100% { filter: drop-shadow(0 0 5px rgba(139, 92, 246, 0.3)); }
-  50% { filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.6)); }
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3)); }
+  50% { filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.6)); }
 }
 
 .animate-gold-pulse {
@@ -84,4 +95,14 @@
 
 .animate-rotate-slow {
   animation: rotate-slow 15s infinite linear;
+}
+
+/* Premium button glow */
+@keyframes button-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(212, 175, 55, 0.3); }
+  50% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.6); }
+}
+
+.animate-glow {
+  animation: button-glow 3s infinite ease-in-out;
 }

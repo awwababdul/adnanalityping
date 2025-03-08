@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Building2, UserCheck, FileSignature, Printer, BookCheck, ArrowRight, MessageCircle } from "lucide-react";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -54,7 +53,6 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <div className="relative z-10 pt-20 pb-32 md:pt-36 md:pb-40 flex items-center justify-center bg-gradient-to-b from-background to-secondary/5 overflow-hidden">
-        {/* Background elements with Dubai animation */}
         <div className="absolute inset-0 overflow-hidden">
           <DubaiSkylineAnimation className="w-full h-full" />
           <div className="absolute top-1/4 -right-64 w-[800px] h-[800px] bg-primary/5 rounded-full filter blur-3xl"></div>
@@ -84,7 +82,7 @@ const Index = () => {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Button 
                   size="lg" 
-                  className="text-lg px-8 py-6 rounded-full animate-glow"
+                  className="text-lg px-8 py-6 rounded-full animate-glow bg-gradient-to-r from-primary to-[#D4AF37] hover:shadow-lg transition-all duration-300"
                   onClick={handleGetStarted}
                 >
                   Get Started Now
@@ -92,7 +90,7 @@ const Index = () => {
                 <Button 
                   variant="outline" 
                   size="lg" 
-                  className="text-lg px-8 py-6 rounded-full bg-white/10 text-white"
+                  className="text-lg px-8 py-6 rounded-full bg-white/10 text-white border-[#D4AF37]/30 hover:border-[#D4AF37]/50 transition-all duration-300"
                   onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
                 >
                   Explore Services
@@ -103,9 +101,7 @@ const Index = () => {
         </div>
       </div>
       
-      {/* Services Section with glass cards */}
       <section id="services" className="py-24 relative overflow-hidden">
-        {/* Background gradient blobs */}
         <div className="absolute top-1/4 -left-64 w-[500px] h-[500px] bg-primary/10 rounded-full filter blur-3xl"></div>
         <div className="absolute bottom-1/4 -right-64 w-[500px] h-[500px] bg-accent/10 rounded-full filter blur-3xl"></div>
         
@@ -149,12 +145,9 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
       <TestimonialsSection />
 
-      {/* Latest Offers Section */}
       <section className="py-24 bg-secondary/5 relative overflow-hidden">
-        {/* Decorative elements */}
         <div className="absolute inset-0 bg-noise-pattern opacity-5"></div>
         
         <div className="container mx-auto px-4 relative z-10">
@@ -215,7 +208,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Our Esteemed Partners Section */}
       <section className="py-24 relative overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
           <AnimatedSection variant="fadeInUp">
@@ -293,9 +285,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Success Metrics Section */}
       <section className="py-24 bg-secondary relative overflow-hidden text-white">
-        {/* Decorative elements */}
         <div className="absolute inset-0 bg-noise-pattern opacity-5"></div>
         <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-background to-transparent"></div>
         
@@ -323,7 +313,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-24 relative overflow-hidden">
         <AnimatedSection 
           variant="fadeIn"
