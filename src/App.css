@@ -2,8 +2,14 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
+}
+
+@media (min-width: 768px) {
+  #root {
+    padding: 2rem;
+  }
 }
 
 .logo {
@@ -60,4 +66,3 @@
 .animate-rotate-slow {
   animation: rotate-slow 15s infinite linear;
 }
-

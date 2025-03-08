@@ -50,8 +50,8 @@ const Header = () => {
             : "bg-transparent"
         }`}
       >
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-20">
+        <div className="container mx-auto px-2 md:px-4">
+          <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2">
               <motion.img
@@ -60,14 +60,15 @@ const Header = () => {
                 transition={{ duration: 0.5 }}
                 src="/lovable-uploads/c3a3a109-e73f-4597-ba4b-c0043c986598.png"
                 alt="Adnan Ali Typing Logo"
-                className="h-14 w-auto"
+                className="h-10 md:h-14 w-auto"
               />
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
+                className="hidden sm:block"
               >
-                <h1 className={`font-bold text-xl ${isScrolled ? "text-primary" : "text-white"}`}>
+                <h1 className={`font-bold text-lg md:text-xl ${isScrolled ? "text-primary" : "text-white"}`}>
                   Adnan Ali Typing
                 </h1>
                 <p className={`text-xs ${isScrolled ? "text-gray-600" : "text-gray-300"}`}>
@@ -124,17 +125,24 @@ const Header = () => {
               </a>
             </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              className="md:hidden text-gray-800"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              {mobileMenuOpen ? (
-                <X className={`w-6 h-6 ${isScrolled ? "text-gray-800" : "text-white"}`} />
-              ) : (
-                <Menu className={`w-6 h-6 ${isScrolled ? "text-gray-800" : "text-white"}`} />
-              )}
-            </button>
+            {/* Mobile Call Button and Menu Button */}
+            <div className="flex items-center gap-2 md:hidden">
+              <a href="tel:+971552636961" className="mr-2" aria-label="Call us">
+                <Phone className={`w-5 h-5 ${isScrolled ? "text-primary" : "text-white"}`} />
+              </a>
+
+              <button
+                className="md:hidden"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label="Toggle menu"
+              >
+                {mobileMenuOpen ? (
+                  <X className={`w-6 h-6 ${isScrolled ? "text-gray-800" : "text-white"}`} />
+                ) : (
+                  <Menu className={`w-6 h-6 ${isScrolled ? "text-gray-800" : "text-white"}`} />
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -145,7 +153,7 @@ const Header = () => {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          className="fixed top-20 left-0 w-full bg-white shadow-lg z-40 md:hidden"
+          className="fixed top-16 md:top-20 left-0 w-full bg-white shadow-lg z-40 md:hidden overflow-y-auto max-h-[calc(100vh-4rem)]"
         >
           <div className="container mx-auto px-4 py-4">
             <nav className="flex flex-col space-y-4">
@@ -159,7 +167,7 @@ const Header = () => {
                           <Link 
                             key={idx}
                             to={dropdownItem.path}
-                            className="block text-gray-600 hover:text-primary transition-colors"
+                            className="block text-gray-600 hover:text-primary transition-colors py-2"
                           >
                             {dropdownItem.name}
                           </Link>
@@ -169,7 +177,7 @@ const Header = () => {
                   ) : (
                     <Link 
                       to={item.path}
-                      className="block font-medium text-gray-800 hover:text-primary transition-colors"
+                      className="block font-medium text-gray-800 hover:text-primary transition-colors py-2"
                     >
                       {item.name}
                     </Link>
@@ -177,7 +185,7 @@ const Header = () => {
                 </div>
               ))}
               <div className="pt-4 border-t border-gray-200">
-                <a href="tel:+971552636961" className="flex items-center gap-2 text-primary">
+                <a href="tel:+971552636961" className="flex items-center gap-2 text-primary py-2">
                   <Phone className="w-4 h-4" />
                   <span>+971 55 263 6961</span>
                 </a>
