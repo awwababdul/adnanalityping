@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
 interface DubaiSkylineAnimationProps {
@@ -8,6 +8,7 @@ interface DubaiSkylineAnimationProps {
 
 const DubaiSkylineAnimation: React.FC<DubaiSkylineAnimationProps> = ({ className = '' }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [scrollY, setScrollY] = useState(0);
   
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -33,37 +34,76 @@ const DubaiSkylineAnimation: React.FC<DubaiSkylineAnimationProps> = ({ className
     const goldenParticles: Particle[] = [];
     let frameCount = 0;
     
-    // Generate buildings (more minimal and elegant design)
+    // Handle scroll for zoom effect
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    
+    // Famous buildings of Dubai Skyline
+    const famousBuildings = [
+      { name: "Burj Khalifa", heightRatio: 0.65, widthRatio: 0.015, positionRatio: 0.5, color: "rgba(212, 175, 55, 0.9)", isIconic: true },
+      { name: "Burj Al Arab", heightRatio: 0.4, widthRatio: 0.015, positionRatio: 0.3, color: "rgba(220, 220, 240, 0.8)", isIconic: true },
+      { name: "Emirates Towers", heightRatio: 0.45, widthRatio: 0.015, positionRatio: 0.65, color: "rgba(190, 190, 210, 0.85)", isIconic: true },
+      { name: "Princess Tower", heightRatio: 0.5, widthRatio: 0.015, positionRatio: 0.42, color: "rgba(200, 200, 220, 0.8)", isIconic: false },
+      { name: "Cayan Tower", heightRatio: 0.48, widthRatio: 0.012, positionRatio: 0.38, color: "rgba(210, 210, 230, 0.8)", isIconic: false },
+      { name: "Marina 101", heightRatio: 0.52, widthRatio: 0.014, positionRatio: 0.57, color: "rgba(200, 200, 220, 0.8)", isIconic: false },
+      { name: "JW Marriott Marquis", heightRatio: 0.47, widthRatio: 0.018, positionRatio: 0.76, color: "rgba(210, 210, 230, 0.8)", isIconic: false },
+      { name: "Address Boulevard", heightRatio: 0.46, widthRatio: 0.014, positionRatio: 0.22, color: "rgba(205, 205, 225, 0.8)", isIconic: false },
+    ];
+    
+    // Generate buildings (more authentic Dubai skyline)
     const generateBuildings = () => {
-      const numBuildings = Math.floor(canvas.width / 80); // Fewer, more spaced out buildings
-      
-      // Find center for Burj Khalifa
-      const burjIndex = Math.floor(numBuildings / 2);
-      
-      for (let i = 0; i < numBuildings; i++) {
-        const isBurj = i === burjIndex;
-        const x = (i / numBuildings) * canvas.width;
-        const width = Math.random() * 10 + 10; // Thinner buildings
+      // Add the famous buildings first
+      famousBuildings.forEach(building => {
+        const x = building.positionRatio * canvas.width;
+        const width = building.widthRatio * canvas.width;
+        const height = building.heightRatio * canvas.height;
         
-        // Height based on importance
-        const height = isBurj 
-          ? canvas.height * 0.65 // Burj Khalifa
-          : Math.random() * (canvas.height * 0.35) + (canvas.height * 0.1);
-        
-        // Premium color palette
-        const alphaValue = 0.7 + Math.random() * 0.3;
-        const building: Building = {
+        const buildingObj: Building = {
           x,
           y: canvas.height,
           width,
           height,
-          color: isBurj 
-            ? `rgba(212, 175, 55, ${alphaValue})` // Gold for Burj Khalifa
-            : `rgba(${240 + Math.random() * 15}, ${240 + Math.random() * 15}, ${240 + Math.random() * 15}, ${alphaValue})`, // Light premium colors
-          isBurj
+          color: building.color,
+          isBurj: building.name === "Burj Khalifa",
+          isIconic: building.isIconic,
+          name: building.name
         };
         
-        buildings.push(building);
+        buildings.push(buildingObj);
+      });
+      
+      // Fill in with generic buildings
+      const numGenericBuildings = Math.floor(canvas.width / 50);
+      
+      for (let i = 0; i < numGenericBuildings; i++) {
+        const x = (i / numGenericBuildings) * canvas.width;
+        const width = Math.random() * 8 + 5; // Thinner buildings
+        const height = Math.random() * (canvas.height * 0.25) + (canvas.height * 0.05);
+        
+        // Check if too close to an iconic building
+        const tooClose = buildings.some(b => 
+          b.isIconic && Math.abs(b.x - x) < b.width * 5
+        );
+        
+        if (!tooClose) {
+          // Premium color palette
+          const alphaValue = 0.7 + Math.random() * 0.3;
+          const building: Building = {
+            x,
+            y: canvas.height,
+            width,
+            height,
+            color: `rgba(${240 + Math.random() * 15}, ${240 + Math.random() * 15}, ${240 + Math.random() * 15}, ${alphaValue})`,
+            isBurj: false,
+            isIconic: false,
+            name: "Generic Building"
+          };
+          
+          buildings.push(building);
+        }
       }
     };
     
@@ -83,8 +123,23 @@ const DubaiSkylineAnimation: React.FC<DubaiSkylineAnimationProps> = ({ className
     };
     
     const draw = () => {
+      // Get zoom factor based on scroll
+      const maxZoom = 1.5;
+      const scrollProgress = Math.min(scrollY / 500, 1); // Adjust divisor to control zoom speed
+      const zoomFactor = 1 + (scrollProgress * (maxZoom - 1));
+      
+      // Calculate canvas center for zoom
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+      
       // Clear canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Apply zoom transformation
+      ctx.save();
+      ctx.translate(centerX, centerY);
+      ctx.scale(zoomFactor, zoomFactor);
+      ctx.translate(-centerX, -centerY);
       
       // Create premium gradient background - deep blue to soft gold
       const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
@@ -132,6 +187,18 @@ const DubaiSkylineAnimation: React.FC<DubaiSkylineAnimationProps> = ({ className
           // Premium gold gradient for Burj Khalifa
           buildingGradient.addColorStop(0, 'rgba(212, 175, 55, 0.9)');
           buildingGradient.addColorStop(1, 'rgba(212, 175, 55, 0.7)');
+        } else if (building.isIconic) {
+          // Special gradient for iconic buildings
+          const baseColor = building.color.match(/\d+/g);
+          if (baseColor && baseColor.length >= 3) {
+            const r = parseInt(baseColor[0]);
+            const g = parseInt(baseColor[1]);
+            const b = parseInt(baseColor[2]);
+            const a = parseFloat(baseColor[3] || "0.8");
+            
+            buildingGradient.addColorStop(0, `rgba(${r+10}, ${g+10}, ${b+10}, ${a})`);
+            buildingGradient.addColorStop(1, `rgba(${r-10}, ${g-10}, ${b-10}, ${a})`);
+          }
         } else {
           // Regular buildings with subtle lighting
           const baseColor = building.color.match(/\d+/g);
@@ -179,6 +246,20 @@ const DubaiSkylineAnimation: React.FC<DubaiSkylineAnimationProps> = ({ className
           ctx.fill();
           ctx.shadowBlur = 0;
         }
+        
+        // Special shape for Burj Al Arab
+        if (building.name === "Burj Al Arab") {
+          const sailHeight = building.height * 0.8;
+          const baseWidth = building.width * 1.5;
+          
+          ctx.fillStyle = 'rgba(220, 220, 240, 0.8)';
+          ctx.beginPath();
+          ctx.moveTo(building.x, building.y);
+          ctx.lineTo(building.x + baseWidth, building.y);
+          ctx.lineTo(building.x + baseWidth * 0.5, building.y - sailHeight);
+          ctx.closePath();
+          ctx.fill();
+        }
       });
       
       // Draw reflection in water - very subtle
@@ -214,6 +295,7 @@ const DubaiSkylineAnimation: React.FC<DubaiSkylineAnimationProps> = ({ className
           ctx.fill();
         }
       });
+      ctx.restore(); // Restore the canvas state (removes zoom transformation)
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.globalAlpha = 1;
       
@@ -228,8 +310,9 @@ const DubaiSkylineAnimation: React.FC<DubaiSkylineAnimationProps> = ({ className
     
     return () => {
       window.removeEventListener('resize', updateCanvasDimensions);
+      window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [scrollY]);
   
   return (
     <div className={`w-full h-full relative overflow-hidden ${className}`}>
@@ -260,6 +343,8 @@ interface Building {
   height: number;
   color: string;
   isBurj: boolean;
+  isIconic: boolean;
+  name: string;
 }
 
 interface Particle {

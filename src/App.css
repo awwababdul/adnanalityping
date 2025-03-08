@@ -106,3 +106,19 @@
 .animate-glow {
   animation: button-glow 3s infinite ease-in-out;
 }
+
+/* Dubai skyline zoom effect */
+@keyframes skyline-zoom-in {
+  from { transform: scale(1); }
+  to { transform: scale(1.5); }
+}
+
+.skyline-zoom {
+  will-change: transform;
+  transition: transform 0.5s ease-out;
+}
+
+.skyline-panel {
+  overflow: hidden;
+  position: relative;
+}
