@@ -1,12 +1,16 @@
 
 import { Button } from "@/components/ui/button";
-import { Building2, UserCheck, FileSignature, Printer, BookCheck, ArrowRight, MessageCircle } from "lucide-react";
+import { Building2, UserCheck, FileSignature, Printer, BookCheck, ArrowRight, MessageCircle, CheckCircle, Globe, BadgeCheck, Clock, Award, ThumbsUp } from "lucide-react";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Link } from "react-router-dom";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import TypewriterText from "@/components/TypewriterText";
 import AnimatedSection from "@/components/AnimatedSection";
 import DubaiSkylineAnimation from "@/components/DubaiSkylineAnimation";
+import ServiceHighlights from "@/components/ServiceHighlights";
+import TrendingServices from "@/components/TrendingServices";
+import WhyChooseUs from "@/components/WhyChooseUs";
+import ProcessSteps from "@/components/ProcessSteps";
 
 const Index = () => {
   const mainServices = [
@@ -53,6 +57,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Hero Section */}
       <div className="relative z-10 pt-24 pb-32 md:pt-40 md:pb-48 flex items-center justify-center bg-gradient-to-b from-background to-secondary/5 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <DubaiSkylineAnimation className="w-full h-full" />
@@ -103,6 +108,10 @@ const Index = () => {
         </div>
       </div>
       
+      {/* Service Highlights - New Section */}
+      <ServiceHighlights />
+      
+      {/* Main Services Section */}
       <section id="services" className="py-24 relative overflow-hidden">
         <div className="absolute top-1/4 -left-64 w-[500px] h-[500px] bg-primary/10 rounded-full filter blur-3xl"></div>
         <div className="absolute bottom-1/4 -right-64 w-[500px] h-[500px] bg-accent/10 rounded-full filter blur-3xl"></div>
@@ -147,8 +156,19 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Why Choose Us Section - New Section */}
+      <WhyChooseUs />
+
+      {/* How We Work - Process Steps - New Section */}
+      <ProcessSteps />
+
+      {/* Trending Services - New Section */}
+      <TrendingServices />
+
+      {/* Testimonials Section */}
       <TestimonialsSection />
 
+      {/* Offers Section */}
       <section className="py-24 bg-secondary/5 relative overflow-hidden">
         <div className="absolute inset-0 bg-noise-pattern opacity-5"></div>
         
@@ -210,6 +230,7 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Partners Section */}
       <section className="py-24 relative overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
           <AnimatedSection variant="fadeInUp">
@@ -287,6 +308,7 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Stats Section */}
       <section className="py-24 bg-secondary relative overflow-hidden text-white">
         <div className="absolute inset-0 bg-noise-pattern opacity-5"></div>
         <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-background to-transparent"></div>
@@ -315,6 +337,7 @@ const Index = () => {
         </div>
       </section>
 
+      {/* CTA Section */}
       <section className="py-24 relative overflow-hidden">
         <AnimatedSection 
           variant="fadeIn"

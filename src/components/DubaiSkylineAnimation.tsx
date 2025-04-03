@@ -40,19 +40,22 @@ const DubaiSkylineAnimation: React.FC<DubaiSkylineAnimationProps> = ({ className
   const scrollProgress = Math.min(scrollY / (isMobile ? 400 : 500), 1); // Adjust for faster zoom on mobile
   const zoomFactor = 1 + (scrollProgress * (maxZoom - 1));
   
+  // Use a higher quality Dubai skyline image
+  const skylineImage = "https://images.unsplash.com/photo-1546412414-8035e1776c9a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80";
+  
   return (
     <div className={`w-full h-full relative overflow-hidden ${className}`}>
       <div 
         className="absolute inset-0 bg-cover bg-center skyline-zoom"
         style={{
-          backgroundImage: 'url("https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80")',
+          backgroundImage: `url("${skylineImage}")`,
           backgroundPosition: isMobile ? 'center 60%' : 'center 70%', // Adjust position on mobile
           transform: `scale(${zoomFactor})`,
           transition: 'transform 0.2s ease-out'
         }}
       >
         {/* Overlay gradient for better text contrast */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/30"></div>
       </div>
       
       {/* Gold particles effect overlay */}
