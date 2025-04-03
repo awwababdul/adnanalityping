@@ -8,22 +8,36 @@ interface DubaiSkylineAnimationProps {
 
 const DubaiSkylineAnimation: React.FC<DubaiSkylineAnimationProps> = ({ className = '' }) => {
   const [scrollY, setScrollY] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   
   useEffect(() => {
+    // Check if we're on mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
     // Handle scroll for zoom effect
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
     
+    // Initialize mobile check
+    checkMobile();
+    
+    // Add event listeners
     window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', checkMobile);
+    
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', checkMobile);
     };
   }, []);
   
   // Calculate zoom factor based on scroll position
-  const maxZoom = 1.5;
-  const scrollProgress = Math.min(scrollY / 500, 1); // Adjust 500 to control zoom speed
+  // Less aggressive zoom on mobile
+  const maxZoom = isMobile ? 1.3 : 1.5;
+  const scrollProgress = Math.min(scrollY / (isMobile ? 400 : 500), 1); // Adjust for faster zoom on mobile
   const zoomFactor = 1 + (scrollProgress * (maxZoom - 1));
   
   return (
@@ -32,20 +46,20 @@ const DubaiSkylineAnimation: React.FC<DubaiSkylineAnimationProps> = ({ className
         className="absolute inset-0 bg-cover bg-center skyline-zoom"
         style={{
           backgroundImage: 'url("https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80")',
-          backgroundPosition: 'center 70%',
+          backgroundPosition: isMobile ? 'center 60%' : 'center 70%', // Adjust position on mobile
           transform: `scale(${zoomFactor})`,
           transition: 'transform 0.2s ease-out'
         }}
       >
         {/* Overlay gradient for better text contrast */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent"></div>
       </div>
       
       {/* Gold particles effect overlay */}
       <div className="absolute inset-0 bg-noise-pattern opacity-5"></div>
       
       {/* Premium signature */}
-      <div className="absolute bottom-4 right-4 z-10 opacity-80">
+      <div className="absolute bottom-2 md:bottom-4 right-2 md:right-4 z-10 opacity-80">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
