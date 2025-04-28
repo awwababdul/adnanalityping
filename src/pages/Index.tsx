@@ -11,7 +11,7 @@ import TrendingServices from "@/components/TrendingServices";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import StatsSection from "@/components/StatsSection";
 import PartnersSection from "@/components/PartnersSection";
-import CTASection from "@/components/CTASection";
+import CTASection from "@/components/CtaSection";
 
 const Index = () => {
   const handleGetStarted = () => {

@@ -1,5 +1,5 @@
 
-import { Building2, UserCheck, FileSignature, Printer, BookCheck } from "lucide-react";
+import { Building2, UserCheck, FileSignature, Printer, BookCheck, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import AnimatedSection from "@/components/AnimatedSection";
