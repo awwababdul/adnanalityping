@@ -1,2 +1,6 @@
 
+# Sitemap directly serves the XML file
+/sitemap.xml  /sitemap.xml  200
+
+# SPA redirect for all other paths
 /* /index.html 200
