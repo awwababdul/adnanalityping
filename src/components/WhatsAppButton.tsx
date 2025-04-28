@@ -1,11 +1,43 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, Phone, Mail, X, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const WhatsAppButton = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showWelcomeMessage, setShowWelcomeMessage] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
+  const [welcomeMessage, setWelcomeMessage] = useState("");
+  const fullWelcomeMessage = "Hi, how can I help you today?";
+
+  useEffect(() => {
+    // Show typing animation and welcome message on first visit
+    const hasVisited = sessionStorage.getItem("hasVisited");
+    
+    if (!hasVisited) {
+      setTimeout(() => {
+        setShowWelcomeMessage(true);
+        setIsTyping(true);
+        
+        // Simulate typing animation
+        setTimeout(() => {
+          setIsTyping(false);
+          let i = 0;
+          const typeMessage = setInterval(() => {
+            if (i < fullWelcomeMessage.length) {
+              setWelcomeMessage(prev => prev + fullWelcomeMessage.charAt(i));
+              i++;
+            } else {
+              clearInterval(typeMessage);
+            }
+          }, 50);
+        }, 1500);
+        
+        sessionStorage.setItem("hasVisited", "true");
+      }, 2000);
+    }
+  }, []);
 
   const handleWhatsAppClick = () => {
     window.open("https://api.whatsapp.com/send?phone=971552636961", "_blank");
@@ -16,11 +48,18 @@ const WhatsAppButton = () => {
   };
 
   const handleEmailClick = () => {
-    window.open("mailto:info@example.com", "_blank");
+    window.open("mailto:info@adnanalityping.ae", "_blank");
   };
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+    // Hide welcome message when menu is opened
+    setShowWelcomeMessage(false);
+  };
+
+  const closeWelcomeMessage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setShowWelcomeMessage(false);
   };
 
   return (
@@ -31,6 +70,49 @@ const WhatsAppButton = () => {
       transition={{ type: "spring", stiffness: 260, damping: 20, delay: 1 }}
     >
       <AnimatePresence>
+        {showWelcomeMessage && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 10 }}
+            className="bg-white rounded-lg shadow-lg p-4 mb-4 max-w-xs relative"
+          >
+            <button 
+              onClick={closeWelcomeMessage}
+              className="absolute top-2 right-2 text-gray-400 hover:text-gray-600"
+            >
+              <X size={16} />
+            </button>
+            <div className="flex items-start space-x-3">
+              <div className="flex-shrink-0">
+                <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white">
+                  <MessageSquare size={20} />
+                </div>
+              </div>
+              <div>
+                <p className="font-medium text-sm mb-1">Adnan Ali Typing</p>
+                {isTyping ? (
+                  <div className="flex space-x-1">
+                    <div className="h-2 w-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></div>
+                    <div className="h-2 w-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></div>
+                    <div className="h-2 w-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></div>
+                  </div>
+                ) : (
+                  <p className="text-sm text-gray-600">{welcomeMessage}</p>
+                )}
+                {!isTyping && welcomeMessage === fullWelcomeMessage && (
+                  <button 
+                    onClick={handleWhatsAppClick}
+                    className="mt-3 text-sm text-green-600 hover:text-green-700 font-medium"
+                  >
+                    Send a message
+                  </button>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        )}
+
         {isOpen && (
           <>
             <motion.div
@@ -98,7 +180,7 @@ const WhatsAppButton = () => {
           ) : (
             <MessageSquare className="text-white w-9 h-9" />
           )}
-          {!isOpen && (
+          {!isOpen && !showWelcomeMessage && (
             <span className="absolute w-full h-full rounded-full bg-primary animate-ping opacity-75"></span>
           )}
         </Button>

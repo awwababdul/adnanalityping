@@ -30,14 +30,17 @@ const Header = () => {
       name: "Services", 
       path: "#", 
       dropdown: [
-        { name: "Packages", path: "/services/packages" },
+        { name: "Business Setup", path: "/services/business-setup" },
         { name: "Immigration", path: "/services/immigration" },
         { name: "Emirates ID", path: "/services/emirates-id" },
-        { name: "Tas-heel", path: "/services/tas-heel" },
+        { name: "Document Processing", path: "/services/document-processing" },
         { name: "DHA Services", path: "/services/dubai-health-authority" },
+        { name: "Tas-heel", path: "/services/tas-heel" },
+        { name: "Packages", path: "/services/packages" },
       ] 
     },
     { name: "About Us", path: "/about" },
+    { name: "FAQ", path: "/faq" },
     { name: "Contact", path: "/contact" },
   ];
 
