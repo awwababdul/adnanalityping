@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { useForm } from "react-hook-form";
@@ -7,37 +6,28 @@ import * as z from "zod";
 import { toast } from "@/hooks/use-toast";
 import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
 import AnimatedSection from '@/components/AnimatedSection';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import WhatsAppButton from '@/components/WhatsAppButton';
-
 const formSchema = z.object({
   name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
+    message: "Name must be at least 2 characters."
   }),
   email: z.string().email({
-    message: "Please enter a valid email address.",
+    message: "Please enter a valid email address."
   }),
   phone: z.string().min(8, {
-    message: "Please enter a valid phone number.",
+    message: "Please enter a valid phone number."
   }),
   subject: z.string().min(5, {
-    message: "Subject must be at least 5 characters.",
+    message: "Subject must be at least 5 characters."
   }),
   message: z.string().min(10, {
-    message: "Message must be at least 10 characters.",
-  }),
+    message: "Message must be at least 10 characters."
+  })
 });
-
 const ContactPage = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -46,22 +36,19 @@ const ContactPage = () => {
       email: "",
       phone: "",
       subject: "",
-      message: "",
-    },
+      message: ""
+    }
   });
-
   function onSubmit(values: z.infer<typeof formSchema>) {
     // In a real implementation, you would send this data to a server
     console.log(values);
     toast({
       title: "Message Sent",
-      description: "Thank you for contacting us. We will get back to you shortly.",
+      description: "Thank you for contacting us. We will get back to you shortly."
     });
     form.reset();
   }
-
-  return (
-    <div className="min-h-screen bg-background pt-20 pb-16">
+  return <div className="min-h-screen bg-background pt-20 pb-16">
       <Helmet>
         <title>Contact Us - Adnan Ali Typing | Document Services Dubai</title>
         <meta name="description" content="Contact Adnan Ali Typing center in Dubai for all your document processing, visa, and business setup needs. Visit our office in Hor Al Anz or reach us by phone and WhatsApp." />
@@ -102,9 +89,7 @@ const ContactPage = () => {
                 </div>
                 <div>
                   <h3 className="font-bold text-lg">Email</h3>
-                  <a href="mailto:info@adnanalityping.ae" className="text-gray-600 hover:text-primary">
-                    info@adnanalityping.ae
-                  </a>
+                  <a href="mailto:info@adnanalityping.ae" className="text-gray-600 hover:text-primary">info@adnantyping.com; adnanaliltyping@gmail.com</a>
                 </div>
               </div>
               
@@ -136,17 +121,9 @@ const ContactPage = () => {
               </div>
 
               <div className="h-64 lg:h-72 mt-8">
-                <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.577881336268!2d55.325132!3d25.278490799999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5b5d51d6ac93%3A0x3910c76442d39ab0!2sHor%20Al%20Anz%2C%20Dubai!5e0!3m2!1sen!2sae!4v1650000000000!5m2!1sen!2sae" 
-                  width="100%" 
-                  height="100%" 
-                  style={{border: 0}}
-                  allowFullScreen={true}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Adnan Ali Typing Office Location"
-                  className="rounded-lg shadow-sm"
-                ></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.577881336268!2d55.325132!3d25.278490799999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5b5d51d6ac93%3A0x3910c76442d39ab0!2sHor%20Al%20Anz%2C%20Dubai!5e0!3m2!1sen!2sae!4v1650000000000!5m2!1sen!2sae" width="100%" height="100%" style={{
+                border: 0
+              }} allowFullScreen={true} loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Adnan Ali Typing Office Location" className="rounded-lg shadow-sm"></iframe>
               </div>
             </div>
           </AnimatedSection>
@@ -158,80 +135,56 @@ const ContactPage = () => {
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <FormField
-                      control={form.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem>
+                    <FormField control={form.control} name="name" render={({
+                    field
+                  }) => <FormItem>
                           <FormLabel>Full Name</FormLabel>
                           <FormControl>
                             <Input placeholder="John Doe" {...field} />
                           </FormControl>
                           <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
+                        </FormItem>} />
+                    <FormField control={form.control} name="email" render={({
+                    field
+                  }) => <FormItem>
                           <FormLabel>Email</FormLabel>
                           <FormControl>
                             <Input type="email" placeholder="john@example.com" {...field} />
                           </FormControl>
                           <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                        </FormItem>} />
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <FormField
-                      control={form.control}
-                      name="phone"
-                      render={({ field }) => (
-                        <FormItem>
+                    <FormField control={form.control} name="phone" render={({
+                    field
+                  }) => <FormItem>
                           <FormLabel>Phone Number</FormLabel>
                           <FormControl>
                             <Input placeholder="+971 50 123 4567" {...field} />
                           </FormControl>
                           <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="subject"
-                      render={({ field }) => (
-                        <FormItem>
+                        </FormItem>} />
+                    <FormField control={form.control} name="subject" render={({
+                    field
+                  }) => <FormItem>
                           <FormLabel>Subject</FormLabel>
                           <FormControl>
                             <Input placeholder="Visa Inquiry" {...field} />
                           </FormControl>
                           <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                        </FormItem>} />
                   </div>
 
-                  <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem>
+                  <FormField control={form.control} name="message" render={({
+                  field
+                }) => <FormItem>
                         <FormLabel>Message</FormLabel>
                         <FormControl>
-                          <Textarea 
-                            placeholder="Please provide details about your inquiry..." 
-                            className="min-h-32" 
-                            {...field} 
-                          />
+                          <Textarea placeholder="Please provide details about your inquiry..." className="min-h-32" {...field} />
                         </FormControl>
                         <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                      </FormItem>} />
 
                   <Button type="submit" className="w-full">
                     <Send className="h-4 w-4 mr-2" />
@@ -247,8 +200,6 @@ const ContactPage = () => {
         </div>
       </div>
       <WhatsAppButton />
-    </div>
-  );
+    </div>;
 };
-
 export default ContactPage;
