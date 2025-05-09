@@ -28,7 +28,7 @@ import TypingServicesPage from "./pages/TypingServicesPage";
 import BlogPage from "./pages/BlogPage";
 import BlogPostPage from "./pages/BlogPostPage";
 import Footer from "./components/Footer";
-import GoogleAnalytics from "./components/GoogleAnalytics";
+import GoogleTagManager from "./components/GoogleAnalytics";
 import WhatsAppPixel from "./components/WhatsAppPixel";
 
 const queryClient = new QueryClient();
@@ -61,7 +61,7 @@ const App = () => (
         <meta name="ICBM" content="25.2048, 55.2708" />
       </Helmet>
       <SchemaOrgStructuredData />
-      <GoogleAnalytics />
+      <GoogleTagManager />
       <WhatsAppPixel />
       <Toaster />
       <Sonner />

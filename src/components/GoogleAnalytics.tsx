@@ -1,5 +1,4 @@
-
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet';
 
 // Extend Window interface to include dataLayer
@@ -9,31 +8,41 @@ declare global {
   }
 }
 
-const GoogleAnalytics = () => {
-  useEffect(() => {
-    // This is where initialization would typically happen if using gtag.js directly
-    window.dataLayer = window.dataLayer || [];
-    function gtag(...args: any[]) {
-      window.dataLayer.push(args);
-    }
-    gtag('js', new Date());
-    gtag('config', 'G-MEASUREMENT_ID'); // Replace with your actual measurement ID
-  }, []);
+const GoogleTagManager = () => {
+  const GTM_ID = "GTM-XXXXXXX"; // Replace with your actual GTM ID
 
   return (
     <Helmet>
-      {/* Google Analytics GA4 Tag */}
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-MEASUREMENT_ID"></script>
+      {/* Google Tag Manager */}
+      <script>
+        {`
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','${GTM_ID}');
+        `}
+      </script>
+
+      {/* Google Tag Manager (noscript) - for body */}
+      <noscript>
+        {`
+          <iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}"
+          height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        `}
+      </noscript>
+
+      {/* Google Analytics Measurement ID - will be managed via GTM, but keeping for direct implementation option */}
       <script>
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-MEASUREMENT_ID'); // Replace with your actual measurement ID
+          gtag('config', 'G-XXXXXXXXXX'); // Replace with your actual GA4 measurement ID
         `}
       </script>
     </Helmet>
   );
 };
 
-export default GoogleAnalytics;
+export default GoogleTagManager;
