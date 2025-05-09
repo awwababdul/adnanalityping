@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -12,6 +11,7 @@ import { Button } from "./ui/button";
 interface SearchDialogProps {
   open: boolean;
   setOpen: (open: boolean) => void;
+  initialQuery?: string; // Add initialQuery as an optional prop
 }
 
 interface SearchResult {
@@ -25,11 +25,18 @@ interface SearchResult {
   answer?: string;
 }
 
-const SearchDialog = ({ open, setOpen }: SearchDialogProps) => {
-  const [searchTerm, setSearchTerm] = useState('');
+const SearchDialog = ({ open, setOpen, initialQuery = '' }: SearchDialogProps) => {
+  const [searchTerm, setSearchTerm] = useState(initialQuery); // Initialize with initialQuery
   const [results, setResults] = useState<SearchResult[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const navigate = useNavigate();
+
+  // Update searchTerm when initialQuery changes
+  useEffect(() => {
+    if (initialQuery) {
+      setSearchTerm(initialQuery);
+    }
+  }, [initialQuery]);
 
   // Perform search when search term changes
   useEffect(() => {

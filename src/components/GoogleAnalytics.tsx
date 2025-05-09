@@ -2,6 +2,13 @@
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 
+// Extend Window interface to include dataLayer
+declare global {
+  interface Window {
+    dataLayer: any[];
+  }
+}
+
 const GoogleAnalytics = () => {
   useEffect(() => {
     // This is where initialization would typically happen if using gtag.js directly
