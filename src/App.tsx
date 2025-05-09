@@ -29,15 +29,27 @@ const App = () => (
     <TooltipProvider>
       <Helmet>
         <title>Adnan Ali Typing | Document & Visa Services in Dubai</title>
-        <meta name="description" content="Adnan Ali Typing offers professional document processing, visa services, Emirates ID, and business setup services in Dubai with over 25 years of experience." />
-        <meta name="keywords" content="Dubai typing center, visa processing Dubai, Emirates ID services, business setup Dubai, document clearing services, PRO services Dubai" />
+        <meta name="description" content="Adnan Ali Typing offers professional typing services, document processing, visa services, Emirates ID, translation services and business setup services in Dubai with over 25 years of experience." />
+        <meta name="keywords" content="Typing Services Dubai, Online Typing Services UAE, Legal Document Typing Dubai, Arabic English Typing Services, Fast Typing Services Dubai, Document Translation Services UAE, Professional Typing Center Dubai, Business Typing Solutions UAE, Resume Typing Services Dubai, Certified Typing Services UAE" />
         <meta name="author" content="Adnan Ali Typing" />
         <meta property="og:title" content="Adnan Ali Typing | Document & Visa Services Dubai" />
-        <meta property="og:description" content="Professional document processing, visa services, Emirates ID, and business setup services in Dubai with over 25 years of experience." />
+        <meta property="og:description" content="Professional typing, translation, document processing, visa services, Emirates ID, and business setup services in Dubai with over 25 years of experience." />
         <meta property="og:image" content="/og-image.png" />
-        <meta property="og:url" content="https://adnanalityping.ae" />
+        <meta property="og:url" content="https://adnanalityping.com" />
         <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="https://adnanalityping.ae" />
+        <link rel="canonical" href="https://adnanalityping.com" />
+        
+        {/* Google Search Console Verification */}
+        <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />
+        
+        {/* Additional SEO tags */}
+        <meta name="robots" content="index, follow" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="format-detection" content="telephone=yes" />
+        <meta name="geo.region" content="AE-DU" />
+        <meta name="geo.placename" content="Dubai" />
+        <meta name="geo.position" content="25.2048;55.2708" />
+        <meta name="ICBM" content="25.2048, 55.2708" />
       </Helmet>
       <SchemaOrgStructuredData />
       <Toaster />

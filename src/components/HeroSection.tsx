@@ -14,6 +14,12 @@ const HeroSection = () => {
     setSearchOpen(true);
   };
 
+  const handleSearchKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      setSearchOpen(true);
+    }
+  };
+
   return (
     <div className="relative min-h-[90vh] overflow-hidden bg-secondary">
       {/* Background elements */}
@@ -67,7 +73,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            Your trusted partner for professional documentation, visa services, and legal translations with 15+ years of experience.
+            Your trusted partner for professional typing, translation, and document services in Dubai with over 25 years of excellence.
           </motion.p>
 
           <motion.div 
@@ -79,11 +85,13 @@ const HeroSection = () => {
             <div className="relative">
               <Input
                 type="text"
-                placeholder="Search for services..."
+                placeholder="Search for typing services, documents, or FAQs..."
                 className="w-full h-14 pl-12 pr-4 rounded-full text-lg bg-white/10 text-white placeholder:text-gray-400 border-none focus-visible:ring-2 focus-visible:ring-primary backdrop-blur-md"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onClick={handleSearchClick}
+                onKeyPress={handleSearchKeyPress}
+                aria-label="Search documents, services and FAQs"
               />
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <Button className="absolute right-1 top-1/2 transform -translate-y-1/2 rounded-full h-12 px-6" onClick={handleSearchClick}>

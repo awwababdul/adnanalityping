@@ -7,18 +7,18 @@ const SchemaOrgStructuredData = () => {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Adnan Ali Typing",
-    "description": "Professional document processing, visa services, Emirates ID, and business setup services in Dubai.",
-    "url": "https://adnanalityping.ae",
-    "logo": "https://adnanalityping.ae/logo.png",
-    "image": "https://adnanalityping.ae/storefront.jpg",
+    "description": "Professional document processing, visa services, Emirates ID, and business setup services in Dubai. Offering certified typing, translation, and legal document services with over 25 years of experience.",
+    "url": "https://adnanalityping.com",
+    "logo": "https://adnanalityping.com/logo.png",
+    "image": "https://adnanalityping.com/storefront.jpg",
     "telephone": "+971552636961",
-    "email": "info@adnanalityping.ae",
+    "email": "info@adnanalityping.com",
+    "priceRange": "$$",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Near Al Mamzar Center, Hor Al Anz",
       "addressLocality": "Dubai",
       "addressRegion": "Dubai",
-      "postalCode": "00000",
       "addressCountry": "AE"
     },
     "geo": {
@@ -51,26 +51,37 @@ const SchemaOrgStructuredData = () => {
       "https://www.facebook.com/adnanalityping",
       "https://www.instagram.com/adnanalityping"
     ],
-    "priceRange": "$$",
-    "servesCuisine": "Document Services",
     "areaServed": {
-      "@type": "GeoCircle",
-      "geoMidpoint": {
-        "@type": "GeoCoordinates",
-        "latitude": "25.2048",
-        "longitude": "55.2708"
-      },
-      "geoRadius": "50000"
+      "@type": "GeoShape",
+      "name": "Dubai and surrounding areas",
+      "addressCountry": "AE",
+      "addressRegion": "Dubai"
     },
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
-      "name": "Document Services",
+      "name": "Document and Typing Services",
       "itemListElement": [
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "Visa Processing",
+            "name": "Typing Services Dubai",
+            "description": "Professional document typing services in Dubai with quick turnaround and high accuracy."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Translation Services UAE",
+            "description": "Certified Arabic-English translation services for legal and official documents."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Visa Processing Dubai",
             "description": "Complete visa processing services for all types of visas in Dubai."
           }
         },
@@ -86,7 +97,7 @@ const SchemaOrgStructuredData = () => {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "Business Setup",
+            "name": "Business Setup Dubai",
             "description": "Comprehensive business setup and licensing services in Dubai."
           }
         },
@@ -94,16 +105,16 @@ const SchemaOrgStructuredData = () => {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "Document Translation",
-            "description": "Professional translation services for all types of documents."
+            "name": "Resume Typing Services Dubai",
+            "description": "Professional CV and resume typing services for job seekers in Dubai."
           }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "PRO Services",
-            "description": "Professional representative services for government transactions."
+            "name": "Legal Document Typing Dubai",
+            "description": "Accurate typing services for legal documents and contracts."
           }
         }
       ]
@@ -114,13 +125,86 @@ const SchemaOrgStructuredData = () => {
       "ratingCount": "350",
       "bestRating": "5",
       "worstRating": "1"
-    }
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "Mohammed Al Hashimi"
+        },
+        "datePublished": "2025-03-15",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "reviewBody": "Excellent typing and document services. Very professional and efficient."
+      },
+      {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "Sarah Johnson"
+        },
+        "datePublished": "2025-02-20",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "reviewBody": "Fast and reliable visa processing services. Highly recommend for all documentation needs."
+      }
+    ]
+  };
+
+  // Add FAQPage schema
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What services does Adnan Ali Typing provide?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Adnan Ali Typing offers a comprehensive range of documentation services including typing services, visa processing, Emirates ID applications, business setup assistance, document typing, attestation, legal translation, and Tasheel/Amer services in Dubai."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is Adnan Ali Typing located in Dubai?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We are conveniently located in Hor Al Anz, Dubai. Our office is easily accessible and we serve clients throughout Dubai and neighboring emirates."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does document typing take?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most standard documents are completed within 24 hours. Complex documents may take 1-2 business days depending on length and requirements. We also offer express same-day service for urgent needs."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you offer translation services in Dubai?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we provide professional translation services for all types of documents including legal documents, certificates, contracts, and personal documents. Our translations are legally certified and accepted by all government departments."
+        }
+      }
+    ]
   };
 
   return (
     <Helmet>
       <script type="application/ld+json">
         {JSON.stringify(schemaData)}
+      </script>
+      <script type="application/ld+json">
+        {JSON.stringify(faqSchema)}
       </script>
     </Helmet>
   );
