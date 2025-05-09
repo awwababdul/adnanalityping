@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Helmet } from 'react-helmet';
 
@@ -32,13 +33,36 @@ const GoogleTagManager = () => {
         `}
       </noscript>
 
-      {/* Google Analytics Measurement ID - will be managed via GTM, but keeping for direct implementation option */}
+      {/* Enhanced ecommerce tracking for location-based pages */}
       <script>
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', 'G-XXXXXXXXXX'); // Replace with your actual GA4 measurement ID
+          
+          // Track location page views
+          const path = window.location.pathname;
+          if (path.includes('typing-services-') || path.includes('/locations/')) {
+            const locationName = path.split('typing-services-')[1] || path.split('/locations/')[1] || 'unknown';
+            dataLayer.push({
+              'event': 'view_location_page',
+              'location_name': locationName
+            });
+            console.log('Location page view pushed to dataLayer:', locationName);
+          }
+          
+          // Track guide downloads
+          document.addEventListener('submit', function(e) {
+            const target = e.target as HTMLFormElement;
+            if (target && target.closest('#download-guide')) {
+              dataLayer.push({
+                'event': 'guide_download',
+                'guide_name': 'UAE Document Guide'
+              });
+              console.log('Guide download pushed to dataLayer');
+            }
+          }, false);
         `}
       </script>
     </Helmet>

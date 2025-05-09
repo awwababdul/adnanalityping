@@ -24,8 +24,9 @@ const WhatsAppPixel = () => {
           // Track when a user initiates WhatsApp contact
           document.addEventListener('click', function(e) {
             const target = e.target as HTMLElement;
-            if (target && (target.closest('a[href*="whatsapp"]') || target.closest('button[data-whatsapp="true"]'))) {
+            if (target && (target.closest('a[href*="whatsapp"]') || target.closest('button[data-whatsapp="true"]') || target.closest('[onClick*="whatsapp"]'))) {
               fbq('track', 'Contact', {method: 'WhatsApp'});
+              console.log('WhatsApp contact tracked');
             }
           }, false);
 
@@ -36,7 +37,39 @@ const WhatsAppPixel = () => {
               content_type: 'service',
               content_name: document.title
             });
+            console.log('Service page view tracked');
           }
+          
+          // Track when a user views a location-specific page
+          if (path.includes('typing-services-') || path.includes('/locations/')) {
+            fbq('track', 'ViewContent', {
+              content_type: 'location_service',
+              content_name: document.title,
+              location: path.split('typing-services-')[1] || 'unknown'
+            });
+            console.log('Location service page view tracked');
+          }
+          
+          // Track when a user downloads the guide
+          document.addEventListener('submit', function(e) {
+            const target = e.target as HTMLFormElement;
+            if (target && target.closest('#download-guide')) {
+              fbq('track', 'Lead', {
+                content_name: 'UAE Document Guide Download',
+                content_category: 'guide'
+              });
+              console.log('Guide download tracked');
+            }
+          }, false);
+          
+          // Track when a user clicks on phone number
+          document.addEventListener('click', function(e) {
+            const target = e.target as HTMLElement;
+            if (target && target.closest('a[href^="tel:"]')) {
+              fbq('track', 'Contact', {method: 'Phone'});
+              console.log('Phone contact tracked');
+            }
+          }, false);
         `}
       </script>
       <noscript>

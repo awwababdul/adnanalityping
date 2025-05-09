@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import LocationSelector from "./LocationSelector";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -37,6 +38,23 @@ const Header = () => {
         { name: "DHA Services", path: "/services/dubai-health-authority" },
         { name: "Tas-heel", path: "/services/tas-heel" },
         { name: "Packages", path: "/services/packages" },
+      ] 
+    },
+    { 
+      name: "Locations", 
+      path: "#", 
+      dropdown: [
+        { name: "Dubai", path: "/typing-services-dubai" },
+        { name: "Abu Dhabi", path: "/typing-services-abu-dhabi" },
+        { name: "Business Bay", path: "/typing-services-business-bay" },
+      ] 
+    },
+    { 
+      name: "Resources", 
+      path: "#", 
+      dropdown: [
+        { name: "Ultimate Guide to Typing Services", path: "/ultimate-guide-typing-translation-services-uae" },
+        { name: "Blog", path: "/blog" },
       ] 
     },
     { name: "About Us", path: "/about" },
@@ -81,7 +99,7 @@ const Header = () => {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-8">
+            <nav className="hidden md:flex items-center space-x-6">
               {navItems.map((item, index) => (
                 <div key={index} className="relative group">
                   {item.dropdown ? (
@@ -118,8 +136,9 @@ const Header = () => {
               ))}
             </nav>
 
-            {/* Contact Button */}
-            <div className="hidden md:block">
+            {/* Contact Button and Location Selector */}
+            <div className="hidden md:flex items-center gap-2">
+              <LocationSelector className="mr-2" />
               <a href="tel:+971552636961">
                 <Button variant="ghost" className="flex items-center gap-2">
                   <Phone className="w-4 h-4" />
@@ -130,6 +149,7 @@ const Header = () => {
 
             {/* Mobile Call Button and Menu Button */}
             <div className="flex items-center gap-2 md:hidden">
+              <LocationSelector className="mr-2" />
               <a href="tel:+971552636961" className="mr-2" aria-label="Call us">
                 <Phone className={`w-5 h-5 ${isScrolled ? "text-primary" : "text-white"}`} />
               </a>

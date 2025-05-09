@@ -27,6 +27,10 @@ import TranslationServices from "./pages/TranslationServices";
 import TypingServicesPage from "./pages/TypingServicesPage";
 import BlogPage from "./pages/BlogPage";
 import BlogPostPage from "./pages/BlogPostPage";
+import UltimateTypingGuide from "./pages/UltimateTypingGuide";
+import DubaiTypingServices from "./pages/locations/DubaiTypingServices";
+import AbuDhabiTypingServices from "./pages/locations/AbuDhabiTypingServices";
+import BusinessBayTypingServices from "./pages/locations/BusinessBayTypingServices";
 import Footer from "./components/Footer";
 import GoogleTagManager from "./components/GoogleAnalytics";
 import WhatsAppPixel from "./components/WhatsAppPixel";
@@ -87,6 +91,14 @@ const App = () => (
           <Route path="/resume-typing-services-dubai" element={<ResumeTypingServices />} />
           <Route path="/translation-services-dubai" element={<TranslationServices />} />
           <Route path="/typing-services-dubai" element={<TypingServicesPage />} />
+
+          {/* Location Pages */}
+          <Route path="/typing-services-dubai" element={<DubaiTypingServices />} />
+          <Route path="/typing-services-abu-dhabi" element={<AbuDhabiTypingServices />} />
+          <Route path="/typing-services-business-bay" element={<BusinessBayTypingServices />} />
+          
+          {/* Ultimate Guide */}
+          <Route path="/ultimate-guide-typing-translation-services-uae" element={<UltimateTypingGuide />} />
           
           {/* Blog Pages */}
           <Route path="/blog" element={<BlogPage />} />
