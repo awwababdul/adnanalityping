@@ -21,6 +21,15 @@ import Header from "./components/Header";
 import LoadingScreen from "./components/LoadingScreen";
 import AnniversaryEmblem from "./components/AnniversaryEmblem";
 import SchemaOrgStructuredData from "./components/SchemaOrgStructuredData";
+import LegalDocumentTyping from "./pages/LegalDocumentTyping";
+import ResumeTypingServices from "./pages/ResumeTypingServices"; 
+import TranslationServices from "./pages/TranslationServices";
+import TypingServicesPage from "./pages/TypingServicesPage";
+import BlogPage from "./pages/BlogPage";
+import BlogPostPage from "./pages/BlogPostPage";
+import Footer from "./components/Footer";
+import GoogleAnalytics from "./components/GoogleAnalytics";
+import WhatsAppPixel from "./components/WhatsAppPixel";
 
 const queryClient = new QueryClient();
 
@@ -39,11 +48,11 @@ const App = () => (
         <meta name="twitter:card" content="summary_large_image" />
         <link rel="canonical" href="https://adnanalityping.com" />
         
-        {/* Google Search Console Verification */}
+        {/* Google Search Console Verification - Replace with your actual verification code */}
         <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />
         
         {/* Additional SEO tags */}
-        <meta name="robots" content="index, follow" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="format-detection" content="telephone=yes" />
         <meta name="geo.region" content="AE-DU" />
@@ -52,6 +61,8 @@ const App = () => (
         <meta name="ICBM" content="25.2048, 55.2708" />
       </Helmet>
       <SchemaOrgStructuredData />
+      <GoogleAnalytics />
+      <WhatsAppPixel />
       <Toaster />
       <Sonner />
       <LoadingScreen />
@@ -70,8 +81,20 @@ const App = () => (
           <Route path="/services/dubai-health-authority" element={<DubaiHealthAuthorityPage />} />
           <Route path="/services/tas-heel" element={<TasHeelPage />} />
           <Route path="/services/packages" element={<PackagesPage />} />
+          
+          {/* SEO Landing Pages */}
+          <Route path="/legal-document-typing-dubai" element={<LegalDocumentTyping />} />
+          <Route path="/resume-typing-services-dubai" element={<ResumeTypingServices />} />
+          <Route path="/translation-services-dubai" element={<TranslationServices />} />
+          <Route path="/typing-services-dubai" element={<TypingServicesPage />} />
+          
+          {/* Blog Pages */}
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
+          
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { MapPin, Phone, Search } from "lucide-react";
+import { MapPin, Phone, Search, Check } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -59,22 +59,36 @@ const HeroSection = () => {
           </motion.div>
 
           <motion.h1 
-            className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight"
+            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <span className="text-gradient">Adnan Ali Typing</span>
+            <span className="text-gradient">Certified Typing & Translation Services in Dubai</span>
           </motion.h1>
           
           <motion.p 
-            className="text-xl text-gray-300 max-w-2xl mx-auto mb-12"
+            className="text-xl text-gray-300 max-w-2xl mx-auto mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
             Your trusted partner for professional typing, translation, and document services in Dubai with over 25 years of excellence.
           </motion.p>
+          
+          <motion.div
+            className="flex flex-wrap justify-center gap-3 mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+          >
+            {["Fast Turnaround", "Certified Services", "100% Accuracy", "Competitive Rates"].map((tag, index) => (
+              <div key={index} className="flex items-center bg-white/10 backdrop-blur-sm px-4 py-1.5 rounded-full">
+                <Check className="w-4 h-4 mr-1.5 text-primary" />
+                <span className="text-sm text-white">{tag}</span>
+              </div>
+            ))}
+          </motion.div>
 
           <motion.div 
             className="max-w-md mx-auto mb-12"
@@ -91,7 +105,7 @@ const HeroSection = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onClick={handleSearchClick}
                 onKeyPress={handleSearchKeyPress}
-                aria-label="Search documents, services and FAQs"
+                aria-label="Search document services in Dubai"
               />
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <Button className="absolute right-1 top-1/2 transform -translate-y-1/2 rounded-full h-12 px-6" onClick={handleSearchClick}>
@@ -115,7 +129,7 @@ const HeroSection = () => {
               <MapPin className="w-5 h-5" />
               <span>Visit Our Office in Dubai</span>
             </a>
-            <div className="flex items-center gap-6">
+            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
               <a 
                 href="tel:+971552636961" 
                 className="flex items-center gap-2 hover:text-primary transition-colors"
@@ -170,7 +184,7 @@ const HeroSection = () => {
       </motion.div>
       
       {/* Search Dialog */}
-      <SearchDialog open={searchOpen} setOpen={setSearchOpen} />
+      <SearchDialog open={searchOpen} setOpen={setSearchOpen} initialQuery={searchQuery} />
     </div>
   );
 };
