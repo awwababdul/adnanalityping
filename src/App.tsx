@@ -1,10 +1,10 @@
 
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import EmiratesIDPage from "./pages/services/emirates-id";
@@ -40,53 +40,53 @@ import Index from "./pages/Index";
 import Footer from "./components/Footer";
 import GoogleTagManager from "./components/GoogleAnalytics";
 import WhatsAppPixel from "./components/WhatsAppPixel";
-import PWAInstallPrompt from "./components/PWAInstallPrompt";
 import MobileNavigation from "./components/MobileNavigation";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Helmet>
-        <title>Adnan Ali Typing | Document & Visa Services in Dubai</title>
-        <meta name="description" content="Adnan Ali Typing offers professional typing services, document processing, visa services, Emirates ID, translation services and business setup services in Dubai with over 25 years of experience." />
-        <meta name="keywords" content="Typing Services Dubai, Online Typing Services UAE, Legal Document Typing Dubai, Arabic English Typing Services, Fast Typing Services Dubai, Document Translation Services UAE, Professional Typing Center Dubai, Business Typing Solutions UAE, Resume Typing Services Dubai, Certified Typing Services UAE" />
-        <meta name="author" content="Adnan Ali Typing" />
-        <meta property="og:title" content="Adnan Ali Typing | Document & Visa Services Dubai" />
-        <meta property="og:description" content="Professional typing, translation, document processing, visa services, Emirates ID, and business setup services in Dubai with over 25 years of experience." />
-        <meta property="og:image" content="/og-image.png" />
-        <meta property="og:url" content="https://adnanalityping.com" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="https://adnanalityping.com" />
+    <BrowserRouter>
+      <TooltipProvider>
+        <Helmet>
+          <title>Adnan Ali Typing | Document & Visa Services in Dubai</title>
+          <meta name="description" content="Adnan Ali Typing offers professional typing services, document processing, visa services, Emirates ID, translation services and business setup services in Dubai with over 25 years of experience." />
+          <meta name="keywords" content="Typing Services Dubai, Online Typing Services UAE, Legal Document Typing Dubai, Arabic English Typing Services, Fast Typing Services Dubai, Document Translation Services UAE, Professional Typing Center Dubai, Business Typing Solutions UAE, Resume Typing Services Dubai, Certified Typing Services UAE" />
+          <meta name="author" content="Adnan Ali Typing" />
+          <meta property="og:title" content="Adnan Ali Typing | Document & Visa Services Dubai" />
+          <meta property="og:description" content="Professional typing, translation, document processing, visa services, Emirates ID, and business setup services in Dubai with over 25 years of experience." />
+          <meta property="og:image" content="/og-image.png" />
+          <meta property="og:url" content="https://adnanalityping.com" />
+          <meta name="twitter:card" content="summary_large_image" />
+          <link rel="canonical" href="https://adnanalityping.com" />
+          
+          {/* PWA Meta Tags */}
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+          <meta name="apple-mobile-web-app-title" content="Adnan Ali Typing" />
+          <meta name="application-name" content="Adnan Ali Typing" />
+          <meta name="theme-color" content="#3b82f6" />
+          <link rel="manifest" href="/manifest.json" />
+          
+          {/* Google Search Console Verification - Replace with your actual verification code */}
+          <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />
+          
+          {/* Additional SEO tags */}
+          <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <meta name="format-detection" content="telephone=yes" />
+          <meta name="geo.region" content="AE-DU" />
+          <meta name="geo.placename" content="Dubai" />
+          <meta name="geo.position" content="25.2048;55.2708" />
+          <meta name="ICBM" content="25.2048, 55.2708" />
+        </Helmet>
+        <SchemaOrgStructuredData />
+        <GoogleTagManager />
+        <WhatsAppPixel />
+        <Toaster />
+        <Sonner />
+        <LoadingScreen />
         
-        {/* PWA Meta Tags */}
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="Adnan Ali Typing" />
-        <meta name="application-name" content="Adnan Ali Typing" />
-        <meta name="theme-color" content="#3b82f6" />
-        <link rel="manifest" href="/manifest.json" />
-        
-        {/* Google Search Console Verification - Replace with your actual verification code */}
-        <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />
-        
-        {/* Additional SEO tags */}
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="format-detection" content="telephone=yes" />
-        <meta name="geo.region" content="AE-DU" />
-        <meta name="geo.placename" content="Dubai" />
-        <meta name="geo.position" content="25.2048;55.2708" />
-        <meta name="ICBM" content="25.2048, 55.2708" />
-      </Helmet>
-      <SchemaOrgStructuredData />
-      <GoogleTagManager />
-      <WhatsAppPixel />
-      <Toaster />
-      <Sonner />
-      <LoadingScreen />
-      <BrowserRouter>
         <Routes>
           {/* Redirect root to new app-style home */}
           <Route path="/" element={<Home />} />
@@ -133,9 +133,8 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
         <MobileNavigation />
-        <PWAInstallPrompt />
-      </BrowserRouter>
-    </TooltipProvider>
+      </TooltipProvider>
+    </BrowserRouter>
   </QueryClientProvider>
 );
 
