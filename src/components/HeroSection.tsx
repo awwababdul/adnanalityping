@@ -1,10 +1,11 @@
 
 import { motion } from "framer-motion";
-import { MapPin, Phone, Search, Check } from "lucide-react";
+import { MapPin, Phone, Search, Check, ArrowRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import SearchDialog from "./SearchDialog";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -21,7 +22,7 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="relative min-h-[90vh] overflow-hidden bg-secondary">
+    <div className="relative min-h-[90vh] overflow-hidden bg-gradient-to-br from-secondary to-secondary/90">
       {/* Background elements */}
       <div className="absolute inset-0 bg-noise-pattern opacity-[0.03]"></div>
       <div className="absolute top-20 -left-32 w-96 h-96 bg-primary/20 rounded-full filter blur-3xl"></div>
@@ -64,7 +65,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <span className="text-gradient">Certified Typing & Translation Services in Dubai</span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-primary/90">UAE Document Services</span>
           </motion.h1>
           
           <motion.p 
@@ -91,7 +92,7 @@ const HeroSection = () => {
           </motion.div>
 
           <motion.div 
-            className="max-w-md mx-auto mb-12"
+            className="max-w-md mx-auto mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
@@ -112,6 +113,25 @@ const HeroSection = () => {
                 Search
               </Button>
             </div>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
+          >
+            <Link to="/services">
+              <Button size="lg" className="rounded-full px-8 bg-gradient-to-r from-primary to-blue-500 hover:shadow-lg hover:shadow-primary/20 transition-all">
+                <span>Get Started</span>
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+            <Link to="/get-quote">
+              <Button size="lg" variant="outline" className="rounded-full px-8 text-white border-white/20 backdrop-blur-sm hover:bg-white/10">
+                Request Quote
+              </Button>
+            </Link>
           </motion.div>
 
           <motion.div

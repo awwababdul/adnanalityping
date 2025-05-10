@@ -40,6 +40,8 @@ import Index from "./pages/Index";
 import Footer from "./components/Footer";
 import GoogleTagManager from "./components/GoogleAnalytics";
 import WhatsAppPixel from "./components/WhatsAppPixel";
+import PWAInstallPrompt from "./components/PWAInstallPrompt";
+import MobileNavigation from "./components/MobileNavigation";
 
 const queryClient = new QueryClient();
 
@@ -85,7 +87,6 @@ const App = () => (
       <Sonner />
       <LoadingScreen />
       <BrowserRouter>
-        {/* Default version routes */}
         <Routes>
           {/* Redirect root to new app-style home */}
           <Route path="/" element={<Home />} />
@@ -131,6 +132,8 @@ const App = () => (
           
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <MobileNavigation />
+        <PWAInstallPrompt />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

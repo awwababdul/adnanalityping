@@ -1,26 +1,25 @@
 
-import React from 'react';
-
 export interface SubService {
   id: string;
   title: string;
   description: string;
-  governmentLink?: string;
   requirements?: string[];
   process?: string[];
   documents?: string[];
-  
-  // New fields for service categories
+  governmentLink?: string;
+  // New properties
   tags?: string[];
   officialService?: boolean;
   timeframe?: string;
   governmentAuthority?: string;
+  price?: string | number;
+  rating?: number;
 }
 
 export interface Service {
   id: string;
-  icon: React.ReactNode;
   title: string;
-  description: string;
+  description?: string;
+  icon: JSX.Element;
   subServices: SubService[];
 }

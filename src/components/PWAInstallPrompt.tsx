@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Download, X } from 'lucide-react';
+import { Download, X, Smartphone } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 interface BeforeInstallPromptEvent extends Event {
@@ -43,7 +43,9 @@ const PWAInstallPrompt = () => {
       
       // Only show prompt after 2 page views and if not dismissed recently
       if (newPageViewCount >= 2 && !isDismissedRecently) {
-        setShowPrompt(true);
+        setTimeout(() => {
+          setShowPrompt(true);
+        }, 3000); // Show after 3 seconds
       }
     };
 
@@ -54,6 +56,24 @@ const PWAInstallPrompt = () => {
       setIsPWAInstalled(true);
       setShowPrompt(false);
       console.log('PWA was installed');
+      
+      // Show thank you toast or notification
+      const thankYouElement = document.createElement('div');
+      thankYouElement.textContent = 'Thanks for installing our app!';
+      thankYouElement.style.position = 'fixed';
+      thankYouElement.style.bottom = '80px';
+      thankYouElement.style.left = '50%';
+      thankYouElement.style.transform = 'translateX(-50%)';
+      thankYouElement.style.background = '#0070F3';
+      thankYouElement.style.color = 'white';
+      thankYouElement.style.padding = '8px 16px';
+      thankYouElement.style.borderRadius = '20px';
+      thankYouElement.style.zIndex = '9999';
+      document.body.appendChild(thankYouElement);
+      
+      setTimeout(() => {
+        document.body.removeChild(thankYouElement);
+      }, 3000);
     });
 
     return () => {
@@ -104,26 +124,50 @@ const PWAInstallPrompt = () => {
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
-          className="fixed bottom-20 left-4 right-4 z-50 px-4 py-3 bg-primary text-white rounded-lg shadow-lg flex items-center justify-between"
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          className="fixed bottom-20 left-4 right-4 z-50 md:left-auto md:right-4 md:bottom-4 md:w-80"
         >
-          <div className="flex items-center gap-2">
-            <Download className="h-5 w-5" />
-            <span className="text-sm font-medium">Use Adnan Ali Typing like an app! Add to home screen for faster access.</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <button 
-              onClick={handleInstallClick}
-              className="text-xs bg-white text-primary px-3 py-1 rounded-full font-medium"
-            >
-              Install
-            </button>
-            <button 
-              onClick={handleDismiss}
-              className="text-white p-1 rounded-full"
-              aria-label="Dismiss"
-            >
-              <X className="h-4 w-4" />
-            </button>
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700">
+            <div className="p-4">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10">
+                    <Smartphone className="h-5 w-5 text-primary" />
+                  </div>
+                  <h4 className="font-semibold">Install App</h4>
+                </div>
+                <Button 
+                  size="icon"
+                  variant="ghost"
+                  onClick={handleDismiss}
+                  className="h-8 w-8"
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+              
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                Use Adnan Ali Typing like a native app! Add to home screen for faster access.
+              </p>
+              
+              <div className="flex gap-2 justify-end">
+                <Button 
+                  variant="secondary"
+                  size="sm"
+                  onClick={handleDismiss}
+                >
+                  Not Now
+                </Button>
+                <Button 
+                  onClick={handleInstallClick}
+                  size="sm"
+                  className="gap-1"
+                >
+                  <Download className="h-4 w-4" />
+                  Install
+                </Button>
+              </div>
+            </div>
           </div>
         </motion.div>
       )}
