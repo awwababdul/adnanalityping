@@ -1,13 +1,13 @@
 
 {
-  "name": "Adnan Ali Typing Services",
+  "name": "Adnan Ali Typing Services UAE",
   "short_name": "Adnan Typing",
   "description": "Professional document services, typing and visa services in UAE",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#3b82f6",
-  "orientation": "portrait",
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -24,6 +24,36 @@
       "sizes": "180x180",
       "type": "image/png",
       "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Upload Documents",
+      "short_name": "Upload",
+      "description": "Upload your documents for processing",
+      "url": "/upload-documents",
+      "icons": [{ "src": "/icons/upload.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Get Quote",
+      "short_name": "Quote",
+      "description": "Get a quote for our services",
+      "url": "/get-quote",
+      "icons": [{ "src": "/icons/quote.png", "sizes": "192x192" }]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "screenshots": [
+    {
+      "src": "/screenshots/home-screen.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    },
+    {
+      "src": "/screenshots/services-screen.png",
+      "sizes": "1280x720",
+      "type": "image/png"
     }
   ]
 }

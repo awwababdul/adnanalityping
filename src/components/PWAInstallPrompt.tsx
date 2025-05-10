@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Download, X } from 'lucide-react';
+import { Button } from "@/components/ui/button";
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -27,6 +28,11 @@ const PWAInstallPrompt = () => {
     localStorage.setItem('pageViewCount', newPageViewCount.toString());
     setPageViewCount(newPageViewCount);
 
+    // Check if the prompt was dismissed recently
+    const dismissedTime = parseInt(localStorage.getItem('dismissedInstallTime') || '0');
+    const showAgainAfter = 7 * 24 * 60 * 60 * 1000; // 7 days in ms
+    const isDismissedRecently = dismissedTime && (Date.now() - dismissedTime < showAgainAfter);
+
     // Listen for beforeinstallprompt event
     const handleBeforeInstallPrompt = (e: Event) => {
       // Prevent default to avoid the browser showing its own prompt
@@ -35,8 +41,8 @@ const PWAInstallPrompt = () => {
       // Store the event for later use
       setDeferredPrompt(e as BeforeInstallPromptEvent);
       
-      // Only show prompt after 2 page views
-      if (newPageViewCount >= 2) {
+      // Only show prompt after 2 page views and if not dismissed recently
+      if (newPageViewCount >= 2 && !isDismissedRecently) {
         setShowPrompt(true);
       }
     };
@@ -47,6 +53,7 @@ const PWAInstallPrompt = () => {
     window.addEventListener('appinstalled', () => {
       setIsPWAInstalled(true);
       setShowPrompt(false);
+      console.log('PWA was installed');
     });
 
     return () => {
@@ -97,11 +104,11 @@ const PWAInstallPrompt = () => {
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
-          className="fixed bottom-16 left-4 right-4 z-50 px-4 py-3 bg-primary text-white rounded-lg shadow-lg flex items-center justify-between"
+          className="fixed bottom-20 left-4 right-4 z-50 px-4 py-3 bg-primary text-white rounded-lg shadow-lg flex items-center justify-between"
         >
           <div className="flex items-center gap-2">
             <Download className="h-5 w-5" />
-            <span className="text-sm font-medium">Use Adnan Ali Typing like an app! Tap here to install.</span>
+            <span className="text-sm font-medium">Use Adnan Ali Typing like an app! Add to home screen for faster access.</span>
           </div>
           <div className="flex items-center gap-2">
             <button 
