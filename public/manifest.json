@@ -1,12 +1,13 @@
 
 {
-  "name": "Adnan Ali Typing",
+  "name": "Adnan Ali Typing Services",
   "short_name": "Adnan Typing",
-  "description": "Professional document services in UAE",
+  "description": "Professional document services, typing and visa services in UAE",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#3b82f6",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -17,6 +18,12 @@
       "src": "/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }

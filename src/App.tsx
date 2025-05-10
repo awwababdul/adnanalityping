@@ -35,6 +35,7 @@ import ServiceCategoryPage from "./pages/ServiceCategoryPage";
 import ServiceDetailPage from "./pages/ServiceDetailPage";
 import UploadDocumentsPage from "./pages/UploadDocumentsPage";
 import GetQuotePage from "./pages/GetQuotePage";
+import CartPage from "./pages/CartPage";
 import Index from "./pages/Index";
 import Footer from "./components/Footer";
 import GoogleTagManager from "./components/GoogleAnalytics";
@@ -62,7 +63,7 @@ const App = () => (
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Adnan Ali Typing" />
         <meta name="application-name" content="Adnan Ali Typing" />
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#3b82f6" />
         <link rel="manifest" href="/manifest.json" />
         
         {/* Google Search Console Verification - Replace with your actual verification code */}
@@ -96,6 +97,7 @@ const App = () => (
           <Route path="/services/:categoryId/:serviceId" element={<ServiceDetailPage />} />
           <Route path="/upload-documents" element={<UploadDocumentsPage />} />
           <Route path="/get-quote" element={<GetQuotePage />} />
+          <Route path="/cart" element={<CartPage />} />
           
           {/* Legacy routes */}
           <Route path="/about" element={<AboutPage />} />

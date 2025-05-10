@@ -4,7 +4,7 @@ import { useLocation, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Home, Grid, Upload, MessageSquare, 
-  DollarSign, ChevronRight, Search, X, Filter
+  Search, X, Filter
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,6 +14,7 @@ import {
   DrawerTrigger, 
   DrawerClose
 } from '@/components/ui/drawer';
+import CartIndicator from './CartIndicator';
 
 interface MobileAppLayoutProps {
   children: React.ReactNode;
@@ -30,7 +31,7 @@ const MobileAppLayout = ({ children }: MobileAppLayoutProps) => {
     { name: 'Home', path: '/', icon: <Home className="w-5 h-5" /> },
     { name: 'Services', path: '/services', icon: <Grid className="w-5 h-5" /> },
     { name: 'Upload', path: '/upload-documents', icon: <Upload className="w-5 h-5" /> },
-    { name: 'Quote', path: '/get-quote', icon: <DollarSign className="w-5 h-5" /> },
+    { name: 'Cart', path: '/cart', icon: <CartIndicator /> },
     { name: 'Chat', path: '#chat', icon: <MessageSquare className="w-5 h-5" /> },
   ];
 
@@ -205,7 +206,7 @@ const MobileAppLayout = ({ children }: MobileAppLayoutProps) => {
                         onClick={() => setSearchOpen(false)}
                       >
                         <span>{service}</span>
-                        <ChevronRight className="w-4 h-4 text-gray-400" />
+                        <span className="w-4 h-4 text-gray-400">›</span>
                       </Link>
                     ))}
                   </div>
@@ -225,8 +226,10 @@ const MobileAppLayout = ({ children }: MobileAppLayoutProps) => {
       <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40">
         <div className="flex justify-around">
           {navigationItems.map((item) => {
-            const isActive = item.path === location.pathname || 
-              (item.path === '/services' && location.pathname.startsWith('/services'));
+            const isActive = 
+              item.path === location.pathname || 
+              (item.path === '/services' && location.pathname.startsWith('/services')) ||
+              (item.path === '/cart' && location.pathname === '/cart');
             
             return (
               <Link
