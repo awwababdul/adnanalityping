@@ -1,7 +1,6 @@
 
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, ExternalLink } from "lucide-react";
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { services } from "@/data/services";
 
@@ -23,11 +22,7 @@ const ServiceDetail = () => {
           Back to Services
         </Link>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
+        <div>
           <h1 className="text-4xl font-bold text-secondary mb-2">{subService.title}</h1>
           <p className="text-xl text-gray-600 mb-8">{subService.description}</p>
 
@@ -74,7 +69,7 @@ const ServiceDetail = () => {
               <ExternalLink className="ml-2 w-4 h-4" />
             </Button>
           )}
-        </motion.div>
+        </div>
       </div>
     </div>
   );
