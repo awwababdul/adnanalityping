@@ -1,14 +1,15 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { motion } from "framer-motion";
 import { Link } from 'react-router-dom';
-import { FileCheck, FileText, Clock, Award, Users, Download, Globe, MapPin, Phone } from 'lucide-react';
-import { Button } from "@/components/ui/button";
-import AnimatedSection from "@/components/AnimatedSection";
-import WhatsAppButton from "@/components/WhatsAppButton";
-import LeadMagnetForm from "@/components/LeadMagnetForm";
-import { locationPages } from '@/data/locationPages';
+import { 
+  FileText, MapPin, Clock, 
+  CheckCircle, ExternalLink, 
+  MessageCircle, FileCheck,
+  FileSignature 
+} from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const UltimateTypingGuide = () => {
   const currentYear = new Date().getFullYear();

@@ -46,7 +46,6 @@ const LocationSelector = ({ className }: LocationSelectorProps) => {
           <Command>
             <CommandInput
               placeholder="Search locations..."
-              startIcon={<Search className="w-4 h-4" />}
               className="py-2"
             />
             <CommandEmpty>No location found.</CommandEmpty>
@@ -58,13 +57,11 @@ const LocationSelector = ({ className }: LocationSelectorProps) => {
                   className="cursor-pointer"
                   onSelect={() => {
                     setOpen(false);
-                    // Note: We're using Link component navigation to prevent page reload
-                    document.querySelector(`a[href="${location.url}"]`)?.click();
+                    window.location.href = location.url;
                   }}
                 >
                   <MapPin className="w-4 h-4 mr-2 text-primary" />
                   <span>Services in {location.name}</span>
-                  <Link to={location.url} className="hidden" />
                 </CommandItem>
               ))}
             </CommandGroup>

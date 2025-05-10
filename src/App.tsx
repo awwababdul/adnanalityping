@@ -3,9 +3,9 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import Index from "./pages/Index";
+import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import EmiratesIDPage from "./pages/services/emirates-id";
 import ImmigrationPage from "./pages/services/immigration";
@@ -31,6 +31,11 @@ import UltimateTypingGuide from "./pages/UltimateTypingGuide";
 import DubaiTypingServices from "./pages/locations/DubaiTypingServices";
 import AbuDhabiTypingServices from "./pages/locations/AbuDhabiTypingServices";
 import BusinessBayTypingServices from "./pages/locations/BusinessBayTypingServices";
+import ServiceCategoryPage from "./pages/ServiceCategoryPage";
+import ServiceDetailPage from "./pages/ServiceDetailPage";
+import UploadDocumentsPage from "./pages/UploadDocumentsPage";
+import GetQuotePage from "./pages/GetQuotePage";
+import Index from "./pages/Index";
 import Footer from "./components/Footer";
 import GoogleTagManager from "./components/GoogleAnalytics";
 import WhatsAppPixel from "./components/WhatsAppPixel";
@@ -52,6 +57,14 @@ const App = () => (
         <meta name="twitter:card" content="summary_large_image" />
         <link rel="canonical" href="https://adnanalityping.com" />
         
+        {/* PWA Meta Tags */}
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="Adnan Ali Typing" />
+        <meta name="application-name" content="Adnan Ali Typing" />
+        <meta name="theme-color" content="#ffffff" />
+        <link rel="manifest" href="/manifest.json" />
+        
         {/* Google Search Console Verification - Replace with your actual verification code */}
         <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />
         
@@ -71,10 +84,20 @@ const App = () => (
       <Sonner />
       <LoadingScreen />
       <BrowserRouter>
-        <Header />
-        <AnniversaryEmblem position="fixed" />
+        {/* Default version routes */}
         <Routes>
-          <Route path="/" element={<Index />} />
+          {/* Redirect root to new app-style home */}
+          <Route path="/" element={<Home />} />
+          <Route path="/original" element={<Index />} />
+          
+          {/* New app-style routes */}
+          <Route path="/services" element={<Navigate to="/services/immigration" />} />
+          <Route path="/services/:categoryId" element={<ServiceCategoryPage />} />
+          <Route path="/services/:categoryId/:serviceId" element={<ServiceDetailPage />} />
+          <Route path="/upload-documents" element={<UploadDocumentsPage />} />
+          <Route path="/get-quote" element={<GetQuotePage />} />
+          
+          {/* Legacy routes */}
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/faq" element={<FaqPage />} />
@@ -106,7 +129,6 @@ const App = () => (
           
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <Footer />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
