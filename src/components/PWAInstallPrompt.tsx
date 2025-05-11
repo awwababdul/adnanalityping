@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Download, X, Smartphone } from 'lucide-react';
+import { Download, X, Smartphone, ArrowRight } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 interface BeforeInstallPromptEvent extends Event {
@@ -56,24 +56,6 @@ const PWAInstallPrompt = () => {
       setIsPWAInstalled(true);
       setShowPrompt(false);
       console.log('PWA was installed');
-      
-      // Show thank you toast or notification
-      const thankYouElement = document.createElement('div');
-      thankYouElement.textContent = 'Thanks for installing our app!';
-      thankYouElement.style.position = 'fixed';
-      thankYouElement.style.bottom = '80px';
-      thankYouElement.style.left = '50%';
-      thankYouElement.style.transform = 'translateX(-50%)';
-      thankYouElement.style.background = '#0070F3';
-      thankYouElement.style.color = 'white';
-      thankYouElement.style.padding = '8px 16px';
-      thankYouElement.style.borderRadius = '20px';
-      thankYouElement.style.zIndex = '9999';
-      document.body.appendChild(thankYouElement);
-      
-      setTimeout(() => {
-        document.body.removeChild(thankYouElement);
-      }, 3000);
     });
 
     return () => {
@@ -94,21 +76,20 @@ const PWAInstallPrompt = () => {
     
     // The prompt can only be used once, so clear it
     setDeferredPrompt(null);
+    setShowPrompt(false);
     
+    // Record install choice
     if (outcome === 'accepted') {
       console.log('User accepted the install prompt');
     } else {
       console.log('User dismissed the install prompt');
+      localStorage.setItem('dismissedInstallTime', Date.now().toString());
     }
-
-    // Hide the prompt regardless of outcome
-    setShowPrompt(false);
   };
 
   const handleDismiss = () => {
     setShowPrompt(false);
     // Don't show again for a while
-    localStorage.setItem('dismissedInstallPrompt', 'true');
     localStorage.setItem('dismissedInstallTime', Date.now().toString());
   };
 
@@ -125,47 +106,65 @@ const PWAInstallPrompt = () => {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          className="fixed bottom-20 left-4 right-4 z-50 md:left-auto md:right-4 md:bottom-4 md:w-80"
+          className="fixed inset-x-0 bottom-20 z-50 px-4 mx-auto md:max-w-md"
         >
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700">
-            <div className="p-4">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10">
-                    <Smartphone className="h-5 w-5 text-primary" />
-                  </div>
-                  <h4 className="font-semibold">Install App</h4>
+            <div className="relative">
+              {/* Header image */}
+              <div className="h-28 bg-gradient-to-r from-blue-500 to-primary flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-[url('/pattern-bg.png')] opacity-10"></div>
+                <div className="bg-white/20 backdrop-blur-md p-4 rounded-2xl border border-white/30">
+                  <Smartphone className="h-12 w-12 text-white" />
                 </div>
-                <Button 
-                  size="icon"
-                  variant="ghost"
+                
+                <button 
                   onClick={handleDismiss}
-                  className="h-8 w-8"
+                  className="absolute top-2 right-2 bg-white/20 backdrop-blur-md rounded-full p-1"
                 >
-                  <X className="h-4 w-4" />
-                </Button>
+                  <X className="h-5 w-5 text-white" />
+                </button>
               </div>
               
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                Use Adnan Ali Typing like a native app! Add to home screen for faster access.
-              </p>
-              
-              <div className="flex gap-2 justify-end">
-                <Button 
-                  variant="secondary"
-                  size="sm"
-                  onClick={handleDismiss}
-                >
-                  Not Now
-                </Button>
+              <div className="p-5">
+                <h4 className="text-lg font-semibold mb-1">Add to Home Screen</h4>
+                <p className="text-gray-600 text-sm mb-4 dark:text-gray-400">
+                  Install Adnan Ali Typing on your phone for faster access and a seamless experience.
+                </p>
+                
+                <div className="space-y-3 mb-4">
+                  <div className="flex items-start gap-2">
+                    <div className="bg-blue-50 p-1 rounded-full text-blue-600 mt-0.5">
+                      <CheckIcon className="h-3 w-3" />
+                    </div>
+                    <p className="text-sm text-gray-600">Access all services even without internet</p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <div className="bg-blue-50 p-1 rounded-full text-blue-600 mt-0.5">
+                      <CheckIcon className="h-3 w-3" />
+                    </div>
+                    <p className="text-sm text-gray-600">Faster document uploads and processing</p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <div className="bg-blue-50 p-1 rounded-full text-blue-600 mt-0.5">
+                      <CheckIcon className="h-3 w-3" />
+                    </div>
+                    <p className="text-sm text-gray-600">Get notifications when your services update</p>
+                  </div>
+                </div>
+                
                 <Button 
                   onClick={handleInstallClick}
-                  size="sm"
-                  className="gap-1"
+                  className="w-full gap-2"
                 >
-                  <Download className="h-4 w-4" />
-                  Install
+                  Install Now <ArrowRight className="h-4 w-4" />
                 </Button>
+                
+                <button 
+                  onClick={handleDismiss}
+                  className="w-full text-center text-sm text-gray-500 mt-3"
+                >
+                  Maybe later
+                </button>
               </div>
             </div>
           </div>
@@ -174,5 +173,21 @@ const PWAInstallPrompt = () => {
     </AnimatePresence>
   );
 };
+
+// Simple check icon component
+const CheckIcon = ({ className = "" }: { className?: string }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="3"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <polyline points="20 6 9 17 4 12"></polyline>
+  </svg>
+);
 
 export default PWAInstallPrompt;
