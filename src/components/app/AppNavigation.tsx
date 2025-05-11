@@ -1,8 +1,6 @@
 
 import { Link, useLocation } from "react-router-dom";
-import { motion } from "framer-motion";
 import { Home, Search, Upload, ShoppingCart, MessageCircle } from "lucide-react";
-import CartIndicator from "@/components/CartIndicator";
 
 const AppNavigation = () => {
   const location = useLocation();
@@ -26,8 +24,7 @@ const AppNavigation = () => {
     { 
       name: 'Cart', 
       path: '/cart', 
-      icon: <CartIndicator />,
-      isCart: true
+      icon: <ShoppingCart className="w-5 h-5" />,
     },
     { 
       name: 'Chat', 
@@ -82,10 +79,8 @@ const AppNavigation = () => {
               </span>
               
               {isActive && (
-                <motion.div 
-                  layoutId="navigation-indicator"
+                <div 
                   className="absolute -top-2 w-12 h-1 bg-primary rounded-b-full"
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 />
               )}
             </Link>

@@ -1,29 +1,14 @@
 
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Search, ChevronLeft, Filter, User, Bell } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { 
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-  SheetClose
-} from '@/components/ui/sheet';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Search, ChevronLeft, Filter, User } from 'lucide-react';
 
 const AppHeader: React.FC = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showSearch, setShowSearch] = useState(false);
   
   // Set header title based on current route
   const getHeaderTitle = () => {
@@ -68,182 +53,113 @@ const AppHeader: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      // Implement search functionality
+      console.log('Searching for:', searchQuery);
+      setShowSearch(false);
+    }
+  };
+
   return (
-    <header 
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-200 ${
-        scrolled ? 'bg-white shadow-sm' : 'bg-white/80 backdrop-blur-lg'
-      }`}
-    >
-      <div className="container mx-auto max-w-7xl px-4">
-        <div className="flex items-center justify-between h-14">
-          <div className="flex items-center">
-            {canGoBack && (
-              <Button
-                onClick={() => window.history.back()}
-                variant="ghost"
-                size="icon"
-                className="mr-2"
-                aria-label="Go back"
+    <>
+      <header 
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-200 ${
+          scrolled ? 'bg-white shadow-sm' : 'bg-white/80 backdrop-blur-lg'
+        }`}
+      >
+        <div className="container mx-auto max-w-7xl px-4">
+          <div className="flex items-center justify-between h-14">
+            <div className="flex items-center">
+              {canGoBack && (
+                <button
+                  onClick={() => navigate(-1)}
+                  className="mr-2 p-2 rounded-full hover:bg-gray-100"
+                  aria-label="Go back"
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </button>
+              )}
+              
+              {isRootRoute ? (
+                <Link to="/" className="flex items-center">
+                  <img
+                    src="/lovable-uploads/c3a3a109-e73f-4597-ba4b-c0043c986598.png"
+                    alt="Adnan Ali Typing Logo"
+                    className="h-8 w-auto mr-2"
+                  />
+                  <span className="font-medium text-lg text-primary">Adnan Ali</span>
+                </Link>
+              ) : (
+                <h1 className="font-semibold text-lg">{title}</h1>
+              )}
+            </div>
+            
+            <div className="flex items-center space-x-2">
+              <button 
+                onClick={() => setShowSearch(true)}
+                className="p-2 rounded-full hover:bg-gray-100"
+                aria-label="Search"
               >
-                <ChevronLeft className="h-5 w-5" />
-              </Button>
-            )}
-            
-            {isRootRoute ? (
-              <Link to="/" className="flex items-center">
-                <img
-                  src="/lovable-uploads/c3a3a109-e73f-4597-ba4b-c0043c986598.png"
-                  alt="Adnan Ali Typing Logo"
-                  className="h-8 w-auto mr-2"
-                />
-                <span className="font-medium text-lg text-primary">Adnan Ali</span>
-              </Link>
-            ) : (
-              <h1 className="font-semibold text-lg">{title}</h1>
-            )}
-          </div>
-          
-          <div className="flex items-center space-x-1">
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" aria-label="Search">
-                  <Search className="h-5 w-5" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="top" className="w-full p-0">
-                <div className="p-4 pb-0">
-                  <div className="flex items-center gap-2">
-                    <div className="relative flex-1">
-                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-                      <input
-                        type="text"
-                        placeholder="Search for services..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        className="pl-9 pr-4 py-2 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                        autoFocus
-                      />
-                    </div>
-                    <SheetClose asChild>
-                      <Button variant="ghost">Cancel</Button>
-                    </SheetClose>
-                  </div>
-                </div>
-                
-                <div className="p-4">
-                  <h3 className="font-medium mb-2">Popular Searches</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {['Visa Renewal', 'Emirates ID', 'Translation', 'Business Setup', 'Typing Services'].map(tag => (
-                      <div 
-                        key={tag} 
-                        className="py-1 px-3 bg-gray-100 rounded-full text-sm cursor-pointer hover:bg-gray-200"
-                        onClick={() => setSearchQuery(tag)}
-                      >
-                        {tag}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </SheetContent>
-            </Sheet>
-            
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" aria-label="Filter">
-                  <Filter className="h-5 w-5" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent>
-                <SheetHeader>
-                  <SheetTitle>Filter Services</SheetTitle>
-                </SheetHeader>
-                <div className="py-4">
-                  <div className="space-y-4">
-                    <div>
-                      <h3 className="font-medium mb-2">By Category</h3>
-                      <div className="flex flex-wrap gap-2">
-                        {['Visa', 'Business', 'Documents', 'Translation', 'Medical'].map((category) => (
-                          <div 
-                            key={category}
-                            className="py-1 px-3 border rounded-full text-sm cursor-pointer hover:bg-gray-100"
-                          >
-                            {category}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <h3 className="font-medium mb-2">By Processing Time</h3>
-                      <div className="flex flex-wrap gap-2">
-                        {['Express', 'Standard', 'Economy'].map((speed) => (
-                          <div 
-                            key={speed}
-                            className="py-1 px-3 border rounded-full text-sm cursor-pointer hover:bg-gray-100"
-                          >
-                            {speed}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <h3 className="font-medium mb-2">By Government Entity</h3>
-                      <div className="flex flex-wrap gap-2">
-                        {['ICA', 'MOHRE', 'DHA', 'DLD', 'Dubai Courts'].map((entity) => (
-                          <div 
-                            key={entity}
-                            className="py-1 px-3 border rounded-full text-sm cursor-pointer hover:bg-gray-100"
-                          >
-                            {entity}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="flex justify-end gap-2 mt-4">
-                  <SheetClose asChild>
-                    <Button variant="outline">Reset</Button>
-                  </SheetClose>
-                  <SheetClose asChild>
-                    <Button>Apply Filters</Button>
-                  </SheetClose>
-                </div>
-              </SheetContent>
-            </Sheet>
-            
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" aria-label="User account">
-                  <Avatar className="h-8 w-8">
-                    <AvatarFallback className="bg-primary/10 text-primary">
-                      <User className="h-4 w-4" />
-                    </AvatarFallback>
-                  </Avatar>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem>
-                  <Link to="/my-services" className="flex w-full">My Services</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link to="/upload-documents" className="flex w-full">My Documents</Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <Link to="/about" className="flex w-full">About Us</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link to="/contact" className="flex w-full">Contact Us</Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+                <Search className="h-5 w-5" />
+              </button>
+              
+              <button
+                onClick={() => navigate('/my-services')}
+                className="p-2 rounded-full hover:bg-gray-100"
+                aria-label="User profile"
+              >
+                <User className="h-5 w-5" />
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      {/* Simple search overlay */}
+      {showSearch && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex flex-col">
+          <div className="bg-white p-4">
+            <form onSubmit={handleSearchSubmit} className="flex items-center gap-2">
+              <input
+                type="text"
+                placeholder="Search for services..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="flex-1 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+                autoFocus
+              />
+              <button 
+                type="button" 
+                onClick={() => setShowSearch(false)}
+                className="p-2 rounded-full hover:bg-gray-100"
+              >
+                Cancel
+              </button>
+            </form>
+          </div>
+          
+          <div className="flex-1 bg-white p-4 overflow-auto">
+            {/* Popular searches */}
+            <div className="mb-4">
+              <h3 className="font-medium mb-2">Popular Searches</h3>
+              <div className="flex flex-wrap gap-2">
+                {['Visa Renewal', 'Emirates ID', 'Translation', 'Business Setup'].map((tag) => (
+                  <button 
+                    key={tag}
+                    className="py-1 px-3 bg-gray-100 rounded-full text-sm hover:bg-gray-200"
+                    onClick={() => setSearchQuery(tag)}
+                  >
+                    {tag}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
