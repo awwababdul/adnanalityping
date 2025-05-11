@@ -1,9 +1,13 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronRight, FileText, Clock, Shield } from 'lucide-react';
+import { ArrowRight, ChevronRight, FileText, Clock, Shield, File, Briefcase, User, FileEdit } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import useServiceStore from '@/store/useServiceStore';
 
 const Home = () => {
+  const { recommendedServices } = useServiceStore();
+  
   const serviceCategories = [
     {
       title: 'Visa & Immigration',
@@ -20,13 +24,19 @@ const Home = () => {
     {
       title: 'Business Setup',
       description: 'Company registration & trade license services',
-      icon: <FileText className="w-6 h-6 text-primary" />,
+      icon: <Briefcase className="w-6 h-6 text-primary" />,
       path: '/services/business-setup'
+    },
+    {
+      title: 'Document Services',
+      description: 'Document drafting, contracts & agreements',
+      icon: <FileEdit className="w-6 h-6 text-primary" />,
+      path: '/services/document-services'
     },
     {
       title: 'Document Processing',
       description: 'All types of document processing & attestation',
-      icon: <FileText className="w-6 h-6 text-primary" />,
+      icon: <File className="w-6 h-6 text-primary" />,
       path: '/services/document-processing'
     },
   ];
@@ -51,10 +61,10 @@ const Home = () => {
       path: '/services/document-processing/legal-translation'
     },
     {
-      title: 'Company Registration',
-      price: 'AED 4,500',
-      timeframe: '5-7 working days',
-      path: '/services/business-setup/company-registration'
+      title: 'CV & Resume Drafting',
+      price: 'AED 150',
+      timeframe: '2-3 working days',
+      path: '/services/document-services/cv-resume'
     },
   ];
 
@@ -78,20 +88,64 @@ const Home = () => {
           
           <div className="flex flex-col sm:flex-row gap-3 justify-center mb-4">
             <Link 
-              to="/services" 
+              to="/needs-wizard" 
               className="bg-white text-primary hover:bg-gray-100 px-6 py-3 rounded-lg font-medium flex items-center justify-center gap-2"
             >
-              Browse Services <ArrowRight className="w-4 h-4" />
+              Find My Services <ArrowRight className="w-4 h-4" />
             </Link>
             <Link 
-              to="/needs-wizard" 
+              to="/services" 
               className="bg-white/20 hover:bg-white/30 px-6 py-3 rounded-lg font-medium flex items-center justify-center gap-2"
             >
-              Service Finder
+              Browse All Services
             </Link>
           </div>
         </div>
       </section>
+      
+      {/* Personalized Services - Show if available */}
+      {recommendedServices && recommendedServices.length > 0 && (
+        <section className="px-4 py-6 bg-blue-50">
+          <div className="max-w-lg mx-auto">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold">Your Recommended Services</h2>
+              <Link to="/needs-wizard" className="text-primary text-sm font-medium flex items-center">
+                Refine <ChevronRight className="w-4 h-4 ml-1" />
+              </Link>
+            </div>
+            
+            <div className="grid grid-cols-1 gap-3">
+              {recommendedServices.slice(0, 2).map((service, index) => (
+                <Link 
+                  key={index} 
+                  to={`/services/${service.categoryId}/${service.id}`}
+                  className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+                >
+                  <h3 className="font-medium text-gray-900 mb-1">{service.title}</h3>
+                  <div className="flex justify-between text-sm mb-2">
+                    <span className="text-primary font-medium">{service.price}</span>
+                    <div className="flex items-center text-gray-500">
+                      <Clock className="w-3 h-3 mr-1" />
+                      <span>{service.timeframe}</span>
+                    </div>
+                  </div>
+                  <Button size="sm" className="w-full text-sm py-1 h-auto">
+                    View Details
+                  </Button>
+                </Link>
+              ))}
+              
+              <Link 
+                to="/needs-wizard"
+                className="bg-blue-100 p-4 rounded-lg border border-blue-200 hover:bg-blue-200 transition-colors text-center"
+              >
+                <p className="font-medium text-primary mb-1">Find More Personalized Services</p>
+                <span className="text-sm text-gray-600">Answer a few questions to get tailored recommendations</span>
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Service Categories */}
       <section className="px-4 py-8">
@@ -194,7 +248,24 @@ const Home = () => {
         </div>
       </section>
       
-      {/* CTA */}
+      {/* Service Finder CTA */}
+      <section className="px-4 py-6">
+        <div className="max-w-lg mx-auto bg-gradient-to-r from-primary to-blue-600 rounded-lg p-5 text-center text-white">
+          <div className="bg-white/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+            <User className="w-8 h-8" />
+          </div>
+          <h2 className="font-bold text-xl mb-2">Not sure what services you need?</h2>
+          <p className="text-white/90 mb-4">Answer a few quick questions and we'll recommend the right services for you</p>
+          <Link 
+            to="/needs-wizard"
+            className="bg-white text-primary hover:bg-gray-100 px-6 py-3 rounded-lg font-medium inline-flex items-center justify-center"
+          >
+            Start Service Finder
+          </Link>
+        </div>
+      </section>
+      
+      {/* WhatsApp CTA */}
       <section className="px-4 py-6">
         <div className="max-w-lg mx-auto bg-primary/10 rounded-lg p-5 text-center">
           <h2 className="font-bold mb-2">Need help with your documents?</h2>

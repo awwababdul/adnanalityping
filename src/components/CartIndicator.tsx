@@ -2,17 +2,14 @@
 import React from 'react';
 import { ShoppingCart } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
+import useCartStore from '@/store/useCartStore';
 
-// Just a placeholder implementation, would normally connect to a cart store
 const CartIndicator = () => {
-  const [itemCount, setItemCount] = React.useState(0);
+  const { items } = useCartStore();
   const location = useLocation();
   
-  // For demonstration, pretend we have 2 items in cart
-  React.useEffect(() => {
-    // This would come from your cart store in a real implementation
-    setItemCount(2);
-  }, []);
+  // Count total items in cart
+  const itemCount = items.length;
   
   const isActive = location.pathname === '/cart';
   

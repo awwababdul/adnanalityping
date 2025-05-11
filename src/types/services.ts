@@ -14,6 +14,12 @@ export interface SubService {
   governmentAuthority?: string;
   price?: string | number;
   rating?: number;
+  userTypes?: string[]; // business-owner, family-sponsor, job-seeker, etc.
+  urgencyLevels?: string[]; // urgent, standard, flexible
+  requiredDocuments?: string[];
+  partnerService?: boolean;
+  partnerName?: string;
+  partnerWebsite?: string;
 }
 
 export interface Service {
@@ -22,4 +28,15 @@ export interface Service {
   description?: string;
   icon: JSX.Element;
   subServices: SubService[];
+}
+
+export interface ServicePartnership {
+  name: string;
+  website: string;
+  logo?: string;
+  description: string;
+  services: {
+    title: string;
+    description: string;
+  }[];
 }

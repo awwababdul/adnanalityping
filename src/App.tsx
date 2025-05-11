@@ -23,6 +23,7 @@ import CartPage from "./pages/CartPage";
 import NeedsWizardPage from "./pages/NeedsWizardPage";
 import MyServicesPage from "./pages/MyServicesPage";
 import ServiceBundlesPage from "./pages/ServiceBundlesPage";
+import DocumentServicesPage from "./pages/services/document-services";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -62,6 +63,7 @@ function App() {
             <Route path="/services/dubai-health-authority" element={<DubaiHealthAuthorityPage />} />
             <Route path="/services/tas-heel" element={<TasHeelPage />} />
             <Route path="/services/packages" element={<PackagesPage />} />
+            <Route path="/services/document-services" element={<DocumentServicesPage />} />
           </Route>
           
           {/* Catch-all route */}
