@@ -23,7 +23,6 @@ import CartPage from "./pages/CartPage";
 import NeedsWizardPage from "./pages/NeedsWizardPage";
 import MyServicesPage from "./pages/MyServicesPage";
 import ServiceBundlesPage from "./pages/ServiceBundlesPage";
-import Index from "./pages/Index";
 
 const queryClient = new QueryClient({
   defaultOptions: {

@@ -24,7 +24,7 @@ const AppNavigation = () => {
     { 
       name: 'Cart', 
       path: '/cart', 
-      icon: <ShoppingCart className="w-5 h-5" />,
+      icon: <ShoppingCart className="w-5 h-5" /> 
     },
     { 
       name: 'Chat', 

@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Search, ChevronLeft, Filter, User } from 'lucide-react';
+import { Search, ChevronLeft, Filter } from 'lucide-react';
 
 const AppHeader: React.FC = () => {
   const location = useLocation();
@@ -69,7 +69,7 @@ const AppHeader: React.FC = () => {
           scrolled ? 'bg-white shadow-sm' : 'bg-white/80 backdrop-blur-lg'
         }`}
       >
-        <div className="container mx-auto max-w-7xl px-4">
+        <div className="container mx-auto max-w-lg px-4">
           <div className="flex items-center justify-between h-14">
             <div className="flex items-center">
               {canGoBack && (
@@ -103,14 +103,6 @@ const AppHeader: React.FC = () => {
                 aria-label="Search"
               >
                 <Search className="h-5 w-5" />
-              </button>
-              
-              <button
-                onClick={() => navigate('/my-services')}
-                className="p-2 rounded-full hover:bg-gray-100"
-                aria-label="User profile"
-              >
-                <User className="h-5 w-5" />
               </button>
             </div>
           </div>
