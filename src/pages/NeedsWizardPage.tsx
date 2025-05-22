@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -13,6 +12,13 @@ import { toast } from '@/components/ui/use-toast';
 
 // Combine all services
 const allServices = [...services, ...documentServices];
+
+// Define urgency mapping for type safety
+const urgencyMapping: Record<string, "standard" | "express" | "same-day"> = {
+  'urgent': 'same-day',
+  'standard': 'standard',
+  'flexible': 'express'
+};
 
 const NeedsWizardPage = () => {
   const navigate = useNavigate();
@@ -117,13 +123,16 @@ const NeedsWizardPage = () => {
   };
   
   const handleAddToCart = (service: any) => {
+    // Convert user-friendly urgency to system urgency type
+    const mappedUrgency = urgencyMapping[answers.q2] || 'standard';
+    
     addItem({
       id: service.id,
       title: service.title,
       price: service.price ? parseFloat(service.price.toString().replace(/[^0-9.]/g, '')) : null,
       isCustomPrice: !service.price || typeof service.price === 'string',
       categoryId: service.categoryId,
-      urgency: answers.q2
+      urgency: mappedUrgency
     });
     
     toast({
