@@ -1,4 +1,8 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -73,12 +77,33 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1, h2, h3, h4, h5 {
+    @apply font-serif;
+  }
+
+  h1 {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold;
+  }
+
+  h2 {
+    @apply text-2xl md:text-3xl font-semibold;
+  }
+
+  h3 {
+    @apply text-xl md:text-2xl font-semibold;
+  }
+
+  .display-title {
+    @apply font-display text-3xl md:text-4xl lg:text-5xl font-bold;
   }
 }
 
 @layer components {
+  /* Base Components */
   .glass-card {
     @apply backdrop-blur-lg bg-white/10 border border-white/20 shadow-lg;
   }
@@ -91,8 +116,13 @@
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
   }
 
+  .gold-text-gradient {
+    @apply bg-clip-text text-transparent bg-gold-gradient;
+  }
+
+  /* Card Components */
   .service-card {
-    @apply relative overflow-hidden rounded-xl transition-all duration-300 hover:translate-y-[-5px] hover:shadow-xl;
+    @apply relative overflow-hidden rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
   }
 
   .service-card::after {
@@ -102,5 +132,89 @@
   
   .service-card:hover::after {
     @apply opacity-100;
+  }
+
+  .premium-card {
+    @apply rounded-xl border border-primary/20 bg-white shadow-md hover:shadow-premium transition-shadow duration-300;
+  }
+
+  .gold-card {
+    @apply rounded-xl border border-gold/20 bg-white shadow-md hover:shadow-gold transition-shadow duration-300;
+  }
+
+  /* Button Styles */
+  .btn-primary {
+    @apply bg-primary hover:bg-primary-600 text-white px-4 py-2 rounded-lg font-medium transition-colors;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary hover:bg-secondary/90 text-white px-4 py-2 rounded-lg font-medium transition-colors;
+  }
+
+  .btn-outline {
+    @apply border border-primary text-primary hover:bg-primary/10 px-4 py-2 rounded-lg font-medium transition-colors;
+  }
+
+  .btn-gold {
+    @apply bg-gold hover:bg-gold-600 text-white px-4 py-2 rounded-lg font-medium transition-colors;
+  }
+
+  /* Input Styles */
+  .input-primary {
+    @apply border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-colors;
+  }
+
+  /* Badge Styles */
+  .badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium;
+  }
+
+  .badge-primary {
+    @apply badge bg-primary-50 text-primary-700;
+  }
+
+  .badge-secondary {
+    @apply badge bg-gray-100 text-gray-800;
+  }
+
+  .badge-accent {
+    @apply badge bg-accent-50 text-accent-700;
+  }
+
+  .badge-gold {
+    @apply badge bg-gold-50 text-gold-700;
+  }
+
+  /* Shimmer Loading Effect */
+  .shimmer {
+    @apply relative overflow-hidden bg-gray-200 rounded-md;
+  }
+
+  .shimmer::after {
+    content: '';
+    @apply absolute top-0 left-0 right-0 bottom-0 -translate-x-full;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: shimmer 2s infinite;
+  }
+
+  /* Icon Containers */
+  .icon-container {
+    @apply flex items-center justify-center w-10 h-10 rounded-full;
+  }
+
+  .icon-container-primary {
+    @apply icon-container bg-primary-50 text-primary;
+  }
+
+  .icon-container-secondary {
+    @apply icon-container bg-gray-100 text-gray-700;
+  }
+
+  .icon-container-accent {
+    @apply icon-container bg-accent-50 text-accent;
+  }
+
+  .icon-container-gold {
+    @apply icon-container bg-gold-50 text-gold;
   }
 }

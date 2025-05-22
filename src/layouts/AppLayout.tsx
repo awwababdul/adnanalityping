@@ -1,9 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import AppHeader from '@/components/app/AppHeader';
+import ModernHeader from '@/components/app/ModernHeader';
 import AppNavigation from '@/components/app/AppNavigation';
 import { useToast } from '@/hooks/use-toast';
+import WhatsAppButton from '@/components/WhatsAppButton';
 
 const AppLayout: React.FC = () => {
   const location = useLocation();
@@ -22,9 +23,9 @@ const AppLayout: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      <AppHeader />
+      <ModernHeader />
       
-      <main className="flex-1 pt-14 pb-16">
+      <main className="flex-1 pt-16 pb-16">
         {isLoading ? (
           <div className="flex justify-center items-center h-64">
             <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
@@ -35,6 +36,7 @@ const AppLayout: React.FC = () => {
       </main>
       
       <AppNavigation />
+      <WhatsAppButton />
     </div>
   );
 };

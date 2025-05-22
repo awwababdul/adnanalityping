@@ -1,12 +1,17 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+import { motion } from 'framer-motion';
 import { ArrowRight, ChevronRight, FileText, Clock, Shield, File, Briefcase, User, FileEdit } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import useServiceStore from '@/store/useServiceStore';
+import NewsFeed from '@/components/NewsFeed';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Home = () => {
   const { recommendedServices } = useServiceStore();
+  const { user } = useAuth();
   
   const serviceCategories = [
     {
@@ -44,25 +49,21 @@ const Home = () => {
   const popularServices = [
     {
       title: 'Visa Stamping',
-      price: 'AED 599',
       timeframe: '3-4 working days',
       path: '/services/immigration/visa-stamping'
     },
     {
       title: 'Emirates ID Renewal',
-      price: 'AED 370',
       timeframe: '1-2 working days',
       path: '/services/emirates-id/renewal'
     },
     {
       title: 'Legal Translation',
-      price: 'AED 80/page',
       timeframe: 'Same day',
       path: '/services/document-processing/legal-translation'
     },
     {
       title: 'CV & Resume Drafting',
-      price: 'AED 150',
       timeframe: '2-3 working days',
       path: '/services/document-services/cv-resume'
     },
@@ -70,23 +71,47 @@ const Home = () => {
 
   return (
     <div className="pb-16">
+      <Helmet>
+        <title>Adnan Ali Typing | Professional Document & Government Services in Dubai</title>
+        <meta name="description" content="Professional typing services in Dubai - legal document typing, Arabic English translation, business document solutions, and certified typing services with 25+ years experience." />
+      </Helmet>
+
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-primary to-blue-700 text-white pt-6 pb-12 px-4">
-        <div className="max-w-lg mx-auto text-center">
-          <img 
+      <section className="bg-gradient-to-b from-primary to-blue-700 text-white pt-8 pb-12 px-4 relative overflow-hidden">
+        <div className="absolute inset-0 bg-noise-pattern opacity-10"></div>
+        <div className="max-w-lg mx-auto text-center relative z-10">
+          <motion.img 
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
             src="/lovable-uploads/c3a3a109-e73f-4597-ba4b-c0043c986598.png" 
             alt="Adnan Ali Typing Logo" 
             className="w-24 h-24 mx-auto mb-6"
           />
-          <h1 className="text-3xl font-bold mb-3">
+          <motion.h1 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="font-serif text-3xl font-bold mb-3"
+          >
             Document & Government Services
-          </h1>
-          <p className="mb-6 opacity-90">
+          </motion.h1>
+          <motion.p 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mb-8 opacity-90"
+          >
             Your trusted partner for professional typing, translation, 
             and document services in Dubai with over 25 years of excellence.
-          </p>
+          </motion.p>
           
-          <div className="flex flex-col sm:flex-row gap-3 justify-center mb-4">
+          <motion.div 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex flex-col sm:flex-row gap-3 justify-center mb-4"
+          >
             <Link 
               to="/needs-wizard" 
               className="bg-white text-primary hover:bg-gray-100 px-6 py-3 rounded-lg font-medium flex items-center justify-center gap-2"
@@ -99,16 +124,46 @@ const Home = () => {
             >
               Browse All Services
             </Link>
-          </div>
+          </motion.div>
         </div>
       </section>
+      
+      {/* User Welcome Section - Show if logged in */}
+      {user && (
+        <section className="px-4 py-6">
+          <div className="max-w-lg mx-auto">
+            <div className="bg-white rounded-lg border border-gray-100 p-4 shadow-sm">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                  <User className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h2 className="font-medium text-lg mb-1">Welcome back{user.user_metadata?.full_name ? `, ${user.user_metadata.full_name}` : ''}!</h2>
+                  <p className="text-gray-600 text-sm mb-3">Continue with your document services</p>
+                  <div className="flex flex-wrap gap-2">
+                    <Link to="/my-services" className="text-primary text-sm font-medium hover:underline flex items-center">
+                      My Services <ChevronRight className="w-4 h-4" />
+                    </Link>
+                    <Link to="/upload-documents" className="text-primary text-sm font-medium hover:underline flex items-center">
+                      Upload Documents <ChevronRight className="w-4 h-4" />
+                    </Link>
+                    <Link to="/favorites" className="text-primary text-sm font-medium hover:underline flex items-center">
+                      Saved Services <ChevronRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
       
       {/* Personalized Services - Show if available */}
       {recommendedServices && recommendedServices.length > 0 && (
         <section className="px-4 py-6 bg-blue-50">
           <div className="max-w-lg mx-auto">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold">Your Recommended Services</h2>
+              <h2 className="text-xl font-serif font-bold">Your Recommended Services</h2>
               <Link to="/needs-wizard" className="text-primary text-sm font-medium flex items-center">
                 Refine <ChevronRight className="w-4 h-4 ml-1" />
               </Link>
@@ -123,14 +178,13 @@ const Home = () => {
                 >
                   <h3 className="font-medium text-gray-900 mb-1">{service.title}</h3>
                   <div className="flex justify-between text-sm mb-2">
-                    <span className="text-primary font-medium">{service.price}</span>
                     <div className="flex items-center text-gray-500">
                       <Clock className="w-3 h-3 mr-1" />
                       <span>{service.timeframe}</span>
                     </div>
                   </div>
                   <Button size="sm" className="w-full text-sm py-1 h-auto">
-                    View Details
+                    Get Personalized Quote
                   </Button>
                 </Link>
               ))}
@@ -150,7 +204,7 @@ const Home = () => {
       {/* Service Categories */}
       <section className="px-4 py-8">
         <div className="max-w-lg mx-auto">
-          <h2 className="text-xl font-bold mb-4">Service Categories</h2>
+          <h2 className="text-xl font-serif font-bold mb-4">Service Categories</h2>
           
           <div className="grid grid-cols-1 gap-3">
             {serviceCategories.map((category, index) => (
@@ -179,7 +233,7 @@ const Home = () => {
       <section className="px-4 py-6 bg-gray-50">
         <div className="max-w-lg mx-auto">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold">Popular Services</h2>
+            <h2 className="text-xl font-serif font-bold">Popular Services</h2>
             <Link to="/services" className="text-primary text-sm font-medium flex items-center">
               View all <ChevronRight className="w-4 h-4 ml-1" />
             </Link>
@@ -194,25 +248,31 @@ const Home = () => {
               >
                 <h3 className="font-medium text-gray-900 mb-2">{service.title}</h3>
                 <div className="flex justify-between text-sm mb-2">
-                  <span className="text-primary font-medium">{service.price}</span>
                   <div className="flex items-center text-gray-500">
                     <Clock className="w-3 h-3 mr-1" />
                     <span>{service.timeframe}</span>
                   </div>
                 </div>
                 <button className="w-full bg-primary/10 text-primary text-sm py-2 rounded-lg font-medium hover:bg-primary/20">
-                  View Details
+                  Get a Quote
                 </button>
               </Link>
             ))}
           </div>
         </div>
       </section>
+      
+      {/* News Feed Section */}
+      <section className="px-4 py-8">
+        <div className="max-w-lg mx-auto">
+          <NewsFeed />
+        </div>
+      </section>
 
       {/* Why Choose Us */}
       <section className="px-4 py-8">
         <div className="max-w-lg mx-auto">
-          <h2 className="text-xl font-bold mb-4 text-center">Why Choose Us</h2>
+          <h2 className="text-xl font-serif font-bold mb-4 text-center">Why Choose Us</h2>
           
           <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
             <div className="flex items-center gap-3 py-3 border-b">
@@ -254,7 +314,7 @@ const Home = () => {
           <div className="bg-white/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
             <User className="w-8 h-8" />
           </div>
-          <h2 className="font-bold text-xl mb-2">Not sure what services you need?</h2>
+          <h2 className="font-serif font-bold text-xl mb-2">Not sure what services you need?</h2>
           <p className="text-white/90 mb-4">Answer a few quick questions and we'll recommend the right services for you</p>
           <Link 
             to="/needs-wizard"
@@ -268,7 +328,7 @@ const Home = () => {
       {/* WhatsApp CTA */}
       <section className="px-4 py-6">
         <div className="max-w-lg mx-auto bg-primary/10 rounded-lg p-5 text-center">
-          <h2 className="font-bold mb-2">Need help with your documents?</h2>
+          <h2 className="font-serif font-bold mb-2">Need help with your documents?</h2>
           <p className="text-gray-700 mb-4">Our team is ready to assist you with any service</p>
           <a 
             href="https://api.whatsapp.com/send?phone=971552636961" 
