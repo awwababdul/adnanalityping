@@ -1,17 +1,18 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, X, Phone } from 'lucide-react';
+import { MessageCircle, X, Phone, User } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const ServiceAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
 
-  // Show tooltip after user has been on site for 15 seconds
+  // Show tooltip after user has been on site for 10 seconds
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowTooltip(true);
-    }, 15000);
+    }, 10000);
     
     return () => clearTimeout(timer);
   }, []);
@@ -28,7 +29,7 @@ const ServiceAssistant = () => {
   }, [showTooltip]);
 
   const handleWhatsAppClick = () => {
-    window.open('https://api.whatsapp.com/send?phone=971552636961&text=Hello%2C%20I%20need%20assistance%20with%20your%20services.', '_blank');
+    window.open('https://api.whatsapp.com/send?phone=971552636961&text=Hello%2C%20I%20need%20assistance%20with%20government%20services.', '_blank');
     setIsOpen(false);
   };
   
@@ -37,9 +38,15 @@ const ServiceAssistant = () => {
     setIsOpen(false);
   };
 
+  const handleRequestCallback = () => {
+    // This could open a form or modal in the future
+    window.open('/get-quote?type=callback', '_blank');
+    setIsOpen(false);
+  };
+
   return (
     <>
-      <div className="fixed bottom-20 right-4 z-40">
+      <div className="fixed bottom-20 right-4 z-50">
         <AnimatePresence>
           {isOpen && (
             <motion.div
@@ -53,6 +60,7 @@ const ServiceAssistant = () => {
                 whileTap={{ scale: 0.95 }}
                 onClick={handleCallClick}
                 className="bg-white text-primary shadow-lg rounded-full w-12 h-12 flex items-center justify-center"
+                aria-label="Call us"
               >
                 <Phone className="w-5 h-5" />
               </motion.button>
@@ -60,8 +68,19 @@ const ServiceAssistant = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={handleRequestCallback}
+                className="bg-white text-amber-500 shadow-lg rounded-full w-12 h-12 flex items-center justify-center"
+                aria-label="Request callback"
+              >
+                <User className="w-5 h-5" />
+              </motion.button>
+              
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={handleWhatsAppClick}
                 className="bg-green-500 text-white shadow-lg rounded-full w-12 h-12 flex items-center justify-center"
+                aria-label="Chat on WhatsApp"
               >
                 <MessageCircle className="w-5 h-5" />
               </motion.button>
@@ -76,11 +95,11 @@ const ServiceAssistant = () => {
                 initial={{ opacity: 0, scale: 0.8, x: -5 }}
                 animate={{ opacity: 1, scale: 1, x: 0 }}
                 exit={{ opacity: 0, scale: 0.8, x: -5 }}
-                className="absolute bottom-full right-0 mb-2 mr-2 bg-white rounded-lg shadow-lg p-3 w-48"
+                className="absolute bottom-full right-0 mb-2 mr-2 bg-white rounded-lg shadow-lg p-3 w-64"
               >
                 <div className="text-sm">
-                  <p><strong>Need help?</strong></p>
-                  <p className="text-gray-600 text-xs">Our service experts are ready to assist you</p>
+                  <p className="font-bold">Need help with paperwork?</p>
+                  <p className="text-gray-600 text-xs mt-1">Our experts are ready to solve your visa & document issues</p>
                 </div>
                 <div className="absolute bottom-0 right-4 transform translate-y-1/2 rotate-45 w-4 h-4 bg-white"></div>
               </motion.div>
@@ -95,6 +114,7 @@ const ServiceAssistant = () => {
               setShowTooltip(false);
             }}
             className={`${isOpen ? 'bg-gray-600' : 'bg-primary'} text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg`}
+            aria-label="Support options"
           >
             {isOpen ? (
               <X className="w-6 h-6" />
@@ -102,7 +122,7 @@ const ServiceAssistant = () => {
               <>
                 <div className="relative flex items-center justify-center">
                   <MessageCircle className="w-6 h-6" />
-                  <span className="absolute top-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></span>
+                  <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></span>
                 </div>
               </>
             )}

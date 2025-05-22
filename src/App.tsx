@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "./components/ui/toaster";
 import { AuthProvider } from "./contexts/AuthContext";
-import Home from "./pages/Home";
+import Index from "./pages/Index";
 import AppLayout from "./layouts/AppLayout";
 import NotFound from "./pages/NotFound";
 import EmiratesIDPage from "./pages/services/emirates-id";
@@ -29,6 +29,7 @@ import FavoritesPage from "./pages/FavoritesPage";
 import ProfilePage from "./pages/ProfilePage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
+import ServiceAssistant from "./components/app/ServiceAssistant";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -50,7 +51,7 @@ function App() {
             
             {/* App Routes - Using AppLayout for modern app-like experience */}
             <Route element={<AppLayout />}>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<Index />} />
               <Route path="/services" element={<ServiceBundlesPage />} />
               <Route path="/services/:categoryId" element={<ServiceCategoryPage />} />
               <Route path="/services/:categoryId/:serviceId" element={<ServiceDetailPage />} />
@@ -82,6 +83,7 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Toaster />
+          <ServiceAssistant />
         </BrowserRouter>
       </AuthProvider>
     </QueryClientProvider>

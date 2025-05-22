@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { MapPin, Phone, Search, Check, ArrowRight } from "lucide-react";
+import { MapPin, Phone, Search, Check, ArrowRight, Upload } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -21,14 +21,22 @@ const HeroSection = () => {
     }
   };
 
+  const handleWizardClick = () => {
+    window.location.href = '/needs-wizard';
+  };
+
+  const handleWhatsAppClick = () => {
+    window.open('https://api.whatsapp.com/send?phone=971552636961', '_blank');
+  };
+
   return (
-    <div className="relative min-h-[90vh] overflow-hidden bg-gradient-to-br from-secondary to-secondary/90">
+    <div className="relative min-h-[90vh] overflow-hidden bg-gradient-to-br from-primary/90 to-primary">
       {/* Background elements */}
       <div className="absolute inset-0 bg-noise-pattern opacity-[0.03]"></div>
-      <div className="absolute top-20 -left-32 w-96 h-96 bg-primary/20 rounded-full filter blur-3xl"></div>
-      <div className="absolute bottom-20 -right-32 w-96 h-96 bg-accent/20 rounded-full filter blur-3xl"></div>
+      <div className="absolute top-20 -left-32 w-96 h-96 bg-blue-400/20 rounded-full filter blur-3xl"></div>
+      <div className="absolute bottom-20 -right-32 w-96 h-96 bg-blue-600/20 rounded-full filter blur-3xl"></div>
       
-      <div className="container relative z-10 mx-auto px-4 py-16 md:py-32 flex flex-col items-center justify-center">
+      <div className="container relative z-10 mx-auto px-4 py-16 md:py-24 flex flex-col items-center justify-center">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -60,21 +68,23 @@ const HeroSection = () => {
           </motion.div>
 
           <motion.h1 
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight"
+            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-primary/90">UAE Document Services</span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-blue-100">
+              No More Paperwork Headaches. We Handle It All.
+            </span>
           </motion.h1>
           
           <motion.p 
-            className="text-xl text-gray-300 max-w-2xl mx-auto mb-6"
+            className="text-xl text-gray-100 max-w-2xl mx-auto mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            Your trusted partner for professional typing, translation, and document services in Dubai with over 25 years of excellence.
+            Trusted Government Services Since 2000
           </motion.p>
           
           <motion.div
@@ -83,88 +93,93 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
           >
-            {["Fast Turnaround", "Certified Services", "100% Accuracy", "Competitive Rates"].map((tag, index) => (
+            {["24+ Years of Experience", "GDRFA, DHA & EIDA Authorized", "Fastest Turnaround", "Total Confidentiality", "Multilingual Support"].map((tag, index) => (
               <div key={index} className="flex items-center bg-white/10 backdrop-blur-sm px-4 py-1.5 rounded-full">
-                <Check className="w-4 h-4 mr-1.5 text-primary" />
+                <Check className="w-4 h-4 mr-1.5 text-green-400" />
                 <span className="text-sm text-white">{tag}</span>
               </div>
             ))}
           </motion.div>
 
-          <motion.div 
-            className="max-w-md mx-auto mb-8"
+          <motion.div
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
+            transition={{ delay: 0.7 }}
           >
+            <Button 
+              size="lg" 
+              onClick={handleWizardClick}
+              className="rounded-full w-full sm:w-auto px-8 bg-gradient-to-r from-green-500 to-green-600 hover:shadow-lg hover:shadow-green-500/20 transition-all"
+            >
+              <span>✔ Start My Visa Process</span>
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+            
+            <Button 
+              size="lg" 
+              variant="outline" 
+              onClick={handleWhatsAppClick}
+              className="rounded-full w-full sm:w-auto px-8 text-white border-white/20 backdrop-blur-sm hover:bg-white/10"
+            >
+              <span>💬 WhatsApp Us Now</span>
+            </Button>
+          </motion.div>
+          
+          {/* Service Finder Wizard */}
+          <motion.div 
+            className="max-w-lg mx-auto mb-10 bg-white/10 backdrop-blur-md p-5 rounded-xl border border-white/10"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 }}
+          >
+            <h3 className="text-white text-xl font-semibold mb-4">What do you need help with?</h3>
             <div className="relative">
               <Input
                 type="text"
-                placeholder="Search for typing services, documents, or FAQs..."
-                className="w-full h-14 pl-12 pr-4 rounded-full text-lg bg-white/10 text-white placeholder:text-gray-400 border-none focus-visible:ring-2 focus-visible:ring-primary backdrop-blur-md"
+                placeholder="Search for visa, Emirates ID, business setup..."
+                className="w-full h-14 pl-12 pr-4 rounded-full text-lg bg-white/20 text-white placeholder:text-gray-300 border-none focus-visible:ring-2 focus-visible:ring-blue-300 backdrop-blur-md"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onClick={handleSearchClick}
                 onKeyPress={handleSearchKeyPress}
-                aria-label="Search document services in Dubai"
+                aria-label="Search government services"
               />
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-300" />
               <Button className="absolute right-1 top-1/2 transform -translate-y-1/2 rounded-full h-12 px-6" onClick={handleSearchClick}>
-                Search
+                Find Services
               </Button>
             </div>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
-          >
-            <Link to="/services">
-              <Button size="lg" className="rounded-full px-8 bg-gradient-to-r from-primary to-blue-500 hover:shadow-lg hover:shadow-primary/20 transition-all">
-                <span>Get Started</span>
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-            <Link to="/get-quote">
-              <Button size="lg" variant="outline" className="rounded-full px-8 text-white border-white/20 backdrop-blur-sm hover:bg-white/10">
-                Request Quote
-              </Button>
-            </Link>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-4">
+              <Button variant="ghost" className="text-white hover:bg-white/20" onClick={() => setSearchQuery("Visa")}>Visa Services</Button>
+              <Button variant="ghost" className="text-white hover:bg-white/20" onClick={() => setSearchQuery("Emirates ID")}>Emirates ID</Button>
+              <Button variant="ghost" className="text-white hover:bg-white/20" onClick={() => setSearchQuery("Business")}>Business Setup</Button>
+            </div>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-            className="flex flex-col md:flex-row items-center justify-center gap-6 text-gray-300"
+            transition={{ delay: 0.9 }}
+            className="flex flex-col md:flex-row items-center justify-center gap-6 text-gray-300 mt-6"
           >
+            <Link
+              to="/upload-documents"
+              className="flex items-center gap-2 bg-white/10 hover:bg-white/20 px-5 py-2 rounded-full transition-all"
+            >
+              <Upload className="w-5 h-5" />
+              <span>Upload Documents for Quick Quote</span>
+            </Link>
+            
             <a 
               href="https://maps.app.goo.gl/DbxyAfj3s6AQ5R8A7?g_st=com.google.maps.preview.copy" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:text-primary transition-colors"
+              className="flex items-center gap-2 hover:text-blue-300 transition-colors"
             >
               <MapPin className="w-5 h-5" />
-              <span>Visit Our Office in Dubai</span>
+              <span>Visit Our Dubai Office</span>
             </a>
-            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-              <a 
-                href="tel:+971552636961" 
-                className="flex items-center gap-2 hover:text-primary transition-colors"
-              >
-                <Phone className="w-5 h-5" />
-                <span>+971 55 263 6961</span>
-              </a>
-              <a 
-                href="tel:+971545535013" 
-                className="flex items-center gap-2 hover:text-primary transition-colors"
-              >
-                <Phone className="w-5 h-5" />
-                <span>+971 54 553 5013</span>
-              </a>
-            </div>
           </motion.div>
         </motion.div>
       </div>
@@ -179,7 +194,7 @@ const HeroSection = () => {
         {Array.from({ length: 20 }).map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-2 h-2 rounded-full bg-primary/30"
+            className="absolute w-2 h-2 rounded-full bg-blue-400/30"
             initial={{
               x: Math.random() * window.innerWidth,
               y: Math.random() * window.innerHeight,
