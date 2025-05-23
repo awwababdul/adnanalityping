@@ -5,6 +5,7 @@ import { Toaster } from "./components/ui/toaster";
 import { AuthProvider } from "./contexts/AuthContext";
 import Index from "./pages/Index";
 import AppLayout from "./layouts/AppLayout";
+import ServiceLayout from "./layouts/ServiceLayout";
 import NotFound from "./pages/NotFound";
 import EmiratesIDPage from "./pages/services/emirates-id";
 import ImmigrationPage from "./pages/services/immigration";
@@ -30,6 +31,7 @@ import ProfilePage from "./pages/ProfilePage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import ServiceAssistant from "./components/app/ServiceAssistant";
+import Home from "./pages/Home";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -47,6 +49,7 @@ function App() {
           <Routes>
             {/* Public Routes */}
             <Route path="/" element={<Index />} />
+            <Route path="/home" element={<Home />} />
             
             {/* Auth Routes */}
             <Route path="/sign-in" element={<SignInPage />} />

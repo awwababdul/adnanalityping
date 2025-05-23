@@ -1,328 +1,231 @@
 
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { useNavigate, Link } from 'react-router-dom';
-import { ChevronRight, Calendar, Clock, Award, Tag, FileCheck, CheckCircle, Search, Filter } from 'lucide-react';
+import { Helmet } from 'react-helmet';
+import { Search, Filter, ArrowRight, Check } from 'lucide-react';
+import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
-import { services } from '@/data/services';
-import useCartStore from '@/store/useCartStore';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { serviceCategories } from '@/data/services';
+import ServiceCardEnhanced from '@/components/ServiceCardEnhanced';
+import ServiceLayout from '@/layouts/ServiceLayout';
 
 const ServiceBundlesPage = () => {
-  const navigate = useNavigate();
-  const { addItem } = useCartStore();
   const [searchQuery, setSearchQuery] = useState('');
-  
-  // Predefined bundles based on customer needs
-  const bundles = [
-    {
-      id: 'visa-renewal-package',
-      title: 'Visa Renewal Package',
-      description: 'Complete visa renewal with all required documents',
-      timeframe: '3-5 working days',
-      price: 1250,
-      services: [
-        { name: 'Visa Application Typing', price: 250 },
-        { name: 'Emirates ID Renewal', price: 370 },
-        { name: 'Medical Fitness Test Assistance', price: 430 },
-        { name: 'Visa Stamping', price: 200 }
-      ],
-      discountedFrom: 1450,
-      tags: ['visa', 'resident', 'renewal'],
-      icon: '📄'
-    },
-    {
-      id: 'new-business-setup',
-      title: 'Business Setup Package',
-      description: 'Everything you need to start your business in Dubai',
-      timeframe: '7-10 working days',
-      price: 4500,
-      services: [
-        { name: 'Trade License Application', price: 2000 },
-        { name: 'Initial Approval', price: 500 },
-        { name: 'Ejari for Office Space', price: 350 },
-        { name: 'MOA Preparation', price: 500 },
-        { name: 'PRO Assistance', price: 1150 }
-      ],
-      discountedFrom: 5000,
-      tags: ['business', 'startup', 'license'],
-      icon: '🏢'
-    },
-    {
-      id: 'family-visa-package',
-      title: 'Family Visa Package',
-      description: 'Bring your family to live with you in the UAE',
-      timeframe: '10-14 working days',
-      price: 3200,
-      services: [
-        { name: 'Family Visa Application', price: 1200 },
-        { name: 'Entry Permit Processing', price: 800 },
-        { name: 'Status Change (per person)', price: 400 },
-        { name: 'Medical Tests Appointment', price: 300 },
-        { name: 'Emirates ID Processing', price: 500 }
-      ],
-      discountedFrom: 3500,
-      tags: ['family', 'visa', 'dependent'],
-      icon: '👨‍👩‍👧‍👦'
-    },
-    {
-      id: 'new-arrival-package',
-      title: 'New to UAE Package',
-      description: 'Essential services for newcomers to the UAE',
-      timeframe: '5-7 working days',
-      price: 1800,
-      services: [
-        { name: 'Residence Visa Processing', price: 900 },
-        { name: 'Emirates ID Application', price: 370 },
-        { name: 'Ejari Registration', price: 280 },
-        { name: 'DEWA Connection', price: 250 }
-      ],
-      discountedFrom: 2000,
-      tags: ['new resident', 'relocation', 'setup'],
-      icon: '✈️'
-    },
-    {
-      id: 'document-package',
-      title: 'Document Translation Bundle',
-      description: 'Professional translation and attestation services',
-      timeframe: '3-4 working days',
-      price: 950,
-      services: [
-        { name: 'Document Translation (up to 5 pages)', price: 500 },
-        { name: 'Legal Review', price: 200 },
-        { name: 'Document Attestation', price: 250 }
-      ],
-      discountedFrom: 1100,
-      tags: ['translation', 'legal', 'documents'],
-      icon: '🗂️'
-    }
-  ];
-  
-  // Create flattened service list from all categories for search
-  const allServices = services.reduce((acc, category) => {
-    return [...acc, ...category.subServices.map(service => ({
-      ...service,
-      categoryId: category.id,
-      categoryTitle: category.title
-    }))];
-  }, [] as any[]);
-  
-  // Filter services based on search
-  const filteredServices = searchQuery 
-    ? allServices.filter(service => 
-        service.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        service.description.toLowerCase().includes(searchQuery.toLowerCase()))
-    : allServices.slice(0, 6); // Just show first few if no search
-  
-  const handleAddToCart = (bundle: any) => {
-    addItem({
-      id: bundle.id,
-      title: bundle.title,
-      price: bundle.price,
-      isCustomPrice: false,
-      categoryId: 'bundles',
-      urgency: 'standard'
-    });
-    
-    navigate('/cart');
-  };
+  const [activeCategory, setActiveCategory] = useState('all');
+
+  const filteredServices = serviceCategories.filter(service => 
+    (activeCategory === 'all' || service.id === activeCategory) &&
+    (searchQuery === '' || 
+      service.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      service.description.toLowerCase().includes(searchQuery.toLowerCase()))
+  );
+
+  const featuredServices = serviceCategories.filter(service => 
+    ['immigration', 'emirates-id', 'business-setup'].includes(service.id)
+  );
 
   return (
-    <div className="pb-24">
-      <Helmet>
-        <title>Service Packages | Adnan Ali Typing</title>
-        <meta name="description" content="Bundled service packages designed to save you time and money. From visa renewals to business setup." />
-      </Helmet>
+    <ServiceLayout 
+      title="Complete UAE Government Services"
+      description="Find the perfect solution for all your UAE documentation needs - visa processing, Emirates ID, business setup and more with expert assistance."
+      canonicalUrl="/services"
+    >
+      {/* Hero Section */}
+      <section className="bg-gradient-to-r from-primary/90 to-primary text-white py-16 px-4">
+        <div className="container mx-auto max-w-5xl">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-10"
+          >
+            <h1 className="text-3xl md:text-4xl font-bold mb-4">UAE Government Services Made Simple</h1>
+            <p className="text-xl text-blue-100 max-w-2xl mx-auto">
+              Expert assistance with all documentation and government procedures in Dubai and across the UAE
+            </p>
+          </motion.div>
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="bg-white/10 backdrop-blur-md rounded-xl p-5 max-w-3xl mx-auto"
+          >
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-200" />
+              <Input
+                type="text"
+                placeholder="Search for a service (e.g., visa renewal, Emirates ID, business license...)"
+                className="pl-10 bg-white/20 border-white/20 text-white placeholder:text-blue-200 h-12 rounded-lg focus-visible:ring-white/30 focus-visible:border-white/30"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <Button className="absolute right-1 top-1/2 transform -translate-y-1/2 rounded-lg">
+                Search
+              </Button>
+            </div>
+            
+            <div className="flex flex-wrap gap-2 mt-4 justify-center">
+              {['visa', 'emirates id', 'business license', 'medical', 'tasheel'].map((tag) => (
+                <Button 
+                  key={tag} 
+                  variant="ghost" 
+                  className="bg-white/10 hover:bg-white/20 text-white text-sm rounded-full"
+                  onClick={() => setSearchQuery(tag)}
+                >
+                  {tag}
+                </Button>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
       
-      <div className="container mx-auto px-4 py-6">
-        {/* Search bar */}
-        <div className="flex items-center gap-2 mb-6">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-            <input
-              type="text"
-              placeholder="Search for services..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-9 pr-4 py-2 w-full border rounded-lg focus:outline-none focus:border-primary"
-            />
-          </div>
-          <Button variant="outline" size="icon">
-            <Filter className="h-5 w-5" />
-          </Button>
-        </div>
-        
-        <Tabs defaultValue="bundles">
-          <TabsList className="grid grid-cols-3 mb-6">
-            <TabsTrigger value="bundles">Service Bundles</TabsTrigger>
-            <TabsTrigger value="individual">Individual Services</TabsTrigger>
-            <TabsTrigger value="categories">Categories</TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="bundles">
-            <div className="space-y-4">
-              <div className="bg-amber-50 p-4 rounded-lg border border-amber-100 mb-6 flex items-start gap-3">
-                <div className="bg-amber-100 p-1.5 rounded-full flex-shrink-0">
-                  <Tag className="h-5 w-5 text-amber-600" />
-                </div>
-                <div>
-                  <h3 className="font-medium text-amber-800">Save up to 15% with bundles</h3>
-                  <p className="text-sm text-amber-700">
-                    Our service packages are designed to handle complete processes, saving you time and money.
-                  </p>
-                </div>
-              </div>
-              
-              {bundles.map((bundle) => (
-                <Card key={bundle.id} className="overflow-hidden border-none shadow-md">
-                  <CardContent className="p-0">
-                    <div className="p-4">
-                      <div className="flex justify-between items-start mb-3">
-                        <div className="flex items-center gap-3">
-                          <div className="text-2xl">{bundle.icon}</div>
-                          <h3 className="font-semibold">{bundle.title}</h3>
-                        </div>
-                        <div className="bg-green-50 text-green-700 text-xs py-0.5 px-2 rounded-full font-medium">
-                          Save AED {(bundle.discountedFrom - bundle.price).toFixed(0)}
-                        </div>
-                      </div>
-                      
-                      <p className="text-gray-600 text-sm mb-3">{bundle.description}</p>
-                      
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="flex items-center text-xs text-gray-500">
-                          <Clock className="h-3 w-3 mr-1" /> {bundle.timeframe}
-                        </div>
-                        <div className="flex items-center text-xs bg-primary/10 text-primary px-1.5 py-0.5 rounded-full">
-                          <CheckCircle className="h-3 w-3 mr-1" /> All-inclusive
-                        </div>
-                      </div>
-                      
-                      <div className="border-t pt-3">
-                        <p className="font-medium text-sm mb-2">Includes:</p>
-                        <ul className="text-sm text-gray-600 space-y-1">
-                          {bundle.services.map((service, idx) => (
-                            <li key={idx} className="flex justify-between">
-                              <span className="flex items-center">
-                                <FileCheck className="h-3 w-3 mr-1 text-primary" />
-                                {service.name}
-                              </span>
-                              <span className="text-gray-500">AED {service.price}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                    
-                    <div className="bg-gray-50 p-4 flex items-center justify-between">
-                      <div>
-                        <div className="text-xs text-gray-500 line-through">AED {bundle.discountedFrom}</div>
-                        <div className="font-bold text-primary">AED {bundle.price}</div>
-                      </div>
-                      <Button onClick={() => handleAddToCart(bundle)}>
-                        Add to Cart
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+      {/* Content Section */}
+      <section className="py-12 px-4 bg-gray-50">
+        <div className="container mx-auto max-w-5xl">
+          {/* Service Categories Tabs */}
+          <Tabs defaultValue="all" className="mb-8" onValueChange={setActiveCategory}>
+            <div className="flex justify-center mb-4">
+              <TabsList className="bg-white/80 backdrop-blur-sm shadow-sm p-1 rounded-full border">
+                <TabsTrigger value="all" className="rounded-full px-4">
+                  All Services
+                </TabsTrigger>
+                <TabsTrigger value="immigration" className="rounded-full px-4">
+                  Immigration
+                </TabsTrigger>
+                <TabsTrigger value="emirates-id" className="rounded-full px-4">
+                  Emirates ID
+                </TabsTrigger>
+                <TabsTrigger value="business-setup" className="rounded-full px-4">
+                  Business
+                </TabsTrigger>
+                <TabsTrigger value="document-processing" className="rounded-full px-4">
+                  Documents
+                </TabsTrigger>
+              </TabsList>
             </div>
-          </TabsContent>
-          
-          <TabsContent value="individual">
-            <div className="space-y-3">
-              {filteredServices.map((service) => (
-                <div
-                  key={service.id}
-                  className="bg-white rounded-lg border p-4 hover:shadow-md transition-shadow cursor-pointer"
-                  onClick={() => navigate(`/services/${service.categoryId}/${service.id}`)}
-                >
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <h3 className="font-medium">{service.title}</h3>
-                      <p className="text-sm text-gray-600 mt-1 line-clamp-2">{service.description}</p>
-                      
-                      <div className="flex items-center gap-2 mt-2">
-                        <span className="text-xs text-gray-500">{service.categoryTitle}</span>
-                        {service.timeframe && (
-                          <span className="text-xs bg-gray-100 px-2 py-0.5 rounded-full">
-                            {service.timeframe}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center">
-                      {service.price ? (
-                        <span className="text-sm font-semibold mr-2">
-                          AED {typeof service.price === 'number' ? service.price : 'Custom'}
-                        </span>
-                      ) : null}
-                      <ChevronRight className="h-5 w-5 text-gray-400" />
+            
+            {/* Featured Services Section */}
+            <TabsContent value="all" className="mt-0">
+              {searchQuery === '' && (
+                <>
+                  <div className="mb-8">
+                    <h2 className="text-2xl font-bold mb-6 text-gray-900 flex items-center">
+                      <span className="bg-primary/10 text-primary p-2 rounded-full mr-2">
+                        <Check className="h-5 w-5" />
+                      </span>
+                      Most Popular Services
+                    </h2>
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                      {featuredServices.map((service, index) => (
+                        <ServiceCardEnhanced 
+                          key={service.id} 
+                          service={service}
+                          delay={0.1 * index}
+                          featured={true}
+                        />
+                      ))}
                     </div>
                   </div>
-                </div>
-              ))}
-              
-              {searchQuery && filteredServices.length === 0 && (
-                <div className="text-center py-12">
-                  <div className="text-gray-400 mb-3">
-                    <Search className="h-12 w-12 mx-auto opacity-20" />
+                  
+                  <div className="pt-8 border-t border-gray-200">
+                    <h2 className="text-2xl font-bold mb-6 text-gray-900">All Service Categories</h2>
                   </div>
-                  <h3 className="text-lg font-medium mb-1">No services found</h3>
-                  <p className="text-sm text-gray-500">Try adjusting your search terms</p>
-                </div>
+                </>
               )}
-            </div>
-          </TabsContent>
+            </TabsContent>
+          </Tabs>
           
-          <TabsContent value="categories">
-            <div className="grid grid-cols-2 gap-3">
-              {services.map((category) => (
-                <Link
-                  key={category.id}
-                  to={`/services/${category.id}`}
-                  className="bg-white rounded-lg border p-4 hover:shadow-md transition-shadow"
-                >
-                  <div className="flex flex-col items-center text-center">
-                    <div className="bg-primary/10 p-3 rounded-full mb-3">
-                      <div className="text-primary">{category.icon}</div>
-                    </div>
-                    <h3 className="font-medium">{category.title}</h3>
-                    <p className="text-xs text-gray-500 mt-1">
-                      {category.subServices.length} services
-                    </p>
-                  </div>
-                </Link>
-              ))}
+          {/* Service Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {filteredServices.map((service, index) => (
+              <ServiceCardEnhanced 
+                key={service.id} 
+                service={service}
+                delay={0.1 * index}
+              />
+            ))}
+          </div>
+          
+          {filteredServices.length === 0 && (
+            <div className="text-center py-12">
+              <h3 className="text-xl font-medium text-gray-700 mb-2">No services found</h3>
+              <p className="text-gray-500 mb-4">Try adjusting your search criteria</p>
+              <Button onClick={() => setSearchQuery('')}>Clear Search</Button>
             </div>
-          </TabsContent>
-        </Tabs>
-        
-        {/* Stats and social proof */}
-        <div className="mt-8 py-6 border-t">
-          <div className="text-center">
-            <p className="text-sm text-gray-500 mb-3">Trusted by thousands of customers</p>
-            <div className="flex justify-center gap-8">
-              <div className="text-center">
-                <div className="font-bold text-xl">2.5K+</div>
-                <div className="text-xs text-gray-500">Services Completed</div>
-              </div>
-              <div className="text-center">
-                <div className="font-bold text-xl">4.9</div>
-                <div className="text-xs text-gray-500">Customer Rating</div>
-              </div>
-              <div className="text-center">
-                <div className="font-bold text-xl">24h</div>
-                <div className="text-xs text-gray-500">Express Service</div>
-              </div>
-            </div>
+          )}
+        </div>
+      </section>
+      
+      {/* Process Overview Section */}
+      <section className="py-12 px-4 bg-white">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">Our Simple Process</h2>
+            <p className="text-gray-600">How we help you navigate UAE's documentation requirements with ease</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                step: 1,
+                title: "Select Your Service",
+                description: "Choose from our comprehensive list of government services or let us guide you"
+              },
+              {
+                step: 2,
+                title: "Submit Documents",
+                description: "Upload your documents or visit our office with the required paperwork"
+              },
+              {
+                step: 3,
+                title: "Receive Your Documents",
+                description: "We process everything and deliver your completed documents"
+              }
+            ].map((item) => (
+              <motion.div 
+                key={item.step}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: item.step * 0.1 }}
+                className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 text-center relative"
+              >
+                <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-primary text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">
+                  {item.step}
+                </div>
+                <h3 className="text-xl font-bold mt-4 mb-2">{item.title}</h3>
+                <p className="text-gray-600">{item.description}</p>
+              </motion.div>
+            ))}
+          </div>
+          
+          <div className="flex justify-center mt-10">
+            <Button size="lg" onClick={() => window.open('https://api.whatsapp.com/send?phone=971552636961', '_blank')}>
+              Contact Us for Assistance <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+      
+      {/* FAQ Teaser */}
+      <section className="py-12 px-4 bg-gray-50">
+        <div className="container mx-auto max-w-3xl text-center">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">Have Questions?</h2>
+          <p className="text-gray-600 mb-8">Find answers in our comprehensive FAQ section or contact us directly</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button variant="outline" asChild>
+              <a href="/faq">View FAQ</a>
+            </Button>
+            <Button asChild>
+              <a href="/contact">Contact Us</a>
+            </Button>
+          </div>
+        </div>
+      </section>
+    </ServiceLayout>
   );
 };
 
