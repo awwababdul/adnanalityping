@@ -16,6 +16,8 @@ import CTASection from "@/components/CtaSection";
 import LocalServiceAreas from "@/components/LocalServiceAreas";
 import SEOContentBlock from "@/components/SEOContentBlock";
 import ServiceFinder from '@/components/ServiceFinder';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 const Index = () => {
   const handleGetStarted = () => {
@@ -43,6 +45,8 @@ const Index = () => {
         <meta name="twitter:image" content="https://adnanalityping.com/og-image.png" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
+
+      <Header />
       <HeroSection />
       <ServiceFinder />
       <ServiceHighlights />
@@ -56,6 +60,7 @@ const Index = () => {
       <LocalServiceAreas />
       <SEOContentBlock />
       <CTASection onGetStarted={handleGetStarted} />
+      <Footer />
       <WhatsAppButton />
     </div>
   );

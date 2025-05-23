@@ -45,13 +45,15 @@ function App() {
       <AuthProvider>
         <BrowserRouter>
           <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<Index />} />
+            
             {/* Auth Routes */}
             <Route path="/sign-in" element={<SignInPage />} />
             <Route path="/sign-up" element={<SignUpPage />} />
             
             {/* App Routes - Using AppLayout for modern app-like experience */}
             <Route element={<AppLayout />}>
-              <Route path="/" element={<Index />} />
               <Route path="/services" element={<ServiceBundlesPage />} />
               <Route path="/services/:categoryId" element={<ServiceCategoryPage />} />
               <Route path="/services/:categoryId/:serviceId" element={<ServiceDetailPage />} />
