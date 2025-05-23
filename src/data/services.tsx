@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { 
   Building2, ScrollText, UserCheck, 
@@ -203,5 +204,81 @@ export const services: Service[] = [
         governmentLink: "https://www.dubai.ae/"
       }
     ]
+  }
+];
+
+// Create a service categories array for the grid display
+export const serviceCategories = [
+  {
+    id: "business-setup",
+    title: "Business Setup",
+    description: "Complete business formation and licensing solutions in Dubai",
+    icon: React.createElement(Building2, { className: "w-6 h-6" }),
+    color: "blue",
+    subServices: services.find(s => s.id === "business-setup")?.subServices || []
+  },
+  {
+    id: "document-clearing",
+    title: "Document Clearing",
+    description: "Professional document processing and government relations",
+    icon: React.createElement(ScrollText, { className: "w-6 h-6" }),
+    color: "indigo",
+    subServices: services.find(s => s.id === "document-clearing")?.subServices || []
+  },
+  {
+    id: "visa-services",
+    title: "Visa Services",
+    description: "Complete visa solutions for residence, visit, and employment",
+    icon: React.createElement(UserCheck, { className: "w-6 h-6" }),
+    color: "green",
+    subServices: services.find(s => s.id === "visa-services")?.subServices || []
+  },
+  {
+    id: "attestation",
+    title: "Certificate Attestation",
+    description: "Ministry and embassy attestation services for all documents",
+    icon: React.createElement(Stamp, { className: "w-6 h-6" }),
+    color: "amber",
+    subServices: services.find(s => s.id === "attestation")?.subServices || []
+  },
+  {
+    id: "translation",
+    title: "Legal Translation",
+    description: "Certified translation services in multiple languages",
+    icon: React.createElement(BookCheck, { className: "w-6 h-6" }),
+    color: "purple",
+    subServices: services.find(s => s.id === "translation")?.subServices || []
+  },
+  {
+    id: "typing",
+    title: "Typing Services",
+    description: "Professional typing services for all types of documents",
+    icon: React.createElement(Printer, { className: "w-6 h-6" }),
+    color: "rose",
+    subServices: services.find(s => s.id === "typing")?.subServices || []
+  },
+  {
+    id: "emirates-id",
+    title: "Emirates ID",
+    description: "Application, renewal and replacement of Emirates ID cards",
+    icon: React.createElement(BadgeCheck, { className: "w-6 h-6" }),
+    color: "red",
+    subServices: []
+  },
+  {
+    id: "dubai-health-authority",
+    title: "Health Authority",
+    description: "DHA card application, insurance approval and medical services",
+    icon: React.createElement(ShieldCheck, { className: "w-6 h-6" }),
+    color: "teal",
+    subServices: []
+  },
+  {
+    id: "tas-heel",
+    title: "Tas-Heel Services",
+    description: "Labor contracts, work permits and related documentation",
+    icon: React.createElement(FileCheck, { className: "w-6 h-6" }),
+    color: "sky",
+    subServices: []
   }
 ];
