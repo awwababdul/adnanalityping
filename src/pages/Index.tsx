@@ -20,9 +20,13 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 const Index = () => {
+  console.log('Index page: Rendering...');
+
   const handleGetStarted = () => {
     window.open("https://api.whatsapp.com/send?phone=971552636961", "_blank");
   };
+
+  console.log('Index page: About to return JSX');
 
   return (
     <div className="min-h-screen bg-background">
