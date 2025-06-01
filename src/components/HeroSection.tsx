@@ -196,17 +196,17 @@ const HeroSection = () => {
             key={i}
             className="absolute w-2 h-2 rounded-full bg-blue-400/30"
             initial={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
+              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
+              y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
             }}
             animate={{
               y: [
-                Math.random() * window.innerHeight,
-                Math.random() * window.innerHeight,
+                Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
+                Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
               ],
               x: [
-                Math.random() * window.innerWidth,
-                Math.random() * window.innerWidth,
+                Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
+                Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
               ],
             }}
             transition={{
