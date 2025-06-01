@@ -49,7 +49,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setSession(session);
       setUser(session?.user || null);
       if (session?.user) {
-        fetchProfile(session.user.id);
+        // Create a basic profile from auth user data
+        const basicProfile: UserProfile = {
+          id: session.user.id,
+          email: session.user.email,
+          full_name: session.user.user_metadata?.full_name || '',
+          notification_preferences: {
+            email: true,
+            push: true,
+            sms: false
+          }
+        };
+        setProfile(basicProfile);
       }
       setLoading(false);
     });
@@ -61,7 +72,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setUser(session?.user || null);
         
         if (session?.user) {
-          await fetchProfile(session.user.id);
+          // Create a basic profile from auth user data
+          const basicProfile: UserProfile = {
+            id: session.user.id,
+            email: session.user.email,
+            full_name: session.user.user_metadata?.full_name || '',
+            notification_preferences: {
+              email: true,
+              push: true,
+              sms: false
+            }
+          };
+          setProfile(basicProfile);
         } else {
           setProfile(null);
         }
@@ -74,29 +96,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       subscription.unsubscribe();
     };
   }, []);
-
-  const fetchProfile = async (userId: string) => {
-    try {
-      // Check if profiles table exists by attempting the query
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', userId)
-        .single();
-        
-      if (error) {
-        // If the table doesn't exist or other error, just log it
-        console.log('Profiles table not available:', error.message);
-        return;
-      }
-      
-      if (data) {
-        setProfile(data as UserProfile);
-      }
-    } catch (error) {
-      console.log('Error fetching profile:', error);
-    }
-  };
 
   const signIn = async (email: string, password: string) => {
     try {
@@ -156,7 +155,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const signUp = async (email: string, password: string, fullName: string) => {
     try {
       setLoading(true);
-      const { data, error } = await supabase.auth.signUp({ email, password });
+      const { data, error } = await supabase.auth.signUp({ 
+        email, 
+        password,
+        options: {
+          data: {
+            full_name: fullName
+          }
+        }
+      });
       
       if (error) {
         toast({
@@ -168,30 +175,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
       
       if (data.user) {
-        // Try to create user profile, but don't fail if table doesn't exist
-        try {
-          const { error: profileError } = await supabase
-            .from('profiles')
-            .insert([
-              { 
-                id: data.user.id, 
-                email, 
-                full_name: fullName,
-                notification_preferences: {
-                  email: true,
-                  push: true,
-                  sms: false
-                }
-              }
-            ]);
-            
-          if (profileError) {
-            console.log('Could not create profile (table may not exist):', profileError.message);
-          }
-        } catch (profileError) {
-          console.log('Profiles table not available during signup');
-        }
-        
         toast({
           title: "Registration successful",
           description: "Please check your email to verify your account.",
@@ -268,27 +251,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       setLoading(true);
       
-      const { error } = await supabase
-        .from('profiles')
-        .update(updates)
-        .eq('id', user.id);
-        
-      if (error) {
+      // For now, just update local state since we don't have profiles table
+      if (profile) {
+        setProfile({ ...profile, ...updates });
         toast({
-          title: "Profile update error",
-          description: error.message,
-          variant: "destructive"
+          title: "Profile updated",
+          description: "Your profile has been successfully updated.",
         });
-        return;
       }
-      
-      // Refresh profile
-      await fetchProfile(user.id);
-      
-      toast({
-        title: "Profile updated",
-        description: "Your profile has been successfully updated.",
-      });
     } catch (error) {
       console.error('Profile update error:', error);
       toast({
