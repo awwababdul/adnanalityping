@@ -1,8 +1,24 @@
-
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { Session, User } from '@supabase/supabase-js';
-import { supabase, UserProfile } from '@/lib/supabase';
+import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+
+// Define the UserProfile type locally
+export type UserProfile = {
+  id: string;
+  email?: string;
+  phone?: string;
+  full_name?: string;
+  avatar_url?: string;
+  preferred_language?: string;
+  notification_preferences?: {
+    email: boolean;
+    push: boolean;
+    sms: boolean;
+  };
+  created_at?: string;
+  updated_at?: string;
+}
 
 type AuthContextType = {
   user: User | null;

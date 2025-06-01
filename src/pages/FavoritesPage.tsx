@@ -1,11 +1,10 @@
-
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
 import { Heart, Trash2, AlertCircle, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { supabase, SavedFavorite } from '@/lib/supabase';
+import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import useCartStore from '@/store/useCartStore';
 import { services } from '@/data/services';
@@ -13,6 +12,15 @@ import { documentServices } from '@/data/documentServices';
 
 // Combine all services for easy lookup
 const allServices = [...services, ...documentServices];
+
+// Define the types locally since we're removing the old supabase file
+export type SavedFavorite = {
+  id: string;
+  user_id: string;
+  service_id: string;
+  category_id: string;
+  created_at: string;
+}
 
 const FavoritesPage: React.FC = () => {
   const [favorites, setFavorites] = useState<SavedFavorite[]>([]);
