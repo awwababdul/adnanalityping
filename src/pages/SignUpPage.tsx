@@ -25,8 +25,12 @@ const SignUpPage: React.FC = () => {
     
     if (!fullName || !email || !password || !agreeTerms) return;
     
-    await signUp(email, password, fullName);
-    navigate('/');
+    try {
+      await signUp(email, password, fullName);
+      navigate('/');
+    } catch (error) {
+      console.error('Sign up error:', error);
+    }
   };
   
   // Password strength check

@@ -26,8 +26,12 @@ const SignInPage: React.FC = () => {
     
     if (!email || !password) return;
     
-    await signIn(email, password);
-    navigate('/');
+    try {
+      await signIn(email, password);
+      navigate('/');
+    } catch (error) {
+      console.error('Sign in error:', error);
+    }
   };
   
   const handlePhoneSignIn = async (e: React.FormEvent) => {
@@ -35,8 +39,12 @@ const SignInPage: React.FC = () => {
     
     if (!phone) return;
     
-    await signInWithPhone(phone);
-    setVerificationSent(true);
+    try {
+      await signInWithPhone(phone);
+      setVerificationSent(true);
+    } catch (error) {
+      console.error('Phone sign in error:', error);
+    }
   };
   
   return (
