@@ -3,10 +3,23 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Clock, ChevronRight, BookmarkPlus, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { supabase, NewsItem } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
+
+// Define NewsItem type locally
+type NewsItem = {
+  id: string;
+  title: string;
+  content: string;
+  summary: string;
+  source: string;
+  source_logo?: string;
+  category: string;
+  published_at: string;
+  url?: string;
+  is_featured: boolean;
+}
 
 // Placeholder news data
 const placeholderNews: NewsItem[] = [
@@ -129,38 +142,13 @@ const NewsFeed: React.FC = () => {
   const { toast } = useToast();
   
   useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        setLoading(true);
-        
-        // This would be a real call to Supabase in production
-        // const { data, error } = await supabase
-        //   .from('news')
-        //   .select('*')
-        //   .order('published_at', { ascending: false });
-        
-        // if (error) throw error;
-        
-        // if (data) {
-        //   setNews(data);
-        // }
-        
-        // Using placeholder data for now
-        setNews(placeholderNews);
-      } catch (error) {
-        console.error('Error fetching news:', error);
-        toast({
-          title: 'Error fetching news',
-          description: 'Unable to load the latest news. Please try again later.',
-          variant: 'destructive',
-        });
-      } finally {
-        setLoading(false);
-      }
-    };
+    // Simulate loading for better UX
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 500);
     
-    fetchNews();
-  }, [toast]);
+    return () => clearTimeout(timer);
+  }, []);
   
   const categories = [
     { id: 'all', label: 'All Updates' },

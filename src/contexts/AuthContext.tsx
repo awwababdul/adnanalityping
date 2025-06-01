@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { Session, User } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
@@ -76,6 +77,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const fetchProfile = async (userId: string) => {
     try {
+      // Check if profiles table exists by attempting the query
       const { data, error } = await supabase
         .from('profiles')
         .select('*')
@@ -83,7 +85,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         .single();
         
       if (error) {
-        console.error('Error fetching profile:', error);
+        // If the table doesn't exist or other error, just log it
+        console.log('Profiles table not available:', error.message);
         return;
       }
       
@@ -91,7 +94,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setProfile(data as UserProfile);
       }
     } catch (error) {
-      console.error('Error fetching profile:', error);
+      console.log('Error fetching profile:', error);
     }
   };
 
@@ -165,24 +168,28 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
       
       if (data.user) {
-        // Create user profile
-        const { error: profileError } = await supabase
-          .from('profiles')
-          .insert([
-            { 
-              id: data.user.id, 
-              email, 
-              full_name: fullName,
-              notification_preferences: {
-                email: true,
-                push: true,
-                sms: false
+        // Try to create user profile, but don't fail if table doesn't exist
+        try {
+          const { error: profileError } = await supabase
+            .from('profiles')
+            .insert([
+              { 
+                id: data.user.id, 
+                email, 
+                full_name: fullName,
+                notification_preferences: {
+                  email: true,
+                  push: true,
+                  sms: false
+                }
               }
-            }
-          ]);
-          
-        if (profileError) {
-          console.error('Error creating profile:', profileError);
+            ]);
+            
+          if (profileError) {
+            console.log('Could not create profile (table may not exist):', profileError.message);
+          }
+        } catch (profileError) {
+          console.log('Profiles table not available during signup');
         }
         
         toast({

@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
@@ -26,6 +27,7 @@ const FavoritesPage: React.FC = () => {
   const [favorites, setFavorites] = useState<SavedFavorite[]>([]);
   const [loading, setLoading] = useState(true);
   const [serviceDetails, setServiceDetails] = useState<any[]>([]);
+  const [tableExists, setTableExists] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
   const { addItem } = useCartStore();
@@ -47,32 +49,47 @@ const FavoritesPage: React.FC = () => {
         return;
       }
       
-      const { data, error } = await supabase
-        .from('favorites')
-        .select('*')
-        .eq('user_id', session.session.user.id)
-        .order('created_at', { ascending: false });
-      
-      if (error) throw error;
-      
-      setFavorites(data || []);
-      
-      // Map favorites to actual service details
-      const details = (data || []).map(favorite => {
-        // Find the service category
-        const category = allServices.find(c => c.id === favorite.category_id);
+      // Try to fetch favorites, but handle if table doesn't exist
+      try {
+        const { data, error } = await supabase
+          .from('favorites')
+          .select('*')
+          .eq('user_id', session.session.user.id)
+          .order('created_at', { ascending: false });
         
-        // Find the specific service
-        const service = category?.subServices.find(s => s.id === favorite.service_id);
+        if (error) {
+          console.log('Favorites table not available:', error.message);
+          setTableExists(false);
+          setFavorites([]);
+          setServiceDetails([]);
+          return;
+        }
         
-        return {
-          ...favorite,
-          serviceDetails: service,
-          categoryName: category?.title
-        };
-      }).filter(item => item.serviceDetails); // Filter out any that couldn't be found
-      
-      setServiceDetails(details);
+        setTableExists(true);
+        setFavorites(data || []);
+        
+        // Map favorites to actual service details
+        const details = (data || []).map(favorite => {
+          // Find the service category
+          const category = allServices.find(c => c.id === favorite.category_id);
+          
+          // Find the specific service
+          const service = category?.subServices.find(s => s.id === favorite.service_id);
+          
+          return {
+            ...favorite,
+            serviceDetails: service,
+            categoryName: category?.title
+          };
+        }).filter(item => item.serviceDetails); // Filter out any that couldn't be found
+        
+        setServiceDetails(details);
+      } catch (error) {
+        console.log('Database table may not exist:', error);
+        setTableExists(false);
+        setFavorites([]);
+        setServiceDetails([]);
+      }
     } catch (error) {
       console.error('Error fetching favorites:', error);
       toast({
@@ -86,6 +103,15 @@ const FavoritesPage: React.FC = () => {
   };
   
   const removeFavorite = async (id: string) => {
+    if (!tableExists) {
+      toast({
+        title: "Feature not available",
+        description: "Favorites feature requires database setup",
+        variant: "destructive"
+      });
+      return;
+    }
+
     try {
       const { error } = await supabase
         .from('favorites')
@@ -140,7 +166,25 @@ const FavoritesPage: React.FC = () => {
         Your Favorites
       </h1>
       
-      {loading ? (
+      {!tableExists && !loading && (
+        <div className="text-center py-12">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
+            <AlertCircle className="h-8 w-8 text-gray-400" />
+          </div>
+          <h2 className="text-xl font-semibold mb-2">Favorites feature coming soon</h2>
+          <p className="text-gray-500 mb-6">
+            The favorites feature will be available once the database is set up
+          </p>
+          <Button 
+            onClick={() => navigate('/services')}
+            className="gap-2"
+          >
+            Browse Services <ArrowRight className="h-4 w-4" />
+          </Button>
+        </div>
+      )}
+      
+      {tableExists && loading && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {[1, 2, 3].map(i => (
             <Card key={i} className="animate-pulse">
@@ -157,7 +201,9 @@ const FavoritesPage: React.FC = () => {
             </Card>
           ))}
         </div>
-      ) : serviceDetails.length === 0 ? (
+      )}
+
+      {tableExists && !loading && serviceDetails.length === 0 && (
         <div className="text-center py-12">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
             <Heart className="h-8 w-8 text-gray-400" />
@@ -173,7 +219,9 @@ const FavoritesPage: React.FC = () => {
             Browse Services <ArrowRight className="h-4 w-4" />
           </Button>
         </div>
-      ) : (
+      )}
+
+      {tableExists && !loading && serviceDetails.length > 0 && (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
             {serviceDetails.map(service => (
