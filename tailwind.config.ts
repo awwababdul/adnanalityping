@@ -26,75 +26,143 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#0070F3", // Bright blue like on3.ai
+          DEFAULT: "#0066FF", // Enhanced modern blue
           foreground: "#FFFFFF",
           50: "#E6F0FF",
           100: "#CCE1FF",
-          200: "#99C2FF",
-          300: "#66A3FF",
-          400: "#3384FF",
-          500: "#0070F3",
-          600: "#005AD1",
-          700: "#0045AF",
-          800: "#00308D",
-          900: "#001B6B",
+          200: "#99C3FF",
+          300: "#66A5FF",
+          400: "#3387FF",
+          500: "#0066FF",
+          600: "#0052D9",
+          700: "#003EB3",
+          800: "#002A8C",
+          900: "#001866",
         },
         secondary: {
-          DEFAULT: "#111827", // Dark blue/black like on3.ai
+          DEFAULT: "#0F172A", // Rich dark blue
           foreground: "#FFFFFF",
+          50: "#F8FAFC",
+          100: "#F1F5F9",
+          200: "#E2E8F0",
+          300: "#CBD5E1",
+          400: "#94A3B8",
+          500: "#64748B",
+          600: "#475569",
+          700: "#334155",
+          800: "#1E293B",
+          900: "#0F172A",
         },
         success: {
-          DEFAULT: "#4CAF50",
+          DEFAULT: "#10B981", // Modern green
           foreground: "#FFFFFF",
-        },
-        accent: {
-          DEFAULT: "#7928CA", // Purple accent color like on3.ai
-          foreground: "#FFFFFF",
-          50: "#F3E6FF",
-          100: "#E7CCFF",
-          200: "#D099FF",
-          300: "#B866FF",
-          400: "#A133FF",
-          500: "#7928CA",
-          600: "#6820A8",
-          700: "#561986",
-          800: "#451164",
-          900: "#330842",
-        },
-        gold: {
-          DEFAULT: "#D4AF37",
-          50: "#FAF6E9",
-          100: "#F5EDD2",
-          200: "#EBDBA6",
-          300: "#E1C979",
-          400: "#D8B74D",
-          500: "#D4AF37",
-          600: "#B28F22",
-          700: "#8F701B",
-          800: "#6C5214",
-          900: "#49330D",
-        },
-        muted: {
-          DEFAULT: "#F8F9FA",
-          foreground: "#111827",
-        },
-        destructive: {
-          DEFAULT: "#FF4D4F",
-          foreground: "#FFFFFF",
+          50: "#ECFDF5",
+          100: "#D1FAE5",
+          200: "#A7F3D0",
+          300: "#6EE7B7",
+          400: "#34D399",
+          500: "#10B981",
+          600: "#059669",
+          700: "#047857",
+          800: "#065F46",
+          900: "#064E3B",
         },
         warning: {
-          DEFAULT: "#FFA940",
+          DEFAULT: "#F59E0B", // Warm amber
           foreground: "#FFFFFF",
+          50: "#FFFBEB",
+          100: "#FEF3C7",
+          200: "#FDE68A",
+          300: "#FCD34D",
+          400: "#FBBF24",
+          500: "#F59E0B",
+          600: "#D97706",
+          700: "#B45309",
+          800: "#92400E",
+          900: "#78350F",
         },
-        info: {
-          DEFAULT: "#1890FF",
+        destructive: {
+          DEFAULT: "#EF4444", // Modern red
           foreground: "#FFFFFF",
-        }
+          50: "#FEF2F2",
+          100: "#FEE2E2",
+          200: "#FECACA",
+          300: "#FCA5A5",
+          400: "#F87171",
+          500: "#EF4444",
+          600: "#DC2626",
+          700: "#B91C1C",
+          800: "#991B1B",
+          900: "#7F1D1D",
+        },
+        accent: {
+          DEFAULT: "#8B5CF6", // Modern purple
+          foreground: "#FFFFFF",
+          50: "#F5F3FF",
+          100: "#EDE9FE",
+          200: "#DDD6FE",
+          300: "#C4B5FD",
+          400: "#A78BFA",
+          500: "#8B5CF6",
+          600: "#7C3AED",
+          700: "#6D28D9",
+          800: "#5B21B6",
+          900: "#4C1D95",
+        },
+        neutral: {
+          50: "#FAFAFA",
+          100: "#F5F5F5",
+          200: "#E5E5E5",
+          300: "#D4D4D4",
+          400: "#A3A3A3",
+          500: "#737373",
+          600: "#525252",
+          700: "#404040",
+          800: "#262626",
+          900: "#171717",
+        },
+        gold: {
+          DEFAULT: "#F59E0B",
+          50: "#FFFBEB",
+          100: "#FEF3C7",
+          200: "#FDE68A",
+          300: "#FCD34D",
+          400: "#FBBF24",
+          500: "#F59E0B",
+          600: "#D97706",
+          700: "#B45309",
+          800: "#92400E",
+          900: "#78350F",
+        },
+        muted: {
+          DEFAULT: "#F8FAFC",
+          foreground: "#64748B",
+        },
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
+        sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
         serif: ["Playfair Display", "Georgia", "serif"],
         display: ["Montserrat", "system-ui", "sans-serif"],
+      },
+      fontSize: {
+        'xs': ['0.75rem', { lineHeight: '1rem' }],
+        'sm': ['0.875rem', { lineHeight: '1.25rem' }],
+        'base': ['1rem', { lineHeight: '1.5rem' }],
+        'lg': ['1.125rem', { lineHeight: '1.75rem' }],
+        'xl': ['1.25rem', { lineHeight: '1.75rem' }],
+        '2xl': ['1.5rem', { lineHeight: '2rem' }],
+        '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
+        '4xl': ['2.25rem', { lineHeight: '2.5rem' }],
+        '5xl': ['3rem', { lineHeight: '1' }],
+        '6xl': ['3.75rem', { lineHeight: '1' }],
+        '7xl': ['4.5rem', { lineHeight: '1' }],
+        '8xl': ['6rem', { lineHeight: '1' }],
+        '9xl': ['8rem', { lineHeight: '1' }],
+      },
+      spacing: {
+        '18': '4.5rem',
+        '88': '22rem',
+        '128': '32rem',
       },
       borderRadius: {
         'sm': '0.25rem',
@@ -106,6 +174,7 @@ export default {
         '3xl': '2rem',
       },
       boxShadow: {
+        'xs': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
         'sm': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
         DEFAULT: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
         'md': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
@@ -113,10 +182,14 @@ export default {
         'xl': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
         '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
         'inner': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
-        'premium': '0 10px 30px -5px rgba(0, 112, 243, 0.3)',
-        'gold': '0 10px 30px -5px rgba(212, 175, 55, 0.3)',
+        'glow': '0 0 20px rgba(0, 102, 255, 0.3)',
+        'glow-lg': '0 0 40px rgba(0, 102, 255, 0.4)',
+        'premium': '0 8px 32px rgba(0, 102, 255, 0.12)',
+        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+        'card-hover': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
       },
       keyframes: {
+        // Enhanced existing animations
         "accordion-down": {
           from: { height: "0", opacity: "0" },
           to: { height: "var(--radix-accordion-content-height)", opacity: "1" },
@@ -133,43 +206,106 @@ export default {
           "0%": { opacity: "0", transform: "translateY(20px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
-        "glow": {
+        "scale-in": {
+          "0%": { opacity: "0", transform: "scale(0.95)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+        // New modern animations
+        "slide-up": {
+          "0%": { opacity: "0", transform: "translateY(100%)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "slide-down": {
+          "0%": { opacity: "0", transform: "translateY(-100%)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "zoom-in": {
+          "0%": { opacity: "0", transform: "scale(0.8)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+        "bounce-in": {
+          "0%": { opacity: "0", transform: "scale(0.3)" },
+          "50%": { opacity: "1", transform: "scale(1.05)" },
+          "70%": { transform: "scale(0.9)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+        "glow-pulse": {
           "0%, 100%": { 
-            boxShadow: "0 0 5px rgba(0, 112, 243, 0.5), 0 0 10px rgba(0, 112, 243, 0.3)" 
+            boxShadow: "0 0 20px rgba(0, 102, 255, 0.3)",
+            transform: "scale(1)"
           },
           "50%": { 
-            boxShadow: "0 0 20px rgba(0, 112, 243, 0.8), 0 0 30px rgba(0, 112, 243, 0.5)" 
+            boxShadow: "0 0 40px rgba(0, 102, 255, 0.6)",
+            transform: "scale(1.02)"
           }
         },
         "float": {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" }
         },
+        "wiggle": {
+          "0%, 100%": { transform: "rotate(-3deg)" },
+          "50%": { transform: "rotate(3deg)" }
+        },
+        "shimmer": {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" }
+        },
+        "gradient-x": {
+          "0%, 100%": { "background-position": "0% 50%" },
+          "50%": { "background-position": "100% 50%" }
+        },
+        "gradient-y": {
+          "0%, 100%": { "background-position": "50% 0%" },
+          "50%": { "background-position": "50% 100%" }
+        },
+        "spin-slow": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" }
+        },
         "pulse-soft": {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0.8" }
-        },
-        "shimmer": {
-          "0%": { backgroundPosition: "-1000px 0" },
-          "100%": { backgroundPosition: "1000px 0" }
-        },
+        }
       },
       animation: {
+        // Enhanced existing animations
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-in": "fade-in 0.3s ease-out",
-        "fade-out": "fade-out 0.3s ease-out",
-        "fade-in-up": "fade-in-up 0.5s ease-out",
-        "glow": "glow 3s infinite",
+        "fade-in": "fade-in 0.5s ease-out",
+        "fade-in-up": "fade-in-up 0.6s ease-out",
+        "scale-in": "scale-in 0.3s ease-out",
+        // New modern animations
+        "slide-up": "slide-up 0.4s ease-out",
+        "slide-down": "slide-down 0.4s ease-out",
+        "zoom-in": "zoom-in 0.4s ease-out",
+        "bounce-in": "bounce-in 0.6s ease-out",
+        "glow-pulse": "glow-pulse 2s ease-in-out infinite",
         "float": "float 6s ease-in-out infinite",
-        "pulse-soft": "pulse-soft 3s ease-in-out infinite",
-        "shimmer": "shimmer 2s infinite linear",
+        "wiggle": "wiggle 1s ease-in-out infinite",
+        "shimmer": "shimmer 2s linear infinite",
+        "gradient-x": "gradient-x 15s ease infinite",
+        "gradient-y": "gradient-y 15s ease infinite",
+        "spin-slow": "spin-slow 20s linear infinite",
+        "pulse-soft": "pulse-soft 2s ease-in-out infinite",
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-premium': 'linear-gradient(135deg, #0066FF 0%, #8B5CF6 100%)',
+        'gradient-success': 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+        'gradient-warning': 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',
+        'gradient-shimmer': 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)',
         'noise-pattern': "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E\")",
-        'premium-gradient': 'linear-gradient(135deg, #0070F3 0%, #7928CA 100%)',
-        'gold-gradient': 'linear-gradient(135deg, #D4AF37 0%, #EBDBA6 50%, #D4AF37 100%)',
+      },
+      backdropBlur: {
+        'xs': '2px',
+        'sm': '4px',
+        'md': '8px',
+        'lg': '12px',
+        'xl': '16px',
+        '2xl': '24px',
+        '3xl': '40px',
       },
     },
   },
